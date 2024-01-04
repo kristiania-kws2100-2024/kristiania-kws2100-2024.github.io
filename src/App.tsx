@@ -1,9 +1,12 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import { OSM } from "ol/source";
 import { useGeographic } from "ol/proj";
 import { MapView } from "./MapView.tsx";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import { GeoJSON } from "ol/format";
 
 useGeographic();
 
@@ -13,14 +16,27 @@ const defaultView = {
 };
 
 function App() {
-  const map = useMemo(
+  const [showCounties, setShowCounties] = useState(false);
+  const countiesLayer = useMemo(
     () =>
-      new Map({
-        view: new View(defaultView),
-        layers: [new TileLayer({ source: new OSM() })],
+      new VectorLayer({
+        source: new VectorSource({
+          url: "/kommuner.json",
+          format: new GeoJSON(),
+        }),
       }),
     [],
   );
+  const map = useMemo(() => new Map({ view: new View(defaultView) }), []);
+  const backgroundLayer = useMemo(
+    () => new TileLayer({ source: new OSM() }),
+    [],
+  );
+  const layers = useMemo(
+    () => [backgroundLayer, ...(showCounties ? [countiesLayer] : [])],
+    [showCounties],
+  );
+  useEffect(() => map.setLayers(layers), [layers]);
 
   function handleCenter(e: React.MouseEvent) {
     e.preventDefault();
@@ -36,6 +52,11 @@ function App() {
     map.getView().animate(defaultView);
   }
 
+  function handleToggleCounties(e: React.MouseEvent) {
+    e.preventDefault();
+    setShowCounties((old) => !old);
+  }
+
   return (
     <>
       <header>
@@ -47,6 +68,9 @@ function App() {
         </a>
         <a href="#" onClick={handleResetView}>
           Reset zoom
+        </a>
+        <a href="#" onClick={handleToggleCounties}>
+          {showCounties ? "Hide counties" : "Show counties"}
         </a>
       </nav>
       <MapView map={map} />
