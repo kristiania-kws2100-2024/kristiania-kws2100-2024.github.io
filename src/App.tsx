@@ -7,7 +7,8 @@ import { MapView } from "./MapView.tsx";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
-import { Stroke, Style } from "ol/style";
+import { Stroke, Style, Text } from "ol/style";
+import { FeatureLike } from "ol/Feature";
 
 useGeographic();
 
@@ -15,6 +16,13 @@ const defaultView = {
   center: [10.5, 60],
   zoom: 10,
 };
+
+function getKommuneNavn(feature: FeatureLike) {
+  const properties = feature.getProperties() as {
+    navn: { sprak: string; navn: string }[];
+  };
+  return properties.navn.find((n) => n.sprak === "nor")!.navn;
+}
 
 function App() {
   const [showCounties, setShowCounties] = useState(false);
@@ -25,9 +33,13 @@ function App() {
           url: "/kommuner.json",
           format: new GeoJSON(),
         }),
-        style: new Style({
-          stroke: new Stroke({ color: "red" }),
-        }),
+        style: (feature: FeatureLike) =>
+          new Style({
+            stroke: new Stroke({ color: "red" }),
+            text: new Text({
+              text: getKommuneNavn(feature),
+            }),
+          }),
       }),
     [],
   );
