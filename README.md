@@ -1,5 +1,7 @@
 # KWS2100 Geographic Information Web Systems
 
+[![Running website](https://img.shields.io/badge/Course-website-green)](https://kristiania-kws2100-2024.github.io/)
+
 Welcome to this course in Geographic Information Systems (GIS) for the web. In this course, we will use popular and powerfull open-source software to explore geographic information systems on the web. The course will use [OpenLayers](https://openlayers.org/) as a web framework for information systems and [PostGIS](https://postgis.net/) as a geographical information database. We will build web applications with the React framework and use Express to create APIs on top of PostGIS.
 
 ## Understanding the course
@@ -50,7 +52,29 @@ Using Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metada
 
 ### Creating a basic React application with Vite and TypeScript
 
+`npm create vite@latest -- --template react-ts`
+
 ### Creating a OpenLayers map in React
+
+```tsx
+useGeographic();
+const map = new Map({
+  view: new View({ center: [11, 60], zoom: 10 }),
+  layers: [new TileLayer({source: new OSM()})]
+})
+
+function App() {
+  const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
+
+  useEffect(() => {
+    map.setTarget(mapRef.current);
+  }, []);
+
+  return (
+    <div ref={mapRef}></div>
+  )
+}
+```
 
 ### Creating a PostGIS API in Express
 
