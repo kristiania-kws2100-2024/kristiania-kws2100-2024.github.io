@@ -5,4 +5,15 @@
 #root {
   height: 100dvh;
   display: grid;
+  grid-template-rows: auto auto 1fr;
+}
+
+header,
+nav {
+  padding: 0.2rem 0.5rem;
+}
+
+nav {
+  display: flex;
+  gap: 1em;
 }
