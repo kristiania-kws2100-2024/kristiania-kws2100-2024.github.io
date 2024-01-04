@@ -7,6 +7,7 @@ import { MapView } from "./MapView.tsx";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
+import { Stroke, Style } from "ol/style";
 
 useGeographic();
 
@@ -23,6 +24,9 @@ function App() {
         source: new VectorSource({
           url: "/kommuner.json",
           format: new GeoJSON(),
+        }),
+        style: new Style({
+          stroke: new Stroke({ color: "red" }),
         }),
       }),
     [],
