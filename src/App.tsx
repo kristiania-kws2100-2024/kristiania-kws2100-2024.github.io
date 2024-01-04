@@ -1,4 +1,3 @@
-import './App.css'
 import {MutableRefObject, useEffect, useRef} from "react";
 import {Map, View} from "ol";
 import TileLayer from "ol/layer/Tile";
@@ -21,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <div ref={mapRef} style={{width: "100vw", height: "100vh"}}></div>
+    <div ref={mapRef}></div>
   )
 }
 
