@@ -1,21 +1,21 @@
-import React, { MutableRefObject, useEffect, useMemo, useRef } from "react";
-import { Map, View } from "ol";
-import TileLayer from "ol/layer/Tile";
-import { OSM } from "ol/source";
-import { useGeographic } from "ol/proj";
+import React from "react";
+import { MapContextProvider } from "../map/mapContext";
+import { MapView } from "../map/mapView";
+import { MapNav } from "../map/mapNav";
 
-useGeographic();
+import "./application.css";
+import "ol/ol.css";
 
 export function Application() {
-  const ref = useRef() as MutableRefObject<HTMLDivElement>;
-  const map = useMemo(() => {
-    return new Map({
-      layers: [new TileLayer({ source: new OSM() })],
-      view: new View({ center: [10, 60], zoom: 8 }),
-    });
-  }, []);
-  useEffect(() => {
-    map.setTarget(ref.current);
-  }, []);
-  return <div ref={ref} style={{ height: "100vh", width: "100%" }}></div>;
+  return (
+    <MapContextProvider>
+      <header>
+        <h1>Kristiania map</h1>
+      </header>
+      <MapNav />
+      <main>
+        <MapView />
+      </main>
+    </MapContextProvider>
+  );
 }
