@@ -1,5 +1,6 @@
 import React, { ReactNode, useContext } from "react";
 import { MapContext } from "./mapContext";
+import { ToggleKommuneCheckbox } from "./toggleKommuneCheckbox";
 
 function LinkButton({
   onClick,
@@ -39,6 +40,7 @@ export function MapNav() {
       <LinkButton onClick={handleShowNorway}>Show Norway</LinkButton>
       <LinkButton onClick={handleShowOslo}>Show Oslo</LinkButton>
       <LinkButton onClick={handleZoomToUser}>Show my location</LinkButton>
+      <ToggleKommuneCheckbox />
     </nav>
   );
 }
