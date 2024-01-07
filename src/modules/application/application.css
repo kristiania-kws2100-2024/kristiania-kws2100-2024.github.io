@@ -2,6 +2,10 @@
   margin: unset;
 }
 
+dialog {
+  margin: revert;
+}
+
 #root {
   display: grid;
   grid-template-rows: auto auto 1fr;
