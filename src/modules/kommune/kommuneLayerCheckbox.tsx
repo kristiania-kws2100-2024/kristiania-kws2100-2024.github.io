@@ -1,13 +1,7 @@
 import React, { MutableRefObject, useRef, useState } from "react";
 import { useKommuneLayer } from "./useKommuneLayer";
 import { Feature } from "ol";
-
-interface KommuneProperties {
-  navn: {
-    navn: string;
-    sprak: string;
-  }[];
-}
+import { KommuneProperties } from "./kommuneProperties";
 
 export function KommuneLayerCheckbox() {
   const [show, setShow] = useState(false);
