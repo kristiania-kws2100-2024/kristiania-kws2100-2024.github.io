@@ -5,7 +5,7 @@ import VectorSource from "ol/source/Vector";
 import { KommuneProperties } from "./kommuneProperties";
 
 export function KommuneAside() {
-  const { layers } = useContext(MapContext);
+  const { layers, map } = useContext(MapContext);
   const kommuneLayer = useMemo(
     () =>
       layers.find(
@@ -13,6 +13,7 @@ export function KommuneAside() {
       ) as VectorLayer<VectorSource>,
     [layers],
   );
+  const view = map.getView();
 
   useEffect(() => {
     kommuneLayer?.getSource()?.on("change", handleSourceChange);
@@ -26,6 +27,12 @@ export function KommuneAside() {
       kommuneLayer
         ?.getSource()
         ?.getFeatures()
+        ?.filter(
+          (f) =>
+            f
+              .getGeometry()
+              ?.intersectsExtent(view.getViewStateAndExtent().extent),
+        )
         ?.map((f) => f.getProperties() as KommuneProperties) || [],
     );
   }
