@@ -2535,23 +2535,6 @@
     },
     {
       "type": "Feature",
-      "geometry": null,
-      "properties": {
-        "kommunenummer": "5031",
-        "objtype": "Kommune",
-        "lokalid": "172738",
-        "oppdateringsdato": null,
-        "datauttaksdato": "20191220110344",
-        "versjonid": "4.1",
-        "opphav": null,
-        "samiskforvaltningsomrade": false,
-        "datafangstdato": null,
-        "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
-        "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Malvik" }]
-      }
-    },
-    {
-      "type": "Feature",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -2739,23 +2722,6 @@
         "datafangstdato": null,
         "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
         "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Fjaler" }]
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": null,
-      "properties": {
-        "kommunenummer": "3816",
-        "objtype": "Kommune",
-        "lokalid": "172749",
-        "oppdateringsdato": "20000630000000",
-        "datauttaksdato": "20191220110344",
-        "versjonid": "4.1",
-        "opphav": null,
-        "samiskforvaltningsomrade": false,
-        "datafangstdato": null,
-        "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
-        "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Nome" }]
       }
     },
     {
@@ -3394,23 +3360,6 @@
     },
     {
       "type": "Feature",
-      "geometry": null,
-      "properties": {
-        "kommunenummer": "3022",
-        "objtype": "Kommune",
-        "lokalid": "172763",
-        "oppdateringsdato": null,
-        "datauttaksdato": "20191220110344",
-        "versjonid": "4.1",
-        "opphav": null,
-        "samiskforvaltningsomrade": false,
-        "datafangstdato": null,
-        "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
-        "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Frogn" }]
-      }
-    },
-    {
-      "type": "Feature",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -3948,23 +3897,6 @@
         "datafangstdato": null,
         "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
         "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Rana" }]
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": null,
-      "properties": {
-        "kommunenummer": "5031",
-        "objtype": "Kommune",
-        "lokalid": "172780",
-        "oppdateringsdato": null,
-        "datauttaksdato": "20191220110345",
-        "versjonid": "4.1",
-        "opphav": null,
-        "samiskforvaltningsomrade": false,
-        "datafangstdato": null,
-        "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
-        "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Malvik" }]
       }
     },
     {
@@ -13223,23 +13155,6 @@
     },
     {
       "type": "Feature",
-      "geometry": null,
-      "properties": {
-        "kommunenummer": "3804",
-        "objtype": "Kommune",
-        "lokalid": "172901",
-        "oppdateringsdato": "20170103000000",
-        "datauttaksdato": "20191220110358",
-        "versjonid": "4.1",
-        "opphav": null,
-        "samiskforvaltningsomrade": false,
-        "datafangstdato": null,
-        "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
-        "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Sandefjord" }]
-      }
-    },
-    {
-      "type": "Feature",
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -19016,43 +18931,6 @@
         "type": "Polygon",
         "coordinates": [
           [
-            [4.4411877410360034, 62.0319403765886],
-            [4.578918375608643, 62.18084511228054],
-            [4.965886088591594, 62.09738323062712],
-            [5.222897804488013, 62.04497368604037],
-            [5.232383580685611, 62.00703595870028],
-            [5.195613056663151, 61.97996146502807],
-            [5.2353122585474186, 61.946684085157095],
-            [5.313539675365753, 61.92567574847319],
-            [5.327048030351484, 61.90186066114069],
-            [5.221459933405924, 61.89933474673],
-            [5.179990977276354, 61.87589874938476],
-            [5.025480563724578, 61.89425764417692],
-            [4.83287066634483, 61.95552862095906],
-            [4.4411877410360034, 62.0319403765886]
-          ]
-        ]
-      },
-      "properties": {
-        "kommunenummer": "4602",
-        "objtype": "Kommune",
-        "lokalid": "172964172966",
-        "oppdateringsdato": "20190301000000",
-        "datauttaksdato": "20191220110417",
-        "versjonid": "4.1",
-        "opphav": null,
-        "samiskforvaltningsomrade": false,
-        "datafangstdato": null,
-        "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
-        "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Kinn" }]
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
             [4.226492612745248, 61.783465273752476],
             [4.615841183508965, 61.70799273018219],
             [4.773089640184002, 61.69639862478966],
@@ -19442,23 +19320,6 @@
         "datafangstdato": null,
         "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
         "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Heim" }]
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": null,
-      "properties": {
-        "kommunenummer": "3803",
-        "objtype": "Kommune",
-        "lokalid": "ab9fbdde-9f36-4776-a226-1966e6b32055",
-        "oppdateringsdato": null,
-        "datauttaksdato": "20191220110418",
-        "versjonid": "4.1",
-        "opphav": null,
-        "samiskforvaltningsomrade": false,
-        "datafangstdato": null,
-        "navnerom": "http://skjema.geonorge.no/SOSI/produktspesifikasjon/AdmEnheter/4.1",
-        "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Tønsberg" }]
       }
     },
     {
