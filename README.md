@@ -24,29 +24,31 @@ We will create a React application that will display a simple map with a backgro
 
 We will add more layers to the map
 
-### Lecture 3: Interacting with features
+### Lecture 3: Interacting with polygon features
 
 Zooming to your location, hovering and clicking on features.
 
 ### Lecture 4: Deploying with GitHub pages
 
-### Lecture 5: Tile layers and map projections
+### Lecture 5: Interacting with point features
+
+### Lecture 6: Tile layers and map projections
 
 **"Damn you, Gerhard!"**
 
-### Lecture 6: Query property data
+### Lecture 7: Query property data
 
 Using the [Norwegian Land Register](https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16), we will develop functionality to show properties close to the users location on a map
 
-### Lecture 7: Importing road data
+### Lecture 8: Assigment: Deployment of simple map applications
+
+### Lecture 9: Importing road data
 
 Using Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metadata/elveg-20/77944f7e-3d75-4f6d-ae04-c528cc72e8f6), we will import a dataset into PostGIS to query it.
 
-### Lecture 8: Assigment: Deployment of simple map applications
+### Lecture 10: Vector layers and styles
 
-### Lecture 9: Vector layers and styles
-
-### Lecture 12: Getting ready for the exam
+### Lecture 11: Getting ready for the exam
 
 ## Reference material
 
