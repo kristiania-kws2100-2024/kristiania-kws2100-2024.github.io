@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { MapContext } from "../map/mapContextProvider";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
@@ -13,14 +13,23 @@ export function KommuneAside() {
       ) as VectorLayer<VectorSource>,
     [layers],
   );
-  const kommuner = useMemo(
-    () =>
+
+  useEffect(() => {
+    kommuneLayer?.getSource()?.on("change", handleSourceChange);
+    return () => kommuneLayer?.getSource()?.un("change", handleSourceChange);
+  }, [kommuneLayer]);
+
+  const [kommuner, setKommuner] = useState<KommuneProperties[]>([]);
+
+  function handleSourceChange() {
+    setKommuner(
       kommuneLayer
         ?.getSource()
         ?.getFeatures()
         ?.map((f) => f.getProperties() as KommuneProperties) || [],
-    [kommuneLayer],
-  );
+    );
+  }
+
   return (
     <aside className={kommuneLayer ? "visible" : ""}>
       <div>
