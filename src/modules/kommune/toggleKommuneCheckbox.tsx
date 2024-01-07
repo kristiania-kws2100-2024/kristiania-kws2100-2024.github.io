@@ -4,16 +4,13 @@ import React, {
   SetStateAction,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
 import { getKommuneNavn, KommuneProperties } from "./kommune";
-import VectorLayer from "ol/layer/Vector";
-import VectorSource from "ol/source/Vector";
-import { GeoJSON } from "ol/format";
 import { Feature, MapBrowserEvent } from "ol";
 import { MapContext } from "../map/mapContext";
+import { useKommuneLayer } from "./useKommuneLayer";
 
 export function ToggleKommuneCheckbox({
   setKommune,
@@ -24,15 +21,12 @@ export function ToggleKommuneCheckbox({
   const [clickedFeatures, setClickedFeatures] = useState<Feature[]>([]);
   const dialogRef = useRef() as MutableRefObject<HTMLDialogElement>;
 
-  const kommuneLayer = useMemo(() => {
-    return new VectorLayer({
-      className: "kommuner",
-      source: new VectorSource({
-        url: "/kommuner.json",
-        format: new GeoJSON(),
-      }),
-    });
-  }, []);
+  function handleClick(features: Feature[]) {
+    setClickedFeatures(features);
+    dialogRef.current.showModal();
+  }
+
+  const kommuneLayer = useKommuneLayer(showKommuner, handleClick);
 
   function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
     const featuresAtCoordinate = kommuneLayer
@@ -48,25 +42,13 @@ export function ToggleKommuneCheckbox({
     );
   }
 
-  function handleClick(e: MapBrowserEvent<MouseEvent>) {
-    const featuresAtCoordinate = kommuneLayer
-      .getSource()
-      ?.getFeaturesAtCoordinate(e.coordinate);
-    setClickedFeatures(featuresAtCoordinate || []);
-    dialogRef.current.showModal();
-  }
-
-  const { setLayers, map } = useContext(MapContext);
+  const { map } = useContext(MapContext);
   useEffect(() => {
     if (showKommuner) {
-      setLayers((old) => [...old, kommuneLayer]);
       map.on("pointermove", handlePointerMove);
-      map.on("click", handleClick);
     }
     return () => {
       map.un("pointermove", handlePointerMove);
-      map.un("click", handleClick);
-      setLayers((old) => old.filter((l) => l !== kommuneLayer));
       setKommune(undefined);
     };
   }, [showKommuner]);
