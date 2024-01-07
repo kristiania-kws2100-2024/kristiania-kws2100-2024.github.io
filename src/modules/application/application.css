@@ -17,3 +17,25 @@ nav {
 header {
   padding: 0.25rem;
 }
+
+main {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+main aside {
+  display: grid;
+  grid-template-columns: 0;
+  transition: grid-template-columns 0.5s ease-out;
+  overflow-x: clip;
+  overflow-y: auto;
+  max-height: calc(100dvh - 100px);
+}
+
+main aside > * {
+  padding: 0.25rem;
+}
+
+main aside.is-open {
+  grid-template-columns: 1fr;
+}

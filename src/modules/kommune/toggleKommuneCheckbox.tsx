@@ -6,12 +6,12 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { KommuneProperties } from "./kommune";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
-import { MapContext } from "./mapContext";
 import { MapBrowserEvent } from "ol";
-import { KommuneProperties } from "../../kommune";
+import { MapContext } from "../map/mapContext";
 
 export function ToggleKommuneCheckbox({
   setKommune,
@@ -21,12 +21,14 @@ export function ToggleKommuneCheckbox({
   const [showKommuner, setShowKommuner] = useState(false);
   const kommuneLayer = useMemo(() => {
     return new VectorLayer({
+      className: "kommuner",
       source: new VectorSource({
         url: "/kommuner.json",
         format: new GeoJSON(),
       }),
     });
   }, []);
+
   function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
     const featuresAtCoordinate = kommuneLayer
       .getSource()

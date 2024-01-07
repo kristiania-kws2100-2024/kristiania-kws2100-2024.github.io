@@ -1,8 +1,7 @@
 import React, { Dispatch, ReactNode, SetStateAction, useContext } from "react";
 import { MapContext } from "./mapContext";
-import { ToggleKommuneCheckbox } from "./toggleKommuneCheckbox";
-import { KommuneProperties } from "../../kommune";
-import { set } from "ol/transform";
+import { KommuneProperties } from "../kommune/kommune";
+import { ToggleKommuneCheckbox } from "../kommune/toggleKommuneCheckbox";
 
 function LinkButton({
   onClick,

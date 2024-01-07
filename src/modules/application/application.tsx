@@ -5,7 +5,8 @@ import { MapNav } from "../map/mapNav";
 
 import "./application.css";
 import "ol/ol.css";
-import { KommuneProperties } from "../../kommune";
+import { KommuneAside } from "../kommune/kommuneAside";
+import { KommuneProperties } from "../kommune/kommune";
 
 export function Application() {
   const [kommune, setKommune] = useState<KommuneProperties | undefined>(
@@ -23,6 +24,7 @@ export function Application() {
       <MapNav setKommune={setKommune} />
       <main>
         <MapView />
+        <KommuneAside />
       </main>
     </MapContextProvider>
   );
