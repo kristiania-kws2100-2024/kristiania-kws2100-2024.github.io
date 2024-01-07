@@ -6,7 +6,7 @@ import { MapNav } from "../map/mapNav";
 import "./application.css";
 import "ol/ol.css";
 import { KommuneAside } from "../kommune/kommuneAside";
-import { KommuneProperties } from "../kommune/kommune";
+import { getKommuneNavn, KommuneProperties } from "../kommune/kommune";
 
 export function Application() {
   const [kommune, setKommune] = useState<KommuneProperties | undefined>(
@@ -18,7 +18,7 @@ export function Application() {
       <header>
         <h1>
           Kristiania map
-          {kommune && ` (${kommune.navn.find((n) => n.sprak === "nor")?.navn})`}
+          {kommune && ` (${getKommuneNavn(kommune)})`}
         </h1>
       </header>
       <MapNav setKommune={setKommune} />
