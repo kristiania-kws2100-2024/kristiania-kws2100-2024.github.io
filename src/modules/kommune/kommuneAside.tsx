@@ -5,8 +5,8 @@ import { getKommuneNavn, KommuneProperties } from "./kommune";
 import VectorLayer from "ol/layer/Vector";
 import { Feature } from "ol";
 
-export function KommuneAside() {
-  const { layers, view } = useContext(MapContext);
+function useKommuneFeatures() {
+  const { layers } = useContext(MapContext);
 
   const kommuneLayer = useMemo(() => {
     return layers.find(
@@ -14,26 +14,40 @@ export function KommuneAside() {
     ) as VectorLayer<VectorSource>;
   }, [layers]);
   const [features, setFeatures] = useState<Feature[]>([]);
+
   function handleVectorSourceChange() {
     setFeatures(kommuneLayer?.getSource()?.getFeatures() || []);
   }
+
   useEffect(() => {
     kommuneLayer?.getSource()?.on("change", handleVectorSourceChange);
     return () =>
       kommuneLayer?.getSource()?.un("change", handleVectorSourceChange);
   }, [kommuneLayer]);
+  return { kommuneLayer, features };
+}
 
+function useViewExtent() {
+  const { view } = useContext(MapContext);
   const [viewExtent, setViewExtent] = useState(
     () => view.getViewStateAndExtent().extent,
   );
+
   function handleViewChange() {
     setViewExtent(view.getViewStateAndExtent().extent);
   }
+
   useEffect(() => {
     handleViewChange();
     view.on("change", handleViewChange);
     return () => view.un("change", handleViewChange);
   }, [view]);
+  return viewExtent;
+}
+
+export function KommuneAside() {
+  const { kommuneLayer, features } = useKommuneFeatures();
+  const viewExtent = useViewExtent();
 
   const kommuneList = useMemo(() => {
     return features
