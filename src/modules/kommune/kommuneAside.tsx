@@ -4,6 +4,8 @@ import VectorSource from "ol/source/Vector";
 import { getKommuneNavn, KommuneProperties } from "./kommune";
 import VectorLayer from "ol/layer/Vector";
 import { Feature } from "ol";
+import { Stroke, Style, Text } from "ol/style";
+import { FeatureLike } from "ol/Feature";
 
 function useKommuneFeatures() {
   const { layers } = useContext(MapContext);
@@ -45,6 +47,16 @@ function useViewExtent() {
   return viewExtent;
 }
 
+const selectedKommuneStyle = (f: FeatureLike) =>
+  new Style({
+    stroke: new Stroke({
+      color: "red",
+    }),
+    text: new Text({
+      text: getKommuneNavn(f.getProperties() as KommuneProperties),
+    }),
+  });
+
 export function KommuneAside() {
   const { kommuneLayer, features } = useKommuneFeatures();
   const viewExtent = useViewExtent();
@@ -56,12 +68,22 @@ export function KommuneAside() {
       .sort((a, b) => getKommuneNavn(a).localeCompare(getKommuneNavn(b)));
   }, [features, viewExtent]);
 
+  function handleKommuneFocus(k?: KommuneProperties) {
+    for (const feature of features) {
+      const selected =
+        feature.getProperties().kommunenummer === k?.kommunenummer;
+      feature.setStyle(selected ? selectedKommuneStyle : undefined);
+    }
+  }
+
   return (
     <aside className={kommuneLayer ? "is-open" : ""}>
-      <div>
+      <div onMouseLeave={() => handleKommuneFocus(undefined)}>
         <h2>Kommuner</h2>
         {kommuneList.map((k) => (
-          <div key={k.kommunenummer}>{getKommuneNavn(k)}</div>
+          <div onMouseEnter={() => handleKommuneFocus(k)} key={k.kommunenummer}>
+            {getKommuneNavn(k)}
+          </div>
         ))}
       </div>
     </aside>
