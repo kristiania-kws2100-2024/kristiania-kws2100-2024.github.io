@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { MapContext } from "../map/mapContextProvider";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { KommuneProperties } from "./kommuneProperties";
+import { getKommuneName, KommuneProperties } from "./kommuneProperties";
 
 export function KommuneAside() {
   const { layers, map } = useContext(MapContext);
@@ -43,7 +43,9 @@ export function KommuneAside() {
         ?.getSource()
         ?.getFeatures()
         ?.filter((f) => f.getGeometry()?.intersectsExtent(viewExtent))
-        ?.map((f) => f.getProperties() as KommuneProperties) || [],
+        ?.map((f) => f.getProperties() as KommuneProperties)
+        ?.sort((a, b) => getKommuneName(a).localeCompare(getKommuneName(b))) ||
+        [],
     );
   }
 
@@ -52,9 +54,7 @@ export function KommuneAside() {
       <div>
         <h2>Kommuner</h2>
         {kommuner.map((k) => (
-          <div key={k.kommunenummer}>
-            {k.navn.find((n) => n.sprak === "nor")?.navn}
-          </div>
+          <div key={k.kommunenummer}>{getKommuneName(k)}</div>
         ))}
       </div>
     </aside>
