@@ -52,6 +52,10 @@ export function ToggleKommuneCheckbox({
       setLayers((old) => old.filter((l) => l != kommuneLayer));
       map.un("pointermove", handlePointerMove);
     }
+    return () => {
+      map.un("pointermove", handlePointerMove);
+      setKommune(undefined);
+    };
   }, [showKommuner]);
 
   return (
