@@ -1,4 +1,10 @@
-import React, { MutableRefObject, useEffect, useRef } from "react";
+import React, {
+  MutableRefObject,
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import "./application.css";
 
 import { Map, View } from "ol";
@@ -14,7 +20,22 @@ const map = new Map({
   layers: [new TileLayer({ source: new OSM() })],
 });
 
+const MapContext = React.createContext({ map });
+
+function MapContextProvider({ children }: { children: ReactNode }) {
+  return <MapContext.Provider value={{ map }}>{children}</MapContext.Provider>;
+}
+
 export function Application() {
+  return (
+    <MapContextProvider>
+      <MapView />
+    </MapContextProvider>
+  );
+}
+
+export function MapView() {
+  const { map } = useContext(MapContext);
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   useEffect(() => map.setTarget(mapRef.current), []);
   return <main ref={mapRef}></main>;
