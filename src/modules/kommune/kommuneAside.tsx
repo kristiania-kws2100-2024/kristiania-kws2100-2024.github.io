@@ -13,7 +13,22 @@ export function KommuneAside() {
       ) as VectorLayer<VectorSource>,
     [layers],
   );
-  const view = map.getView();
+  const [viewExtent, setViewExtent] = useState(
+    () => map.getView().getViewStateAndExtent().extent,
+  );
+
+  function handleViewChange() {
+    setViewExtent(map.getView().getViewStateAndExtent().extent);
+  }
+
+  useEffect(() => {
+    map.getView().on("change", handleViewChange);
+    return () => map.getView().un("change", handleViewChange);
+  }, [map.getView()]);
+
+  useEffect(() => {
+    handleSourceChange();
+  }, [viewExtent]);
 
   useEffect(() => {
     kommuneLayer?.getSource()?.on("change", handleSourceChange);
@@ -27,12 +42,7 @@ export function KommuneAside() {
       kommuneLayer
         ?.getSource()
         ?.getFeatures()
-        ?.filter(
-          (f) =>
-            f
-              .getGeometry()
-              ?.intersectsExtent(view.getViewStateAndExtent().extent),
-        )
+        ?.filter((f) => f.getGeometry()?.intersectsExtent(viewExtent))
         ?.map((f) => f.getProperties() as KommuneProperties) || [],
     );
   }
