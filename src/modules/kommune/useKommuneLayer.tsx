@@ -13,6 +13,7 @@ export function useKommuneLayer(
 
   const kommuneLayer = useMemo(() => {
     return new VectorLayer({
+      className: "kommuner",
       source: new VectorSource({
         url: "/kommuner.json",
         format: new GeoJSON(),

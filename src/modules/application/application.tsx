@@ -4,6 +4,7 @@ import "ol/ol.css";
 import { MapContextProvider } from "../map/mapContextProvider";
 import { MapView } from "../map/mapView";
 import { KommuneLayerCheckbox } from "../kommune/kommuneLayerCheckbox";
+import { KommuneAside } from "../kommune/kommuneAside";
 
 export function Application() {
   return (
@@ -16,7 +17,10 @@ export function Application() {
         <a href={"#"}>Show Norway</a>
         <KommuneLayerCheckbox />
       </nav>
-      <MapView />
+      <main>
+        <MapView />
+        <KommuneAside />
+      </main>
     </MapContextProvider>
   );
 }

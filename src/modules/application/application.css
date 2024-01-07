@@ -13,7 +13,8 @@ dialog {
 }
 
 main {
-  background-color: lightblue;
+  display: grid;
+  grid-template-columns: 1fr auto;
 }
 
 nav {
@@ -24,4 +25,20 @@ nav {
 nav,
 header {
   padding: 0 0.25rem;
+}
+
+main aside {
+  display: grid;
+  grid-template-columns: 0;
+  transition: grid-template-columns 0.5s ease-in-out;
+  overflow-x: clip;
+  overflow-y: auto;
+}
+
+main aside.visible {
+  grid-template-columns: 1fr;
+}
+
+main aside > * {
+  padding: 0.25rem;
 }

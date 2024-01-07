@@ -15,12 +15,12 @@ import { Layer } from "ol/layer";
 useGeographic();
 
 const view = new View({ center: [10.5, 60], zoom: 10 });
-const layers = [new TileLayer({ source: new OSM() })];
+const layers: Layer[] = [new TileLayer({ source: new OSM() })];
 const map = new Map({ view, layers });
 
 const setLayers: Dispatch<SetStateAction<Layer[]>> = () => {};
 
-export const MapContext = React.createContext({ map, setLayers });
+export const MapContext = React.createContext({ map, setLayers, layers });
 
 export function MapContextProvider({ children }: { children: ReactNode }) {
   const [layers, setLayers] = useState<Layer[]>(() => [
@@ -31,7 +31,7 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
   }, []);
   useEffect(() => map.setLayers(layers), [layers]);
   return (
-    <MapContext.Provider value={{ map, setLayers }}>
+    <MapContext.Provider value={{ map, setLayers, layers }}>
       {children}
     </MapContext.Provider>
   );

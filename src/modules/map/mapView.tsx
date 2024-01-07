@@ -5,5 +5,5 @@ export function MapView() {
   const { map } = useContext(MapContext);
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   useEffect(() => map.setTarget(mapRef.current), []);
-  return <main ref={mapRef}></main>;
+  return <div ref={mapRef}></div>;
 }
