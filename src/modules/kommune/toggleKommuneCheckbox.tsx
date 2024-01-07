@@ -1,16 +1,18 @@
 import React, {
   Dispatch,
+  MutableRefObject,
   SetStateAction,
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
-import { KommuneProperties } from "./kommune";
+import { getKommuneNavn, KommuneProperties } from "./kommune";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
-import { MapBrowserEvent } from "ol";
+import { Feature, MapBrowserEvent } from "ol";
 import { MapContext } from "../map/mapContext";
 
 export function ToggleKommuneCheckbox({
@@ -19,6 +21,9 @@ export function ToggleKommuneCheckbox({
   setKommune: Dispatch<SetStateAction<KommuneProperties | undefined>>;
 }) {
   const [showKommuner, setShowKommuner] = useState(false);
+  const [clickedFeatures, setClickedFeatures] = useState<Feature[]>([]);
+  const dialogRef = useRef() as MutableRefObject<HTMLDialogElement>;
+
   const kommuneLayer = useMemo(() => {
     return new VectorLayer({
       className: "kommuner",
@@ -43,17 +48,25 @@ export function ToggleKommuneCheckbox({
     );
   }
 
+  function handleClick(e: MapBrowserEvent<MouseEvent>) {
+    const featuresAtCoordinate = kommuneLayer
+      .getSource()
+      ?.getFeaturesAtCoordinate(e.coordinate);
+    setClickedFeatures(featuresAtCoordinate || []);
+    dialogRef.current.showModal();
+  }
+
   const { setLayers, map } = useContext(MapContext);
   useEffect(() => {
     if (showKommuner) {
       setLayers((old) => [...old, kommuneLayer]);
       map.on("pointermove", handlePointerMove);
-    } else {
-      setLayers((old) => old.filter((l) => l != kommuneLayer));
-      map.un("pointermove", handlePointerMove);
+      map.on("click", handleClick);
     }
     return () => {
       map.un("pointermove", handlePointerMove);
+      map.un("click", handleClick);
+      setLayers((old) => old.filter((l) => l !== kommuneLayer));
       setKommune(undefined);
     };
   }, [showKommuner]);
@@ -68,6 +81,17 @@ export function ToggleKommuneCheckbox({
         />
         <span>{showKommuner ? "Hide" : "Show"} kommuner</span>
       </label>
+      <dialog ref={dialogRef}>
+        <h2>Clicked kommuner</h2>
+        {clickedFeatures
+          .map((f) => f.getProperties() as KommuneProperties)
+          .map((k) => (
+            <div key={k.kommunenummer}>{getKommuneNavn(k)}</div>
+          ))}
+        <div>
+          <button onClick={() => dialogRef.current.close()}>Close</button>
+        </div>
+      </dialog>
     </div>
   );
 }

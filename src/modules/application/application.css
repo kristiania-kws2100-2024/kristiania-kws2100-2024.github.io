@@ -1,5 +1,9 @@
 * {
-  margin: 0;
+  margin: unset;
+}
+
+dialog {
+  margin: revert;
 }
 
 #app {
