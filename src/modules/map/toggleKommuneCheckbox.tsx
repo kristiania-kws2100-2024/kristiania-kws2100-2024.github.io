@@ -1,20 +1,24 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
 import { MapContext } from "./mapContext";
-import { MapBrowserEvent, MapEvent } from "ol";
+import { MapBrowserEvent } from "ol";
+import { KommuneProperties } from "../../kommune";
 
-interface KommuneProperties {
-  kommunenummer: string;
-  navn: { sprak: string; navn: string }[];
-}
-
-export function ToggleKommuneCheckbox() {
+export function ToggleKommuneCheckbox({
+  setKommune,
+}: {
+  setKommune: Dispatch<SetStateAction<KommuneProperties | undefined>>;
+}) {
   const [showKommuner, setShowKommuner] = useState(false);
-  const [kommuneAtMouse, setKommuneAtMouse] = useState<
-    KommuneProperties | undefined
-  >(undefined);
   const kommuneLayer = useMemo(() => {
     return new VectorLayer({
       source: new VectorSource({
@@ -32,14 +36,11 @@ export function ToggleKommuneCheckbox() {
         ? featuresAtCoordinate[0]?.getProperties()
         : undefined
     ) as KommuneProperties | undefined;
-    setKommuneAtMouse((old) =>
+    setKommune((old) =>
       old?.kommunenummer != kommune?.kommunenummer ? kommune : old,
     );
   }
 
-  useEffect(() => {
-    console.log(kommuneAtMouse?.navn.find((n) => n.sprak === "nor")?.navn);
-  }, [kommuneAtMouse]);
   const { setLayers, map } = useContext(MapContext);
   useEffect(() => {
     if (showKommuner) {

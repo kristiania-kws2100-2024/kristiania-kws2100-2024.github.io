@@ -1,6 +1,8 @@
-import React, { ReactNode, useContext } from "react";
+import React, { Dispatch, ReactNode, SetStateAction, useContext } from "react";
 import { MapContext } from "./mapContext";
 import { ToggleKommuneCheckbox } from "./toggleKommuneCheckbox";
+import { KommuneProperties } from "../../kommune";
+import { set } from "ol/transform";
 
 function LinkButton({
   onClick,
@@ -20,7 +22,11 @@ function LinkButton({
   );
 }
 
-export function MapNav() {
+export function MapNav({
+  setKommune,
+}: {
+  setKommune: Dispatch<SetStateAction<KommuneProperties | undefined>>;
+}) {
   const { view } = useContext(MapContext);
   function handleShowNorway() {
     view.animate({ center: [16, 65], zoom: 5 });
@@ -40,7 +46,7 @@ export function MapNav() {
       <LinkButton onClick={handleShowNorway}>Show Norway</LinkButton>
       <LinkButton onClick={handleShowOslo}>Show Oslo</LinkButton>
       <LinkButton onClick={handleZoomToUser}>Show my location</LinkButton>
-      <ToggleKommuneCheckbox />
+      <ToggleKommuneCheckbox setKommune={setKommune} />
     </nav>
   );
 }
