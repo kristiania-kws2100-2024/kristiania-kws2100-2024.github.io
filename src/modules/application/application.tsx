@@ -1,5 +1,6 @@
 import React from "react";
+import "./application.css";
 
 export function Application() {
-  return <h1>Hello React</h1>;
+  return <main>I'm a map</main>;
 }
