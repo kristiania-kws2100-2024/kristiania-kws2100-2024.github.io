@@ -4,10 +4,20 @@
 
 #root {
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: auto auto 1fr;
   height: 100dvh;
 }
 
 main {
   background-color: lightblue;
+}
+
+nav {
+  display: flex;
+  gap: 0.5em;
+}
+
+nav,
+header {
+  padding: 0 0.25rem;
 }
