@@ -1,3 +1,13 @@
+* {
+  margin: unset;
+}
+
+#root {
+  display: grid;
+  grid-template-rows: 1fr;
+  height: 100dvh;
+}
+
 main {
   background-color: lightblue;
 }
