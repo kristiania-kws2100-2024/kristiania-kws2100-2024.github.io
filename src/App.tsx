@@ -6,6 +6,9 @@ import {MutableRefObject, useEffect, useMemo, useRef} from "react";
 import TileLayer from "ol/layer/Tile";
 import {OSM} from "ol/source";
 import {useGeographic} from "ol/proj";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import {GeoJSON} from "ol/format";
 
 
 useGeographic();
@@ -18,7 +21,13 @@ function App() {
   }), []);
   const map = useMemo(() => new Map({
     layers: [
-      new TileLayer({source: new OSM()})
+      new TileLayer({source: new OSM()}),
+        new VectorLayer({
+          source: new VectorSource({
+            url: "/kommuner.json",
+            format: new GeoJSON()
+          })
+        })
     ],
     view: view
   }), []);
