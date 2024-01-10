@@ -1,0 +1,8 @@
+#root {
+  height: 100dvh;
+  display: grid;
+}
+
+.map {
+  background-color: lightblue;
+}
