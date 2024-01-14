@@ -34,7 +34,7 @@ export function MapApplication() {
       </header>
       <nav>
         <a href={"#"}>Zoom to me</a>
-        <KommuneLayerCheckbox setLayers={setLayers} />
+        <KommuneLayerCheckbox setLayers={setLayers} map={map} />
       </nav>
       <MapView map={map} />
     </>
