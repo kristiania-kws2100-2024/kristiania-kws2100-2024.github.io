@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          cache: 'npm'
+          cache: "npm"
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
