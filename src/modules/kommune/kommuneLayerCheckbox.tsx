@@ -3,29 +3,13 @@ import React, {
   MutableRefObject,
   SetStateAction,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
 import { Layer } from "ol/layer";
-import VectorLayer from "ol/layer/Vector";
-import VectorSource from "ol/source/Vector";
-import { GeoJSON } from "ol/format";
-import { Feature, Map, MapBrowserEvent } from "ol";
-
-type KommuneNavn = {
-  sprak: "nor" | "fkv" | "sma" | "sme" | "smj";
-  navn: string;
-};
-
-interface KommuneProperties {
-  kommunenummer: string;
-  navn: KommuneNavn[];
-}
-
-type KommuneFeature = Feature & {
-  getProperties(): KommuneProperties;
-};
+import { Map } from "ol";
+import { KommuneNavn } from "./kommune";
+import { useKommuneLayer } from "./useKommuneLayer";
 
 export function KommuneLayerCheckbox({
   map,
@@ -36,44 +20,20 @@ export function KommuneLayerCheckbox({
 }) {
   const dialogRef = useRef() as MutableRefObject<HTMLDialogElement>;
   const [checked, setChecked] = useState(false);
-  const [clickedKommune, setClickedKommune] = useState<
-    KommuneFeature | undefined
-  >();
-
-  function handleClick(e: MapBrowserEvent<MouseEvent>) {
-    const clickedKommuner = kommuneLayer
-      .getSource()
-      ?.getFeaturesAtCoordinate(e.coordinate);
-
-    setClickedKommune(
-      clickedKommuner?.length
-        ? (clickedKommuner[0] as KommuneFeature)
-        : undefined,
-    );
-  }
+  const { layer, clickedFeature } = useKommuneLayer(checked, map);
 
   useEffect(() => {
-    if (clickedKommune) {
+    if (clickedFeature) {
       dialogRef.current.showModal();
     }
-  }, [clickedKommune]);
+  }, [clickedFeature]);
 
-  const kommuneLayer = useMemo(() => {
-    return new VectorLayer({
-      source: new VectorSource({
-        url: "/kommuner.json",
-        format: new GeoJSON(),
-      }),
-    });
-  }, []);
   useEffect(() => {
     if (checked) {
-      setLayers((old) => [...old, kommuneLayer]);
-      map.on("click", handleClick);
+      setLayers((old) => [...old, layer]);
     }
     return () => {
-      map.un("click", handleClick);
-      setLayers((old) => old.filter((l) => l !== kommuneLayer));
+      setLayers((old) => old.filter((l) => l !== layer));
     };
   }, [checked]);
 
@@ -91,7 +51,7 @@ export function KommuneLayerCheckbox({
         <h2>Valgt kommune</h2>
         <div>
           {
-            clickedKommune
+            clickedFeature
               ?.getProperties()
               ?.navn?.find((n: KommuneNavn) => n.sprak === "nor")?.navn
           }
