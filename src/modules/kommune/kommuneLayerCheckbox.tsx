@@ -28,6 +28,7 @@ export function KommuneLayerCheckbox({
     if (checked) {
       setLayers((old) => [...old, kommuneLayer]);
     }
+    return () => setLayers((old) => old.filter((l) => l !== kommuneLayer));
   }, [checked]);
 
   return (
