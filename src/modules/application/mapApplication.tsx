@@ -9,6 +9,7 @@ import { useGeographic } from "ol/proj";
 import "ol/ol.css";
 import { KommuneLayerCheckbox } from "../kommune/kommuneLayerCheckbox";
 import { Layer } from "ol/layer";
+import { CenterOnUserLink } from "../map/centerOnUserLink";
 
 useGeographic();
 
@@ -33,7 +34,7 @@ export function MapApplication() {
         <h1>Kristiania Map Application</h1>
       </header>
       <nav>
-        <a href={"#"}>Zoom to me</a>
+        <CenterOnUserLink view={map.getView()} />
         <KommuneLayerCheckbox setLayers={setLayers} map={map} />
       </nav>
       <MapView map={map} />
