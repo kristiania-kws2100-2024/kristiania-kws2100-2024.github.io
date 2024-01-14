@@ -1,8 +1,10 @@
 import React, {
   Dispatch,
+  MutableRefObject,
   SetStateAction,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { Layer } from "ol/layer";
@@ -26,6 +28,7 @@ export function KommuneLayerCheckbox({
   map: Map;
   setLayers: Dispatch<SetStateAction<Layer[]>>;
 }) {
+  const dialogRef = useRef() as MutableRefObject<HTMLDialogElement>;
   const [checked, setChecked] = useState(false);
   const [clickedKommune, setClickedKommune] = useState<
     KommuneFeature | undefined
@@ -44,7 +47,9 @@ export function KommuneLayerCheckbox({
   }
 
   useEffect(() => {
-    console.log(clickedKommune?.getProperties()?.kommunenummer);
+    if (clickedKommune) {
+      dialogRef.current.showModal();
+    }
   }, [clickedKommune]);
 
   const kommuneLayer = useMemo(() => {
@@ -76,6 +81,13 @@ export function KommuneLayerCheckbox({
         />
         {checked ? "Hide" : "Show"} kommuner
       </label>
+      <dialog ref={dialogRef}>
+        <h2>Valgt kommune</h2>
+        <div>{clickedKommune?.getProperties()?.kommunenummer}</div>
+        <div>
+          <button onClick={() => {}}>Close</button>
+        </div>
+      </dialog>
     </div>
   );
 }

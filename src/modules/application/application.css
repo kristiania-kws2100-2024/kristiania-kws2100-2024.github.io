@@ -2,6 +2,10 @@
   margin: unset;
 }
 
+dialog {
+  margin: revert;
+}
+
 #root {
   display: grid;
   height: 100dvh;
