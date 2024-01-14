@@ -1,0 +1,18 @@
+* {
+  margin: unset;
+}
+
+#root {
+  display: grid;
+  height: 100dvh;
+  grid-template-rows: auto auto 1fr;
+}
+
+header,
+nav {
+  padding: 0.25rem;
+}
+
+main {
+  background-color: lightblue;
+}
