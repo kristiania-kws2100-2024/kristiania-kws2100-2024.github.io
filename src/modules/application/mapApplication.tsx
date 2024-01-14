@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import "./application.css";
 import { MapView } from "../map/mapView";
@@ -19,11 +19,14 @@ export function MapApplication() {
   const map = useMemo(
     () =>
       new Map({
-        layers,
         view: new View({ center: [10, 60], zoom: 8 }),
       }),
-    [layers],
+    [],
   );
+  useEffect(() => {
+    map.setLayers(layers);
+  }, [layers]);
+
   return (
     <>
       <header>
