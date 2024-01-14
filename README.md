@@ -20,29 +20,33 @@ The lectures will be recorded and the recordings will be available to students i
 
 We will create a React application that will display a simple map with a background layer from [Open Street Map](https://www.openstreetmap.org/) and a [vector layer](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/).
 
-### Lecture 2: Vector layers
+### Lecture 2: Publishing maps with interaction
 
-We will add more layers to the map
+[![Lecture 2 code](https://img.shields.io/badge/Lecture_2-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/02)
+[![Lecture 2 reference](https://img.shields.io/badge/Lecture_2-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/02)
+[![Lecture 2 exercise](https://img.shields.io/badge/Lecture_2-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/02)
 
-### Lecture 3: Interacting with polygon features
+We will publish a basic Vite application to GitHub pages and then add a map where you can click on features to get more information
 
-Zooming to your location, hovering and clicking on features.
+### Lecture 3: Vector source
 
-### Lecture 4: Deploying with GitHub pages
+Will will add more interaction to the polygon features on the map, including hovering over features and listing features currently in the view.
 
-### Lecture 5: Interacting with point features
+### Lecture 4: Interacting with point features
 
-### Lecture 6: Tile layers and map projections
+### Lecture 5: Tile layers and map projections
 
 **"Damn you, Gerhard!"**
 
-### Lecture 7: Query property data
+We will change the background layers in our map to display aerial photos and change the map projection to polar projection
+
+### Lecture 6: Query property data
 
 Using the [Norwegian Land Register](https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16), we will develop functionality to show properties close to the users location on a map
 
-### Lecture 8: Assigment: Deployment of simple map applications
+### Lecture 7: Assigment: Deployment of simple map applications
 
-### Lecture 9: Importing road data
+### Lecture 8: Importing road data
 
 Using Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metadata/elveg-20/77944f7e-3d75-4f6d-ae04-c528cc72e8f6), we will import a dataset into PostGIS to query it.
 
@@ -56,22 +60,64 @@ Using Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metada
 
 `npm create vite@latest -- --template react-ts`
 
+### Manual creation to avoid lots of code
+
+1. `echo {} > package.json` (creates an empty package.json-file)
+2. `npm install --save-dev vite typescript prettier`
+3. `npm install react react-dom`
+4. `npm pkg set scripts.dev=vite`
+5. Create `index.html`:
+   ```html
+   <body>
+   <div id="root"></div>
+   </body>
+   <script src="src/main.tsx" type="module"></script>
+   ```
+6. Create `src/main.tsx`:
+   ```tsx
+   import React from "react";
+   import ReactDOM from "react-dom/client";
+   const root = ReactDOM.createRoot(document.getElementById("root")!);
+   root.render(<h1>Hello React</h1>);
+   ```
+7. Run `npm run dev` to start developing
+
+### Setting up TypeScript properly
+
+1. After running `npm install -D typescript` (above), run `npx tsc --init`, which creates `tsconfig.json`
+2. You will need to also add React type definitions: `npm install --save-dev @types/react @types/react-dom`
+3. In `tsconfig.json` you will need to configure `"jsx": "react"`
+
+
 ### Creating a OpenLayers map in React
 
 ```tsx
+// By calling the "useGeographic" function in OpenLayers, we tell that we want coordinates to be in degrees
+//  instead of meters, which is the default. Without this `center: [11, 60]` doesn't work on the view
 useGeographic();
+
+// Here we create a Map object. Make sure you `import { Map } from "ol"` or otherwise, standard Javascript
+//  map data structure will be used
 const map = new Map({
+  // The map will be centered on 60 degrees latitude and 11 degrees longitude, with a certain zoom level  
   view: new View({ center: [11, 60], zoom: 10 }),
+  // images displayed on the map will be from the Open Street Map (OSM) tile layer
   layers: [new TileLayer({source: new OSM()})]
 })
 
+// A functional React component
 function App() {
+  // `useRef` bridges the gap between JavaScript functions that expect DOM objects and React components
+  // `as MutableRefObject` is required by TypeScript to avoid us binding the wrong ref to the wrong component  
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
 
+  // When we display the page, we want the OpenLayers map object to target the DOM object refererred to by the
+  // map React component 
   useEffect(() => {
     map.setTarget(mapRef.current);
   }, []);
 
+  // This is the location (in React) where we want the map to be displayed
   return (
     <div ref={mapRef}></div>
   )
@@ -79,6 +125,5 @@ function App() {
 ```
 
 ### Creating a PostGIS API in Express
-
 
 
