@@ -13,8 +13,14 @@ import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
 import { Feature, Map, MapBrowserEvent } from "ol";
 
+type KommuneNavn = {
+  sprak: "nor" | "fkv" | "sma" | "sme" | "smj";
+  navn: string;
+};
+
 interface KommuneProperties {
   kommunenummer: string;
+  navn: KommuneNavn[];
 }
 
 type KommuneFeature = Feature & {
@@ -83,9 +89,15 @@ export function KommuneLayerCheckbox({
       </label>
       <dialog ref={dialogRef}>
         <h2>Valgt kommune</h2>
-        <div>{clickedKommune?.getProperties()?.kommunenummer}</div>
         <div>
-          <button onClick={() => {}}>Close</button>
+          {
+            clickedKommune
+              ?.getProperties()
+              ?.navn?.find((n: KommuneNavn) => n.sprak === "nor")?.navn
+          }
+        </div>
+        <div>
+          <button onClick={() => dialogRef.current.close()}>Close</button>
         </div>
       </dialog>
     </div>
