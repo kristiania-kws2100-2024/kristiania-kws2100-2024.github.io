@@ -16,3 +16,8 @@ nav {
 main {
   background-color: lightblue;
 }
+
+nav {
+  display: flex;
+  gap: 1em;
+}
