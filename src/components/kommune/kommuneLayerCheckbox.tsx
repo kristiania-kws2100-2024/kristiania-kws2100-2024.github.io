@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, {Dispatch, SetStateAction, useState} from "react";
+import {Layer} from "ol/layer";
 
-export function KommuneLayerCheckbox() {
+export function KommuneLayerCheckbox({setLayers}: {
+    setLayers: Dispatch<SetStateAction<Layer[]>>
+}) {
   const [checked, setChecked] = useState(false);
   return (
     <div>
