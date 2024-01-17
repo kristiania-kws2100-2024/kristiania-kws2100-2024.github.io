@@ -11,6 +11,11 @@ import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
 import { Map, MapBrowserEvent } from "ol";
 
+interface KommuneProperties {
+  kommunenummer: string;
+  navn: { sprak: string; navn: string }[];
+}
+
 export function KommuneLayerCheckbox({
   setLayers,
   map,
@@ -19,7 +24,15 @@ export function KommuneLayerCheckbox({
   map: Map;
 }) {
   function handleClick(e: MapBrowserEvent<MouseEvent>) {
-    alert(e.coordinate);
+    const features = kommuneLayer
+      .getSource()
+      ?.getFeaturesAtCoordinate(e.coordinate);
+    const firstFeature = features?.length ? features[0] : undefined;
+    if (firstFeature) {
+      const kommuneProperties =
+        firstFeature.getProperties() as KommuneProperties;
+      alert(kommuneProperties.navn.find((n) => n.sprak === "nor")!.navn);
+    }
   }
   const kommuneLayer = useMemo(
     () =>
