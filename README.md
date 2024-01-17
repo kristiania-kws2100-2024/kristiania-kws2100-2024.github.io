@@ -4,11 +4,15 @@ Deploy a React application that lets the user click on information on a map
 
 ## Deployment
 
-1. Create an empty npm project: `echo {} > package.json`
-2. Add `vite` and `typescript` dev dependencies
-3. Create a `dev` and `build` task which calls `vite` and `vite build`, respectively
-4. Create `index.html`
-5. Share the project on GitHub and create a [GitHub pages deployment](https://github.com/actions/deploy-pages)
+1. Create a new GitHub repository on your GitHub account
+2. Clone the project locally (with IntelliJ: File > New > Project from Version Control)
+3. Create an empty npm project: `echo {} > package.json`
+4. Add `vite` and `typescript` dev dependencies
+   - `npm install -D vite`
+5. Create a `dev` and `build` task which calls `vite` and `vite build`, respectively
+   - `npm pkg set scripts.dev=vite`
+6. Create `index.html`
+7. Share the project on GitHub and create a [GitHub pages deployment](https://github.com/actions/deploy-pages)
    - *NB*: You need to tell Vite to use a different base path. This was not showed in lecture
 
 You should improve the build process:
