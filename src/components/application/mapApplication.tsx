@@ -1,5 +1,7 @@
 import React from "react";
 
+
+
 export function MapApplication() {
     return <>
         <header><h1>Map Application</h1></header>
