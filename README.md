@@ -12,8 +12,16 @@ Deploy a React application that lets the user click on information on a map
 5. Create a `dev` and `build` task which calls `vite` and `vite build`, respectively
    - `npm pkg set scripts.dev=vite`
 6. Create `index.html`
-7. Share the project on GitHub and create a [GitHub pages deployment](https://github.com/actions/deploy-pages)
+7. Create a GitHub Action workflow that calls `npm run build`. You can use GitHub's built-in workflow templates
+   as a starting point
+8. Update your GitHub Actions workflow to include [GitHub pages deployment](https://github.com/actions/deploy-pages)
    - *NB*: You need to tell Vite to use a different base path. This was not showed in lecture
+     ```javascript
+     // vite.config.js
+     export default {
+       base: "/<your repo name, for example kws2100-exercise>"
+     }
+     ```
 
 You should improve the build process:
 - Add Typescript checking and prettier to the build process
@@ -25,6 +33,7 @@ You should improve the build process:
 2. Create `src/index.tsx` with a simple React application
 3. Add `ol` dependency and create a map with the Open Street Maps layer
 4. Add [kommuner in Norway](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/) as a vector layer
+   - NB: The path to your `kommuner.json` must reflect the `base` path in your `vite.config.js`.
 5. Commit and push your code to make sure it shows up on GitHub page
 6. Add a click handler on the map that displays the name of the clicked kommune in a dialog
 
@@ -34,9 +43,9 @@ You should improve the interaction:
 ## Tips:
 
 - GitHub pages can be deployed by adding the `steps` `actions/upload-pages-artifact@v3` (specifies `path`) and
-  `actions/deploy-pages@v4`. This requires write permissions `github-pages` and `id-token` in the workflow file
+  `actions/deploy-pages@v4`. This requires write permissions `pages` and `id-token` in the workflow file
   and a `github-pages` environment variable
-- In order to display a map with Openlayers, you have to create a Map object with a View and at least one layer.
+- In order to display a map with OpenLayers, you have to create a Map object with a View and at least one layer.
   The view must have center and zoom
 - You can use `new OSM()` (for Open Street Maps) as your first layer
 - Make sure you call the OpenLayers function `useGeographic()` at the top of your file. Otherwise, positions will be
