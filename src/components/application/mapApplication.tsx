@@ -1,10 +1,12 @@
 import React, {MutableRefObject, useEffect, useRef} from "react";
 
-import "./application.css";
 import {Map, View} from "ol";
 import TileLayer from "ol/layer/Tile";
 import {OSM} from "ol/source";
 import {useGeographic} from "ol/proj";
+
+import "./application.css";
+import "ol/ol.css";
 
 useGeographic()
 
@@ -30,6 +32,6 @@ export function MapApplication() {
     return <>
         <header><h1>Map Application</h1></header>
         <nav>Actions</nav>
-        <main ref={mapRef}>Here is the map</main>
+        <main ref={mapRef}></main>
     </>;
 }
