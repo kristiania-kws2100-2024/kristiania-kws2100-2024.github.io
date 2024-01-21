@@ -16,8 +16,14 @@ interface KommuneFeature extends Feature<Polygon> {
   getProperties(): KommuneProperties;
 }
 
+interface KommuneNavn {
+  sprak: string;
+  navn: string;
+}
+
 interface KommuneProperties {
   kommunenummer: string;
+  navn: KommuneNavn[];
 }
 
 export function KommuneLayerCheckbox({
@@ -42,7 +48,9 @@ export function KommuneLayerCheckbox({
     const clickedFeature = source.getFeaturesAtCoordinate(
       e.coordinate,
     )[0] as KommuneFeature;
-    alert(clickedFeature!.getProperties().kommunenummer);
+    alert(
+      clickedFeature!.getProperties().navn.find((n) => n.sprak === "nor")!.navn,
+    );
   }
 
   useEffect(() => {
