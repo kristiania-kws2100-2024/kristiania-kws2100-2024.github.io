@@ -1,8 +1,12 @@
-cd# KWS2100 Kartbaserte Websystemer: Exercise 2
+cd# KWS2100 Kartbaserte Websystemer: Exercise 3
 
 Deploy a React application that lets the user click on information on a map
 
-## Deployment
+## Deployment (unchanged from lecture 2)
+
+You can use the notes from [the course notes](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/?tab=readme-ov-file#manual-creation-to-avoid-lots-of-code) or the following instructions.
+
+<details>
 
 1. Create a new GitHub repository on your GitHub account
 2. Clone the project locally (with IntelliJ: File > New > Project from Version Control)
@@ -27,6 +31,8 @@ You should improve the build process:
 - Add Typescript checking and prettier to the build process
 - Add husky to avoid bad commits
 
+</details>
+
 ## Display and interact with information on map
 
 1. Add `react`, `react-dom` dependencies (plus @types definitions)
@@ -37,8 +43,15 @@ You should improve the build process:
 5. Commit and push your code to make sure it shows up on GitHub page
 6. Add a click handler on the map that displays the name of the clicked kommune in a dialog
 
-You should improve the interaction:
-- Add a toggle to add and remove the kommune layer and the click handler
+### Interactions with the map
+
+- The user should be able to focus on their own position
+- The user should be able to toggle display of kommune layer on and off
+- When the user clicks on the map with kommuner on, an overlay should show the name of the clicked feature
+- The system should show a list of features in an aside
+- When the user changes the view, the list of features in the aside should reflect what the user sees
+- When the user hovers on a feature in the map, the feature should be highlighted in the aside
+- When the user hovers on a feature in the aside, the feature should be highlighted in the map
 
 ## Tips:
 
@@ -57,4 +70,4 @@ You should improve the interaction:
 - To deal with clicks, use `map.on` to add an event handler (and `map.un` to remove it) and use
   `layer.getSource().getFeaturesAtCoordinate()` to find the clicked feature
 
-For a solution, check out [the reference code for lecture 2](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/02)
+For a solution, check out [the reference code for lecture 3](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/03)
