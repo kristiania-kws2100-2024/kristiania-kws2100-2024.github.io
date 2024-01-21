@@ -11,22 +11,8 @@ import { Layer } from "ol/layer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
-import { Feature, Map, MapBrowserEvent, Overlay } from "ol";
-import { Polygon } from "ol/geom";
-
-interface KommuneFeature extends Feature<Polygon> {
-  getProperties(): KommuneProperties;
-}
-
-interface KommuneNavn {
-  sprak: string;
-  navn: string;
-}
-
-interface KommuneProperties {
-  kommunenummer: string;
-  navn: KommuneNavn[];
-}
+import { Map, MapBrowserEvent, Overlay } from "ol";
+import { KommuneFeature } from "./kommuneFeature";
 
 export function KommuneLayerCheckbox({
   setLayers,
