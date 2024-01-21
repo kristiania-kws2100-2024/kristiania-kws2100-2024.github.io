@@ -36,6 +36,14 @@ export function MapApplication() {
     map.setTarget(mapRef.current);
   }, []);
 
+  function handleFocusOnUser(e: React.MouseEvent) {
+    e.preventDefault();
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const { latitude, longitude } = pos.coords;
+      map.getView().animate({ center: [longitude, latitude] });
+    });
+  }
+
   // This is the location (in React) where we want the map to be displayed
   return (
     <>
@@ -44,6 +52,9 @@ export function MapApplication() {
       </header>
       <nav>
         <KommuneLayerCheckbox />
+        <a href={"#"} onClick={handleFocusOnUser}>
+          Focus on me
+        </a>
       </nav>
       <div ref={mapRef}></div>
     </>
