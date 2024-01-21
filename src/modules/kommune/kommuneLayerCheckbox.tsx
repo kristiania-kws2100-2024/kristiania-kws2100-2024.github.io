@@ -9,11 +9,14 @@ import { Layer } from "ol/layer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
+import { Map, MapBrowserEvent } from "ol";
 
 export function KommuneLayerCheckbox({
   setLayers,
+  map,
 }: {
   setLayers: Dispatch<SetStateAction<Layer[]>>;
+  map: Map;
 }) {
   const [checked, setChecked] = useState(false);
   const kommuneLayer = useMemo(
@@ -26,12 +29,20 @@ export function KommuneLayerCheckbox({
       }),
     [],
   );
+
+  function handleClick(e: MapBrowserEvent<MouseEvent>) {
+    alert(e.coordinate);
+  }
+
   useEffect(() => {
     if (checked) {
       setLayers((old) => [...old, kommuneLayer]);
-    } else {
-      setLayers((old) => old.filter((l) => l !== kommuneLayer));
+      map.on("click", handleClick);
     }
+    return () => {
+      map.un("click", handleClick);
+      setLayers((old) => old.filter((l) => l !== kommuneLayer));
+    };
   }, [checked]);
 
   return (

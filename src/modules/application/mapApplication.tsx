@@ -51,7 +51,7 @@ export function MapApplication() {
         <h1>Kristiania map</h1>
       </header>
       <nav>
-        <KommuneLayerCheckbox setLayers={setLayers} />
+        <KommuneLayerCheckbox setLayers={setLayers} map={map} />
         <a href={"#"} onClick={handleFocusOnUser}>
           Focus on me
         </a>
