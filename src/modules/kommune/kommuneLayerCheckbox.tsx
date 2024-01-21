@@ -1,15 +1,17 @@
 import React, {
   Dispatch,
+  MutableRefObject,
   SetStateAction,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { Layer } from "ol/layer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
-import { Feature, Map, MapBrowserEvent } from "ol";
+import { Feature, Map, MapBrowserEvent, Overlay } from "ol";
 import { Polygon } from "ol/geom";
 
 interface KommuneFeature extends Feature<Polygon> {
@@ -33,7 +35,11 @@ export function KommuneLayerCheckbox({
   setLayers: Dispatch<SetStateAction<Layer[]>>;
   map: Map;
 }) {
-  const [checked, setChecked] = useState(false);
+  const overlayRef = useRef() as MutableRefObject<HTMLDivElement>;
+  const [checked, setChecked] = useState(true);
+  const [selectedKommune, setSelectedKommune] = useState<
+    KommuneFeature | undefined
+  >();
   const source = useMemo(
     () =>
       new VectorSource<KommuneFeature>({
@@ -42,15 +48,17 @@ export function KommuneLayerCheckbox({
       }),
     [],
   );
+  const overlay = useMemo(() => new Overlay({}), []);
   const kommuneLayer = useMemo(() => new VectorLayer({ source }), [source]);
 
   function handleClick(e: MapBrowserEvent<MouseEvent>) {
     const clickedFeature = source.getFeaturesAtCoordinate(
       e.coordinate,
     )[0] as KommuneFeature;
-    alert(
-      clickedFeature!.getProperties().navn.find((n) => n.sprak === "nor")!.navn,
-    );
+    setSelectedKommune(clickedFeature);
+    if (clickedFeature) {
+      overlay.setPosition(e.coordinate);
+    }
   }
 
   useEffect(() => {
@@ -74,6 +82,17 @@ export function KommuneLayerCheckbox({
         />
         Show kommune
       </label>
+      <div ref={overlayRef}>
+        {selectedKommune && (
+          <div className={"selected-kommune"}>
+            {
+              selectedKommune
+                .getProperties()
+                .navn.find((n) => n.sprak === "nor")!.navn
+            }
+          </div>
+        )}
+      </div>
     </div>
   );
 }

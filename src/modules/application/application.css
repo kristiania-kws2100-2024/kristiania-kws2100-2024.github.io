@@ -17,3 +17,13 @@ nav {
   display: flex;
   gap: 0.5em;
 }
+
+.selected-kommune {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  padding: 1em;
+  left: 50%;
+  top: 50%;
+  translate: -50%;
+}
