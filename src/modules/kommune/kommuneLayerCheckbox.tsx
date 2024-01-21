@@ -49,6 +49,13 @@ export function KommuneLayerCheckbox({
     [],
   );
   const overlay = useMemo(() => new Overlay({}), []);
+  useEffect(() => {
+    map.addOverlay(overlay);
+    overlay.setElement(overlayRef.current);
+    return () => {
+      map.removeOverlay(overlay);
+    };
+  }, [overlay]);
   const kommuneLayer = useMemo(() => new VectorLayer({ source }), [source]);
 
   function handleClick(e: MapBrowserEvent<MouseEvent>) {

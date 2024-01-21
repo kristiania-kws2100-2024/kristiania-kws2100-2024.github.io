@@ -19,11 +19,9 @@ nav {
 }
 
 .selected-kommune {
-  position: absolute;
-  z-index: 1;
   background-color: white;
+  border: 2px solid blue;
+  border-radius: 1em;
   padding: 1em;
-  left: 50%;
-  top: 50%;
-  translate: -50%;
+  translate: -50% calc(-100% - 1em);
 }
