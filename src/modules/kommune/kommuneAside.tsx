@@ -1,7 +1,7 @@
 import { Layer } from "ol/layer";
 import React, { useEffect, useMemo, useState } from "react";
 import { KommuneFeature, KommuneLayer } from "./kommuneFeature";
-import { Map } from "ol";
+import { Map, MapBrowserEvent } from "ol";
 import { Stroke, Style } from "ol/style";
 
 function getKommuneNavn(k: KommuneFeature) {
@@ -18,13 +18,19 @@ export function KommuneAside({ layers, map }: { layers: Layer[]; map: Map }) {
     map.getView().getViewStateAndExtent().extent,
   );
   function changeFocusedFeature(feature?: KommuneFeature) {
-    focusedFeature?.setStyle(undefined);
-    setFocusedFeature(feature);
-    feature?.setStyle(
-      new Style({
-        stroke: new Stroke({ color: "red" }),
-      }),
-    );
+    setFocusedFeature((old) => {
+      if (old === feature) {
+        return old;
+      } else {
+        old?.setStyle(undefined);
+        feature?.setStyle(
+          new Style({
+            stroke: new Stroke({ color: "red" }),
+          }),
+        );
+        return feature;
+      }
+    });
   }
   const visibleFeatures = useMemo(() => {
     return kommuneFeatures.filter((f) =>
@@ -39,16 +45,32 @@ export function KommuneAside({ layers, map }: { layers: Layer[]; map: Map }) {
     features.sort((a, b) => getKommuneNavn(a).localeCompare(getKommuneNavn(b)));
     setKommuneFeatures(features || []);
   }
+  function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
+    const hoverFeatures = kommuneLayer
+      ?.getSource()
+      ?.getFeaturesAtCoordinate(e.coordinate);
+    if (hoverFeatures?.length === 1) {
+      changeFocusedFeature(hoverFeatures[0] as KommuneFeature);
+    }
+  }
   useEffect(() => {
     kommuneLayer?.on("change", handleLayerChange);
-    return () => kommuneLayer?.un("change", handleLayerChange);
+    if (kommuneLayer) {
+      map.on("pointermove", handlePointerMove);
+    }
+    return () => {
+      map.on("pointermove", handlePointerMove);
+      return kommuneLayer?.un("change", handleLayerChange);
+    };
   }, [kommuneLayer]);
   useEffect(() => {
     function handleViewChange() {
       setViewExtent(map.getView().getViewStateAndExtent().extent);
     }
     map.getView().on("change", handleViewChange);
-    return () => map.getView().un("change", handleViewChange);
+    return () => {
+      map.getView().un("change", handleViewChange);
+    };
   }, []);
 
   return (
