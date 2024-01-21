@@ -59,7 +59,7 @@ export function MapApplication() {
       </nav>
       <main>
         <div ref={mapRef}></div>
-        <KommuneAside layers={layers} />
+        <KommuneAside layers={layers} map={map} />
       </main>
     </>
   );
