@@ -51,10 +51,15 @@ export function KommuneLayerCheckbox({
     const clickedFeature = source.getFeaturesAtCoordinate(
       e.coordinate,
     )[0] as KommuneFeature;
-    setSelectedKommune(clickedFeature);
-    if (clickedFeature) {
-      overlay.setPosition(e.coordinate);
-    }
+    setSelectedKommune((old) => {
+      if (old) {
+        overlay.setPosition(undefined);
+        return undefined;
+      } else if (clickedFeature) {
+        overlay.setPosition(e.coordinate);
+        return clickedFeature;
+      }
+    });
   }
 
   useEffect(() => {
