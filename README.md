@@ -28,9 +28,19 @@ We will create a React application that will display a simple map with a backgro
 
 We will publish a basic Vite application to GitHub pages and then add a map where you can click on features to get more information
 
-### Lecture 3: Vector source
+### Lecture 3: Interacting with the polygon elements
 
-Will will add more interaction to the polygon features on the map, including hovering over features and listing features currently in the view.
+[![Lecture 3 code](https://img.shields.io/badge/Lecture_3-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/03)
+[![Lecture 3 reference](https://img.shields.io/badge/Lecture_3-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/03)
+[![Lecture 3 exercise](https://img.shields.io/badge/Lecture_3-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/03)
+
+In this lecture, we will make sure that the user can interact with kommuner:
+
+- Clicking a feature on the map should bring up an overlay for the user
+- The user should see a list of features in an aside in the application
+- The feature list in the aside should be synchronized with the view
+- Hovering features in the aside should highlight the features on the map
+- Hovering features in the map should highlight the features on the aside
 
 ### Lecture 4: Interacting with point features
 
@@ -56,16 +66,25 @@ Using Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metada
 
 ## Reference material
 
-### Creating a basic React application with Vite and TypeScript
-
-`npm create vite@latest -- --template react-ts`
 
 ### Manual creation to avoid lots of code
+
+This is an alternative to running `npm create vite@latest` and then removing all the code you don't need.
 
 1. `echo {} > package.json` (creates an empty package.json-file)
 2. `npm install --save-dev vite typescript prettier`
 3. `npm install react react-dom`
 4. `npm pkg set scripts.dev=vite`
+   <details>
+
+   ```shell
+   echo {} > package.json
+   npm install --save-dev vite typescript prettier
+   npm install react react-dom
+   npm pkg set scripts.dev=vite
+   ```
+   
+   </details>
 5. Create `index.html`:
    ```html
    <body>
@@ -82,11 +101,59 @@ Using Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metada
    ```
 7. Run `npm run dev` to start developing
 
-### Setting up TypeScript properly
+### Building with check of Typescript and formatting
 
-1. After running `npm install -D typescript` (above), run `npx tsc --init`, which creates `tsconfig.json`
-2. You will need to also add React type definitions: `npm install --save-dev @types/react @types/react-dom`
-3. In `tsconfig.json` you will need to configure `"jsx": "react"`
+Set up:
+```shell
+npm pkg set scripts.build="npm run check && vite build"
+npm pkg set scripts.check="prettier --check . && tsc --noEmit"
+```
+
+Clean up:
+
+```shell
+npx tsc --init --jsx
+npx prettier --write .
+npm install --save-dev @types/react @types/react-dom
+```
+
+Additionally, fix TypeScript problems: In `tsconfig.json` you will need to configure `"jsx": "react"`
+
+### Set up GitHub Actions to deploy to GitHub pages
+
+You can either start with a template by clicking on GitHub Actions on your repository on github.com or write you workflow from scratch
+
+#### .github/workflows/publish.yaml
+
+```yaml
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+      - uses: actions/deploy-pages@v4
+        id: deployment
+```
 
 
 ### Creating a OpenLayers map in React
