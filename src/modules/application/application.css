@@ -18,6 +18,26 @@ nav {
   gap: 0.5em;
 }
 
+main {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+main > aside {
+  display: grid;
+  grid-template-columns: 1px;
+  overflow-x: clip;
+  transition: grid-template-columns 1s ease-out;
+}
+
+main > aside.show {
+  grid-template-columns: 1fr;
+}
+
+main > aside > div {
+  padding: 1em;
+}
+
 .selected-kommune {
   background-color: white;
   border: 2px solid blue;

@@ -8,6 +8,7 @@ import "ol/ol.css";
 import "./application.css";
 import { Layer } from "ol/layer";
 import { KommuneLayerCheckbox } from "../kommune/kommuneLayerCheckbox";
+import { KommuneAside } from "../kommune/kommuneAside";
 
 // By calling the "useGeographic" function in OpenLayers, we tell that we want coordinates to be in degrees
 //  instead of meters, which is the default. Without this `center: [11, 60]` doesn't work on the view
@@ -56,7 +57,10 @@ export function MapApplication() {
           Focus on me
         </a>
       </nav>
-      <div ref={mapRef}></div>
+      <main>
+        <div ref={mapRef}></div>
+        <KommuneAside layers={layers} />
+      </main>
     </>
   );
 }

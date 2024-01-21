@@ -56,7 +56,10 @@ export function KommuneLayerCheckbox({
       map.removeOverlay(overlay);
     };
   }, [overlay]);
-  const kommuneLayer = useMemo(() => new VectorLayer({ source }), [source]);
+  const kommuneLayer = useMemo(
+    () => new VectorLayer({ source, className: "kommuner" }),
+    [source],
+  );
 
   function handleClick(e: MapBrowserEvent<MouseEvent>) {
     const clickedFeature = source.getFeaturesAtCoordinate(
