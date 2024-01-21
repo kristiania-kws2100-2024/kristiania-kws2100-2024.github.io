@@ -9,7 +9,16 @@ import { Layer } from "ol/layer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
-import { Map, MapBrowserEvent } from "ol";
+import { Feature, Map, MapBrowserEvent } from "ol";
+import { Polygon } from "ol/geom";
+
+interface KommuneFeature extends Feature<Polygon> {
+  getProperties(): KommuneProperties;
+}
+
+interface KommuneProperties {
+  kommunenummer: string;
+}
 
 export function KommuneLayerCheckbox({
   setLayers,
@@ -19,19 +28,21 @@ export function KommuneLayerCheckbox({
   map: Map;
 }) {
   const [checked, setChecked] = useState(false);
-  const kommuneLayer = useMemo(
+  const source = useMemo(
     () =>
-      new VectorLayer({
-        source: new VectorSource({
-          url: "/kommuner.json",
-          format: new GeoJSON(),
-        }),
+      new VectorSource<KommuneFeature>({
+        url: "/kommuner.json",
+        format: new GeoJSON(),
       }),
     [],
   );
+  const kommuneLayer = useMemo(() => new VectorLayer({ source }), [source]);
 
   function handleClick(e: MapBrowserEvent<MouseEvent>) {
-    alert(e.coordinate);
+    const clickedFeature = source.getFeaturesAtCoordinate(
+      e.coordinate,
+    )[0] as KommuneFeature;
+    alert(clickedFeature!.getProperties().kommunenummer);
   }
 
   useEffect(() => {
