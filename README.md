@@ -120,18 +120,16 @@ npm pkg set scripts.check="prettier --check . && tsc --noEmit"
 Clean up:
 
 ```shell
-npx tsc --init --jsx
 npx prettier --write .
+npx tsc --init --jsx react
 npm install --save-dev @types/react @types/react-dom
 ```
-
-Additionally, fix TypeScript problems: In `tsconfig.json` you will need to configure `"jsx": "react"`
 
 ### Set up GitHub Actions to deploy to GitHub pages
 
 You can either start with a template by clicking on GitHub Actions on your repository on github.com or write you workflow from scratch
 
-#### .github/workflows/publish.yaml
+#### `.github/workflows/publish.yaml`
 
 ```yaml
 on:
@@ -162,6 +160,24 @@ jobs:
       - uses: actions/deploy-pages@v4
         id: deployment
 ```
+
+This will publish your project as `https://<your username>.github.io/<repository name>`. By default, Vite expects index.html to fetch JavaScript from the server root. In order to fetch content from `/<repository name>`, you need the following `vite.config.js`:
+
+```javascript
+// vite.config.js
+export default {
+ base: "/<your repo name>"
+}
+```
+
+#### Install husky
+
+Husky helps prevent you from checking in bad code:
+
+1. `npm install --save-dev husky`
+2. `npm pkg set scripts.prepare="husky install"`
+3. `npm run prepare`
+4. `npx husky add .husky/pre-push "npm run check"`
 
 
 ### Creating a OpenLayers map in React
