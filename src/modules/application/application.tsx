@@ -4,6 +4,9 @@ import TileLayer from "ol/layer/Tile";
 import { OSM } from "ol/source";
 import { useGeographic } from "ol/proj";
 
+import "./application.css";
+import "ol/ol.css";
+
 useGeographic();
 
 const map = new Map({
@@ -14,5 +17,15 @@ const map = new Map({
 export function Application() {
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   useEffect(() => map.setTarget(mapRef.current), []);
-  return <div ref={mapRef}></div>;
+  return (
+    <>
+      <header>
+        <h1>Kommune kart</h1>
+      </header>
+      <nav>
+        <a href={"#"}>Focus on me</a>
+      </nav>
+      <div ref={mapRef}></div>
+    </>
+  );
 }
