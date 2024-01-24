@@ -43,7 +43,7 @@ export function Application() {
         <a href={"#"} onClick={handleFocusUser}>
           Focus on me
         </a>
-        <KommuneLayerCheckbox setLayers={setLayers} />
+        <KommuneLayerCheckbox map={map} setLayers={setLayers} />
       </nav>
       <div ref={mapRef}></div>
     </>
