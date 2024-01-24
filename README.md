@@ -44,6 +44,8 @@ In this lecture, we will make sure that the user can interact with kommuner:
 
 ### Lecture 4: Interacting with point features
 
+We will draw points on the map from a vector source and allow the user to interact with them. We will explore using images to represent data, clustering features together and custom drawing of point features using a canvas.
+
 ### Lecture 5: Tile layers and map projections
 
 **"Damn you, Gerhard!"**
@@ -54,13 +56,19 @@ We will change the background layers in our map to display aerial photos and cha
 
 Using the [Norwegian Land Register](https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16), we will develop functionality to show properties close to the users location on a map
 
+In this manner, we will start exploring the PostGIS geographical database extension for Postgresql.
+
 ### Lecture 7: Assigment: Deployment of simple map applications
 
 ### Lecture 8: Importing road data
 
 Using Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metadata/elveg-20/77944f7e-3d75-4f6d-ae04-c528cc72e8f6), we will import a dataset into PostGIS to query it.
 
-### Lecture 10: Vector layers and styles
+## Lecture 9: Vector tile layers
+
+Highlight: dark mode styling of the background map.
+
+### Lecture 10: Drawing on the map 
 
 ### Lecture 11: Getting ready for the exam
 
