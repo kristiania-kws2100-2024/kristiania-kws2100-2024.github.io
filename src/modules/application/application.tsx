@@ -6,6 +6,7 @@ import { useGeographic } from "ol/proj";
 
 import "./application.css";
 import "ol/ol.css";
+import { KommuneLayerCheckbox } from "../kommune/kommuneLayerCheckbox";
 
 useGeographic();
 
@@ -36,6 +37,7 @@ export function Application() {
         <a href={"#"} onClick={handleFocusUser}>
           Focus on me
         </a>
+        <KommuneLayerCheckbox />
       </nav>
       <div ref={mapRef}></div>
     </>
