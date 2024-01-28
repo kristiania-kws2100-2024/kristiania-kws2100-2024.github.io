@@ -1,4 +1,4 @@
-cd# KWS2100 Kartbaserte Websystemer: Exercise 3
+# KWS2100 Kartbaserte Websystemer: Exercise 3
 
 Deploy a React application that lets the user click on information on a map
 
