@@ -10,8 +10,15 @@ export function KommuneAside() {
     [layers],
   );
   const [kommuner, setKommuner] = useState<KommuneFeature[]>([]);
-  useEffect(() => {
+  function loadKommuneFeatures() {
     setKommuner(kommuneLayer?.getSource()?.getFeatures() || []);
+  }
+  useEffect(() => {
+    kommuneLayer?.on("change", loadKommuneFeatures);
+    return () => {
+      kommuneLayer?.un("change", loadKommuneFeatures);
+      setKommuner([]);
+    };
   }, [kommuneLayer]);
 
   return (
