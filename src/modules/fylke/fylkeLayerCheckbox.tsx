@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MapContext } from "../map/mapContext";
-import { kommuneLayer } from "./kommuneLayer";
+import { fylkeLayer } from "./fylkeLayer";
 
-export function KommuneLayerCheckbox() {
+export function FylkeLayerCheckbox() {
   const { setLayers } = useContext(MapContext);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   useEffect(() => {
     if (checked) {
-      setLayers((old) => [...old, kommuneLayer]);
+      setLayers((old) => [...old, fylkeLayer]);
     }
     return () => {
-      setLayers((old) => old.filter((l) => l !== kommuneLayer));
+      setLayers((old) => old.filter((l) => l !== fylkeLayer));
     };
   }, [checked]);
 
@@ -23,7 +23,7 @@ export function KommuneLayerCheckbox() {
           checked={checked}
           onChange={(e) => setChecked(e.target.checked)}
         />
-        Show kommuner
+        Show fylker
       </label>
     </div>
   );
