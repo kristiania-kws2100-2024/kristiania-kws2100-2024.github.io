@@ -5,7 +5,12 @@ import { Feature } from "ol";
 import { Polygon } from "ol/geom";
 
 export type KommuneLayer = VectorLayer<VectorSource<KommuneFeature>>;
-export type KommuneFeature = Feature<Polygon>;
+export type KommuneFeature = {
+  getProperties(): KommuneProperties;
+} & Feature<Polygon>;
+export interface KommuneProperties {
+  kommunenummer: string;
+}
 
 export const kommuneLayer = new VectorLayer({
   className: "kommuner",
