@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { MapContext } from "../map/mapContext";
 
-import { KommuneLayer, KommuneFeature } from "./kommuneLayer";
+import { KommuneFeature, KommuneLayer } from "./kommuneLayer";
+import { useViewExtent } from "../map/useViewExtent";
 
 export function KommuneAside() {
-  const { layers, map } = useContext(MapContext);
-  const viewExtent = useMemo(
-    () => map.getView().getViewStateAndExtent().extent,
-    [map],
-  );
+  const { layers } = useContext(MapContext);
+  const viewExtent = useViewExtent();
   const kommuneLayer = useMemo(
     () => layers.find((l) => l.getClassName() === "kommuner") as KommuneLayer,
     [layers],
