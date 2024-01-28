@@ -37,40 +37,60 @@ We will publish a basic Vite application to GitHub pages and then add a map wher
 In this lecture, we will make sure that the user can interact with kommuner:
 
 - Clicking a feature on the map should bring up an overlay for the user
-- The user should see a list of features in an aside in the application
-- The feature list in the aside should be synchronized with the view
-- Hovering features in the aside should highlight the features on the map
-- Hovering features in the map should highlight the features on the aside
 
-### Lecture 4: Interacting with point features
+### Lecture 4: Vector layers as data
+
+[![Lecture 4 code](https://img.shields.io/badge/Lecture_4-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/04)
+[![Lecture 4 reference](https://img.shields.io/badge/Lecture_4-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/04)
+[![Lecture 4 exercise](https://img.shields.io/badge/Lecture_4-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/04)
+
+In this lecture, we will continue out exploration of vector layers. We will start with an "empty" map and add a [polygon feature layer](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/) with an aside that stays in sync with the visible object on the map. We will then add more feature layers from [international](https://github.com/datasets/geo-countries) and [Norwegian](https://kart.dsb.no/) sources.
+
+- Starting point: Empty map
+- Add kommune layer with checkbox
+- Add kommune aside with list of kommune
+- Understanding GeoJSON properties
+- Limit kommune aside to current view
+- Add fylker (why are polygons `number[][][]`)
+- Highlight active features in map
+- Add layers with countries and stations (points)
+
+
+### Lecture 5: Point vector layers
 
 We will draw points on the map from a vector source and allow the user to interact with them. We will explore using images to represent data, clustering features together and custom drawing of point features using a canvas.
 
-### Lecture 5: Tile layers and map projections
+- Rendering functions
+- Rendering text for a point
+- Clustering points together
+- Finding clicked point features
+- Features in multiple layers
+
+### Lecture 6: Tile layers and map projections
 
 **"Damn you, Gerhard!"**
 
 We will change the background layers in our map to display aerial photos and change the map projection to polar projection
 
-### Lecture 6: Query property data
+### Lecture 7: Assigment: Deployment of simple map applications
+
+### Lecture 8: Query property data
 
 Using the [Norwegian Land Register](https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16), we will develop functionality to show properties close to the users location on a map
 
 In this manner, we will start exploring the PostGIS geographical database extension for Postgresql.
 
-### Lecture 7: Assigment: Deployment of simple map applications
-
-### Lecture 8: Importing road data
+### Lecture 9: Importing road data
 
 Using Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metadata/elveg-20/77944f7e-3d75-4f6d-ae04-c528cc72e8f6), we will import a dataset into PostGIS to query it.
 
-## Lecture 9: Vector tile layers
+## Lecture 10: Vector tile layers
 
 Highlight: dark mode styling of the background map.
 
-### Lecture 10: Drawing on the map 
+### Lecture 11: Drawing on the map 
 
-### Lecture 11: Getting ready for the exam
+### Lecture 12: Getting ready for the exam
 
 ## Reference material
 
