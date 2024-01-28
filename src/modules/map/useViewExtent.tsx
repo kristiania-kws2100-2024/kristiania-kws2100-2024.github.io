@@ -13,7 +13,7 @@ export function useViewExtent() {
 
   useEffect(() => {
     map.getView().on("change", setExtentFromView);
-    setExtentFromView();
+    setTimeout(setExtentFromView, 200);
     return () => {
       map.getView().un("change", setExtentFromView);
     };
