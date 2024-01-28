@@ -23,6 +23,8 @@ main aside {
   grid-template-columns: 0;
   transition: grid-template-columns 0.5s ease-in-out;
   overflow-x: clip;
+  max-height: calc(100dvh - 100px);
+  overflow-y: scroll;
 }
 
 main aside > * {
@@ -31,4 +33,8 @@ main aside > * {
 
 main aside.show {
   grid-template-columns: auto;
+}
+
+main aside.hide * {
+  visibility: hidden;
 }
