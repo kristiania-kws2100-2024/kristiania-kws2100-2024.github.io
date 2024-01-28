@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { MapContext } from "../map/mapContext";
 
-import { FylkeFeature, FylkeLayer } from "./fylkeLayer";
+import { CountryFeature, CountryLayer } from "./countryLayer";
 import { useViewExtent } from "../map/useViewExtent";
 import { Fill, Stroke, Style } from "ol/style";
 import { getStedsnavn } from "../sted/stedsNavn";
@@ -16,22 +16,18 @@ const selectedStyle = new Style({
   }),
 });
 
-export function FylkeAside() {
+export function CountryAside() {
   const { layers } = useContext(MapContext);
   const viewExtent = useViewExtent();
   const layer = useMemo(
-    () => layers.find((l) => l.getClassName() === "fylke") as FylkeLayer,
+    () => layers.find((l) => l.getClassName() === "country") as CountryLayer,
     [layers],
   );
-  const [features, setFeatures] = useState<FylkeFeature[]>([]);
+  const [features, setFeatures] = useState<CountryFeature[]>([]);
   const visibleFeatures = useMemo(() => {
-    return features
-      .filter((f) => f.getGeometry()?.intersectsExtent(viewExtent))
-      .sort((a, b) =>
-        getStedsnavn(a.getProperties()).localeCompare(
-          getStedsnavn(b.getProperties()),
-        ),
-      );
+    return features.filter((f) =>
+      f.getGeometry()?.intersectsExtent(viewExtent),
+    );
   }, [features, viewExtent]);
   function loadFeatures() {
     setFeatures(layer?.getSource()?.getFeatures() || []);
@@ -45,7 +41,7 @@ export function FylkeAside() {
     };
   }, [layer]);
   const [currentFeature, setCurrentFeature] = useState<
-    FylkeFeature | undefined
+    CountryFeature | undefined
   >();
   useEffect(() => {
     currentFeature?.setStyle(selectedStyle);
@@ -57,15 +53,14 @@ export function FylkeAside() {
   return (
     <aside className={layer ? "show" : "hide"}>
       <div>
-        <h2>Fylker</h2>
+        <h2>Countries</h2>
         <div onMouseLeave={() => setCurrentFeature(undefined)}>
-          {visibleFeatures.map((f) => (
+          {visibleFeatures.map((c) => (
             <div
-              key={f.getProperties().fylkenummer}
-              onMouseEnter={() => setCurrentFeature(f)}
-              className={f === currentFeature ? "active" : ""}
+              onMouseEnter={() => setCurrentFeature(c)}
+              className={c === currentFeature ? "active" : ""}
             >
-              {getStedsnavn(f.getProperties())}
+              {JSON.stringify(c.getProperties())}
             </div>
           ))}
         </div>

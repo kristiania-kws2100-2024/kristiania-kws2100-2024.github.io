@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MapContext } from "../map/mapContext";
-import { fylkeLayer } from "./fylkeLayer";
+import { countryLayer } from "./countryLayer";
 
-export function FylkeLayerCheckbox() {
-  const { setLayers } = useContext(MapContext);
-  const [checked, setChecked] = useState(false);
+export function CountryLayerCheckbox() {
+  const { setLayers, map } = useContext(MapContext);
+  const [checked, setChecked] = useState(true);
 
   useEffect(() => {
     if (checked) {
-      setLayers((old) => [...old, fylkeLayer]);
+      setLayers((old) => [...old, countryLayer]);
+      map.getView().setZoom(5);
     }
     return () => {
-      setLayers((old) => old.filter((l) => l !== fylkeLayer));
+      setLayers((old) => old.filter((l) => l !== countryLayer));
     };
   }, [checked]);
 
@@ -23,7 +24,7 @@ export function FylkeLayerCheckbox() {
           checked={checked}
           onChange={(e) => setChecked(e.target.checked)}
         />
-        Show fylker
+        Show countries
       </label>
     </div>
   );
