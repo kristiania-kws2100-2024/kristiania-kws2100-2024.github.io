@@ -10,6 +10,11 @@ export type KommuneFeature = {
 } & Feature<Polygon>;
 export interface KommuneProperties {
   kommunenummer: string;
+  navn: StedsNavn[];
+}
+export interface StedsNavn {
+  sprak: "nor" | "smj";
+  navn: string;
 }
 
 export const kommuneLayer = new VectorLayer({

@@ -28,7 +28,7 @@ export function KommuneAside() {
         <h2>{kommuner.length} Kommuner</h2>
         {kommuner.map((k) => (
           <div key={k.getProperties().kommunenummer}>
-            {k.getProperties().kommunenummer}
+            {k.getProperties().navn.find((n) => n.sprak === "nor")!.navn}
           </div>
         ))}
       </div>
