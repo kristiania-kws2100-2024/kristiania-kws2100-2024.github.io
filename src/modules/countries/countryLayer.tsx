@@ -14,7 +14,7 @@ export interface CountryProperties {}
 export const countryLayer = new VectorLayer({
   className: "country",
   source: new VectorSource({
-    url: "/country.json",
+    url: "/countries.json",
     format: new GeoJSON(),
   }),
   style: new Style({
