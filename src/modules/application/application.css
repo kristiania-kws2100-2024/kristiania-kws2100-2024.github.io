@@ -15,7 +15,7 @@ nav {
 
 main {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
 }
 
 main aside {
@@ -24,7 +24,7 @@ main aside {
   transition: grid-template-columns 0.5s ease-in-out;
   overflow-x: clip;
   max-height: calc(100dvh - 100px);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 main aside > * {

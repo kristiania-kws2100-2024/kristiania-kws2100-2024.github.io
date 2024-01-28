@@ -9,6 +9,7 @@ import { Layer } from "ol/layer";
 import { map, MapContext } from "../map/mapContext";
 import { KommuneAside } from "../kommune/kommuneAside";
 import { FylkeLayerCheckbox } from "../fylke/fylkeLayerCheckbox";
+import { FylkeAside } from "../fylke/fylkeAside";
 
 export function Application() {
   function handleFocusUser(e: React.MouseEvent) {
@@ -41,6 +42,7 @@ export function Application() {
       </nav>
       <main>
         <div ref={mapRef}></div>
+        <FylkeAside />
         <KommuneAside />
       </main>
     </MapContext.Provider>
