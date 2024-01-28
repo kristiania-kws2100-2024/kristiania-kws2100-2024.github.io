@@ -25,9 +25,11 @@ export function CountryAside() {
   );
   const [features, setFeatures] = useState<CountryFeature[]>([]);
   const visibleFeatures = useMemo(() => {
-    return features.filter((f) =>
-      f.getGeometry()?.intersectsExtent(viewExtent),
-    );
+    return features
+      .filter((f) => f.getGeometry()?.intersectsExtent(viewExtent))
+      .sort((a, b) =>
+        a.getProperties().ADMIN.localeCompare(b.getProperties().ADMIN),
+      );
   }, [features, viewExtent]);
   function loadFeatures() {
     setFeatures(layer?.getSource()?.getFeatures() || []);
@@ -57,10 +59,11 @@ export function CountryAside() {
         <div onMouseLeave={() => setCurrentFeature(undefined)}>
           {visibleFeatures.map((c) => (
             <div
+              key={c.getProperties().ISO_A3}
               onMouseEnter={() => setCurrentFeature(c)}
               className={c === currentFeature ? "active" : ""}
             >
-              {JSON.stringify(c.getProperties())}
+              {c.getProperties().ADMIN}
             </div>
           ))}
         </div>

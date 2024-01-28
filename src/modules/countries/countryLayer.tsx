@@ -9,7 +9,11 @@ export type CountryLayer = VectorLayer<VectorSource<CountryFeature>>;
 export type CountryFeature = {
   getProperties(): CountryProperties;
 } & Feature<Polygon>;
-export interface CountryProperties {}
+export interface CountryProperties {
+  ADMIN: string;
+  ISO_A2: string;
+  ISO_A3: string;
+}
 
 export const countryLayer = new VectorLayer({
   className: "country",
