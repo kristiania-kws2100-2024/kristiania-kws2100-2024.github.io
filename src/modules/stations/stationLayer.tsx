@@ -2,12 +2,12 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
 import { Feature } from "ol";
-import { Polygon } from "ol/geom";
+import { Point, Polygon } from "ol/geom";
 
 export type StationLayer = VectorLayer<VectorSource<StationFeature>>;
 export type StationFeature = {
   getProperties(): StationProperties;
-} & Feature<Polygon>;
+} & Feature<Point>;
 export interface StationProperties {
   objtype: "Stasjon";
   navn: string;

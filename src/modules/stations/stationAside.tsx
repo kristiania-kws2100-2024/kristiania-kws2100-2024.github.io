@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { StationFeature } from "./stationLayer";
-import { Fill, Stroke, Style } from "ol/style";
+import { Circle, Fill, Stroke, Style } from "ol/style";
 import { useFeatures } from "../map/useFeatures";
 
 const selectedStyle = new Style({
@@ -11,6 +11,10 @@ const selectedStyle = new Style({
   }),
   fill: new Fill({
     color: [0, 0, 0, 0.2],
+  }),
+  image: new Circle({
+    stroke: new Stroke({ color: "red", width: 2 }),
+    radius: 5,
   }),
 });
 
