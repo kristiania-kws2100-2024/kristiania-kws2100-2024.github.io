@@ -4,7 +4,7 @@ import { stationLayer } from "./stationLayer";
 
 export function StationLayerCheckbox() {
   const { setLayers } = useContext(MapContext);
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     if (checked) {
@@ -23,7 +23,7 @@ export function StationLayerCheckbox() {
           checked={checked}
           onChange={(e) => setChecked(e.target.checked)}
         />
-        Show countries
+        Show stations
       </label>
     </div>
   );

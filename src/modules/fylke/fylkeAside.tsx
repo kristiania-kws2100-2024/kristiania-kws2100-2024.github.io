@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { MapContext } from "../map/mapContext";
+import React, { useEffect, useState } from "react";
 
-import { FylkeFeature, FylkeLayer } from "./fylkeLayer";
-import { useViewExtent } from "../map/useViewExtent";
+import { FylkeFeature } from "./fylkeLayer";
 import { Fill, Stroke, Style } from "ol/style";
 import { getStedsnavn } from "../sted/stedsNavn";
 import { useFeatures } from "../map/useFeatures";
-import { CountryFeature } from "../countries/countryLayer";
 
 const selectedStyle = new Style({
   stroke: new Stroke({
