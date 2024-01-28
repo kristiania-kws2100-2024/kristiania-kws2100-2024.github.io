@@ -19,24 +19,18 @@ const selectedStyle = new Style({
 });
 
 export function StationAside() {
-  const { features, visibleFeatures } = useFeatures<StationFeature>(
-    (l) => l.getClassName() === "station",
-  );
-  const [currentFeature, setCurrentFeature] = useState<
-    StationFeature | undefined
-  >();
+  const { features, visibleFeatures, activeFeature, setActiveFeature } =
+    useFeatures<StationFeature>((l) => l.getClassName() === "station");
   useEffect(() => {
-    currentFeature?.setStyle(selectedStyle);
-    return () => {
-      currentFeature?.setStyle(undefined);
-    };
-  }, [currentFeature]);
+    activeFeature?.setStyle(selectedStyle);
+    return () => activeFeature?.setStyle(undefined);
+  }, [activeFeature]);
 
   return (
     <aside className={features.length ? "show" : "hide"}>
       <div>
         <h2>Stations</h2>
-        <div onMouseLeave={() => setCurrentFeature(undefined)}>
+        <div onMouseLeave={() => setActiveFeature(undefined)}>
           {visibleFeatures
             .sort((a, b) =>
               a.getProperties().navn.localeCompare(b.getProperties().navn),
@@ -44,8 +38,8 @@ export function StationAside() {
             .map((c) => (
               <div
                 key={c.getProperties().navn}
-                onMouseEnter={() => setCurrentFeature(c)}
-                className={c === currentFeature ? "active" : ""}
+                onMouseEnter={() => setActiveFeature(c)}
+                className={c === activeFeature ? "active" : ""}
               >
                 {c.getProperties().navn}
               </div>

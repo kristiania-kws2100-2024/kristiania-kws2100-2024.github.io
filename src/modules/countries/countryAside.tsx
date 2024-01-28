@@ -15,24 +15,18 @@ const selectedStyle = new Style({
 });
 
 export function CountryAside() {
-  const { features, visibleFeatures } = useFeatures<CountryFeature>(
-    (l) => l.getClassName() === "country",
-  );
-  const [currentFeature, setCurrentFeature] = useState<
-    CountryFeature | undefined
-  >();
+  const { features, visibleFeatures, activeFeature, setActiveFeature } =
+    useFeatures<CountryFeature>((l) => l.getClassName() === "country");
   useEffect(() => {
-    currentFeature?.setStyle(selectedStyle);
-    return () => {
-      currentFeature?.setStyle(undefined);
-    };
-  }, [currentFeature]);
+    activeFeature?.setStyle(selectedStyle);
+    return () => activeFeature?.setStyle(undefined);
+  }, [activeFeature]);
 
   return (
     <aside className={features.length ? "show" : "hide"}>
       <div>
         <h2>Countries</h2>
-        <div onMouseLeave={() => setCurrentFeature(undefined)}>
+        <div onMouseLeave={() => setActiveFeature(undefined)}>
           {visibleFeatures
             .sort((a, b) =>
               a.getProperties().ADMIN.localeCompare(b.getProperties().ADMIN),
@@ -40,8 +34,8 @@ export function CountryAside() {
             .map((c) => (
               <div
                 key={c.getProperties().ISO_A3}
-                onMouseEnter={() => setCurrentFeature(c)}
-                className={c === currentFeature ? "active" : ""}
+                onMouseEnter={() => setActiveFeature(c)}
+                className={c === activeFeature ? "active" : ""}
               >
                 {c.getProperties().ADMIN}
               </div>

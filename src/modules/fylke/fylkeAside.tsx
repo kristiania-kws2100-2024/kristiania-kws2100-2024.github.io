@@ -16,24 +16,18 @@ const selectedStyle = new Style({
 });
 
 export function FylkeAside() {
-  const { features, visibleFeatures } = useFeatures<FylkeFeature>(
-    (l) => l.getClassName() === "fylke",
-  );
-  const [currentFeature, setCurrentFeature] = useState<
-    FylkeFeature | undefined
-  >();
+  const { features, visibleFeatures, activeFeature, setActiveFeature } =
+    useFeatures<FylkeFeature>((l) => l.getClassName() === "fylke");
   useEffect(() => {
-    currentFeature?.setStyle(selectedStyle);
-    return () => {
-      currentFeature?.setStyle(undefined);
-    };
-  }, [currentFeature]);
+    activeFeature?.setStyle(selectedStyle);
+    return () => activeFeature?.setStyle(undefined);
+  }, [activeFeature]);
 
   return (
     <aside className={features.length ? "show" : "hide"}>
       <div>
         <h2>Fylker</h2>
-        <div onMouseLeave={() => setCurrentFeature(undefined)}>
+        <div onMouseLeave={() => setActiveFeature(undefined)}>
           {visibleFeatures
             .sort((a, b) =>
               getStedsnavn(a.getProperties()).localeCompare(
@@ -43,8 +37,8 @@ export function FylkeAside() {
             .map((f) => (
               <div
                 key={f.getProperties().fylkenummer}
-                onMouseEnter={() => setCurrentFeature(f)}
-                className={f === currentFeature ? "active" : ""}
+                onMouseEnter={() => setActiveFeature(f)}
+                className={f === activeFeature ? "active" : ""}
               >
                 {getStedsnavn(f.getProperties())}
               </div>
