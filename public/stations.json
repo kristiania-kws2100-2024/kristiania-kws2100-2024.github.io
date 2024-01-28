@@ -1,0 +1,4078 @@
+{
+  "type": "FeatureCollection",
+  "name": "av_export_temp.fjobwrcr",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Hunderfossen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.438633372687091, 61.223407604721871]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ringebu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.139397414289594, 61.52910148526724]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Eina"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.596937970125321, 60.630511747630436]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Grua"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.664801279521525, 60.259140520262719]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Dombås"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.125930913823643, 62.068656598539995]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Dovre"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.256974020898499, 61.984877532720311]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Gran"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.569587704087903, 60.359021771289953]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Raufoss"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.613621985800913, 60.72218076305893]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Kvitfjell"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.165729257827167, 61.472559008546099]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "03.08.2015",
+        "objtype": "Stasjon",
+        "navn": "Roa"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.620317903582228, 60.283516260783408]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lillehammer"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.461139864417721, 61.114627205506643]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Bjorli"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.201195805468425, 62.258480741719822]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hjerkinn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.541314901475509, 62.219691156052974]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lesjaverk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.538011354193049, 62.192372817168838]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Jaren"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.55564603826941, 60.393251488877645]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Stryken"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.720326339284931, 60.16617137308522]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Bleiken"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.500526079799947, 60.468960146823591]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Gjøvik"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.694494882488122, 60.797533417727053]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Kvam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.702501502086522, 61.664872248787994]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Vinstra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.746442268985602, 61.595501453675141]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "02.02.2015",
+        "objtype": "Stasjon",
+        "navn": "Harestua"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.722546640983998, 60.206253348160168]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Lunner"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.584772205360133, 60.305452166490682]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lesja"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.852622509642007, 62.118702698191491]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Otta"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.53741499621235, 61.772038934172755]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Reinsvoll"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.61636339299867, 60.678798908867272]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Rise"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.623571104902435, 58.468416455407265]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Bøylestad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.706070841034798, 58.576870562887571]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Gjerstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.023119499322526, 58.870155179169807]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Nelaug"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.630260670243564, 58.657485927474106]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "17.12.2014",
+        "objtype": "Stasjon",
+        "navn": "Stoa"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.709457671024683, 58.466018630806516]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Vegårshei"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.855523452160796, 58.760992041756602]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "22.10.2015",
+        "objtype": "Stasjon",
+        "navn": "Froland"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.655354671753395, 58.530102155835962]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "13.11.2015",
+        "objtype": "Stasjon",
+        "navn": "Messel"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.648362874777535, 58.507078614882587]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "15.01.2016",
+        "objtype": "Stasjon",
+        "navn": "Arendal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.769466844440549, 58.465105820963068]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Flaten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.680814429434815, 58.636394222262375]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Bråstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.689771760513207, 58.462765138429972]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Eidsvoll"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.248048687479734, 60.329964576008258]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Fetsund"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.162443722035752, 59.926924107015502]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lysaker"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.635943477354232, 59.913602131497449]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Varingskollen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.846639196713852, 60.106259152846469]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hakadal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.82917937702406, 60.117431504290884]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Åneby"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.862525112541149, 60.08547466923104]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Blommenholm"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.554607155255262, 59.897332407263384]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Oslo Lufthavn Gardermoen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.096212263706457, 60.191438542235446]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Sørumsand"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.240230884474755, 59.985755896008087]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hauerseter"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.194949728174198, 60.185436114893889]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Dal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.202484123676173, 60.249033701867596]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Leirsund"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.081531319978648, 59.994660998656244]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Vestby"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.748410446852317, 59.603725571227663]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Jessheim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.176882728601578, 60.14169130946663]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Heggedal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.431110280336485, 59.786772856753181]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ski"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.834037387821011, 59.71964241765172]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Oppegård"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.81304716395395, 59.765113830651444]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lindeberg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.128751698808241, 60.039742211140442]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ås"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.794454288239663, 59.663256331146968]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Høvik"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.580216124658309, 59.900635497087393]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Nittedal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.862745151807424, 60.058246713073927]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Frogner"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.101602925231777, 60.021601798124742]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Slependen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.5028653561609, 59.88534897303289]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Kråkstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.891649746703768, 59.683080953262099]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Rånåsfoss"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.327792710328623, 60.029310058087333]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lørenskog"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.950865017754591, 59.943417634441211]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Kolbotn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.801040996541932, 59.810804162228919]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hvalstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.461647640603475, 59.858898983392315]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Årnes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.464635519321853, 60.123907278648247]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Stabekk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.607106579348768, 59.908200253771597]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lillestrøm"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.046025796996853, 59.953662693627145]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Sandvika"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.525149191205143, 59.892862641264337]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Blaker"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.301322051691297, 60.004988939508536]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Langhus"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.836510798153775, 59.749534491213986]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Kløfta"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.139285229079112, 60.074997581986295]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Strømmen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.002492826927067, 59.949874456341362]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Eidsvoll verk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.169407163581134, 60.287796722221884]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Greverud"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.807171736136263, 59.772302854105696]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Bodung"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.419973647218942, 60.084952972432333]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Auli"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.351642734995668, 60.039089032253599]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Haga"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.373143337579126, 60.053868190717147]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Asker"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.435321584961548, 59.833927872425981]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Myrvoll"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.800863502139016, 59.785888125520231]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "17.12.2014",
+        "objtype": "Stasjon",
+        "navn": "Nordby"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.181712692512853, 60.155509137417518]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "17.12.2014",
+        "objtype": "Stasjon",
+        "navn": "Svingen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.177690925022475, 59.929136588737201]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "17.12.2014",
+        "objtype": "Stasjon",
+        "navn": "Tuen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.101988138267647, 59.943079883857713]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Fjellhamar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.983414250098543, 59.941045978405221]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Hanaborg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.966802385704025, 59.938862202836432]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Nerdrum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.142232927515389, 59.922494677493113]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Billingstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.483071942005209, 59.874766589735863]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Sagdalen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.017050416986933, 59.956047936210432]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Solbråtan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.804200347191912, 59.801494743842376]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Vevelstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.837854651564705, 59.755529551067944]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Vakås"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.466910228501174, 59.849709414675047]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Høn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.455034371783297, 59.84318995016946]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Bondivatn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.433198814490972, 59.819994329285009]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Gullhella"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.436354564351515, 59.806687115821667]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Skotbu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.947735466599216, 59.665175800098055]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Sonsveien"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.726688224670626, 59.516960097637487]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Haugastøl"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.869526087574435, 60.511521811522471]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hokksund"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.909043812538815, 59.768041342199467]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Nesbyen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.113317122241666, 60.576785165734883]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Gulskogen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.160677984987887, 59.743780661902321]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hønefoss"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.249469228674405, 60.169130043645538]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Gol"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.970236886565814, 60.699005285463329]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Vikersund"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.998501139452591, 59.969509570747093]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ål"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.562626327459769, 60.626284009409282]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ustaoset"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.04550328068494, 60.496281271385044]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Brakerøya"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.233027995480089, 59.743823072306284]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Geilo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [8.206576924363089, 60.534664326761721]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Flå"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.473399412791874, 60.43220846594464]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Kongsberg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.651213327550332, 59.672150331182003]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Vestfossen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.865973674043785, 59.733485949815346]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "14.07.2016",
+        "objtype": "Stasjon",
+        "navn": "Spikkestad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.340697321420786, 59.745648191922371]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "20.09.2016",
+        "objtype": "Stasjon",
+        "navn": "Drammen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.20452515057676, 59.740277352644213]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "26.09.2016",
+        "objtype": "Stasjon",
+        "navn": "Burud"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.886411967056572, 59.807266158847192]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "17.12.2014",
+        "objtype": "Stasjon",
+        "navn": "Steinberg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.962004253559797, 59.759368453080526]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Lier"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.290107161015678, 59.76335661062042]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "12.07.2016",
+        "objtype": "Stasjon",
+        "navn": "Darbu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.799992787954528, 59.70164801783374]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Mjøndalen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.01172992246781, 59.75101080401631]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Røyken"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.389600365863263, 59.746790430220493]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Auma"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.660292466449866, 62.222449474722609]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Koppang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.04413154355114, 61.573155398540571]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Skarnes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.680528404267937, 60.253754489245864]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Alvdal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.631990210579213, 62.109567535220329]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Os"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.226856899008709, 62.49745675119317]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Tynset"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.775702089769759, 62.274785292183367]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Tangen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.269932104194202, 60.615959162929038]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Brumunddal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.938660438244733, 60.879725337944897]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.08.2016",
+        "objtype": "Stasjon",
+        "navn": "Opphus"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.261178516656274, 61.331022287551718]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "15.11.2016",
+        "objtype": "Stasjon",
+        "navn": "Elverum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.545631814597465, 60.884042741904828]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Tolga"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.99605585546847, 62.404806320503269]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Atna"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.834598606957371, 61.73268789148284]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "12.09.2003",
+        "objtype": "Stasjon",
+        "navn": "Kongsvinger"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [12.003715859936271, 60.187675361716906]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Rena"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.369498745732601, 61.134663660501928]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Stange"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.194750832031771, 60.718096905072308]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Løten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.342393410188397, 60.818684809797766]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Ilseng"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.222279528180165, 60.776765195062175]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Evenstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.099432343602071, 61.423323034744662]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Stai"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.058843182096512, 61.49398056693007]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hamar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.076157364956016, 60.791379116073188]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Bellingmo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.77945600771586, 62.032695235195028]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hanestad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.881634396608534, 61.838619551639241]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Steinvik"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.323843937298538, 61.251479459365505]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.12.2013",
+        "objtype": "Stasjon",
+        "navn": "Moelv"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.69897818048965, 60.929358185504498]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Mjølfjell"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.839785084554769, 60.693804352059857]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Dale"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.816225035125372, 60.586303371173642]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Trengereid"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.624412426647505, 60.428978533448493]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Stanghelle"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.733177241572479, 60.548901957190189]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "12.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Bergen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.33486290868815, 60.389711845382109]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hallingskeid"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.252350822875841, 60.668019505939057]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Arna"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.467587340662538, 60.420709640407907]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "05.06.2003",
+        "objtype": "Stasjon",
+        "navn": "Bolstadøyri"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.957725940464781, 60.637800270355108]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Evanger"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.111250189075604, 60.646722992268337]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Vieren"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.979539499890878, 60.709296861617176]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Bulken"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.284937218311456, 60.630604469163131]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Urdland"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.593021461750938, 60.679438074773905]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Finse"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.50487313290166, 60.601610210948685]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Skiple"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.679871716820792, 60.681209782520021]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Kløve"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.535156421642642, 60.663367046846325]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Ygre"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.507760977314016, 60.645410988864612]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Gjerdåker"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.463183532168306, 60.639385402979414]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Seimsgrend"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.235922944670137, 60.632627785204129]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Voss"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.410084893843045, 60.629124114623096]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Reimegrend"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.730744227061792, 60.678173131877841]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Ørneberget"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.940996802651641, 60.703628806561085]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Vaksdal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.735276888244004, 60.478763977951317]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Ljosanbotn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.901210837068088, 60.708658360308377]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Øyeflaten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.628039711760868, 60.680235695235872]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Åndalsnes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.691556133023627, 62.567164029597045]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Bjørnfjell"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.071051269942309, 68.432091812667977]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Valnesfjord"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.192515144062638, 67.299346262271058]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Mørkved"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.557955105640806, 67.283987062305229]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lønsdal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.462869154140126, 66.742759144595112]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Dunderland"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.838177937718173, 66.446177122357057]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Mosjøen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.199250035739041, 65.845322383297827]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Mo i Rana"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.1329575068984, 66.309542063285193]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Bodø"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.391295794376777, 67.28646034731706]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Skonseng"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.344929580706761, 66.361936880282627]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Majavatn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.367620542618104, 65.164903772719555]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Narvik"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [17.441111077790442, 68.441844977301628]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Drevvatn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.45591146447981, 66.071114180605974]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "16.11.2007",
+        "objtype": "Stasjon",
+        "navn": "Katterat"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [17.9657117768202, 68.397414111758479]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Bjerka"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.83164478339946, 66.149773624593081]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Rombak"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [17.790847772906382, 68.403649511268824]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "30.12.2013",
+        "objtype": "Stasjon",
+        "navn": "Rognan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.399049805019908, 67.093426407415691]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "06.08.2014",
+        "objtype": "Stasjon",
+        "navn": "Fauske"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.399639997378966, 67.264311914057643]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "20.09.2016",
+        "objtype": "Stasjon",
+        "navn": "Søsterbekk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [18.003861435846517, 68.435452882175341]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "20.09.2016",
+        "objtype": "Stasjon",
+        "navn": "Tverlandet"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [14.74641902093204, 67.300706904646944]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Trofors"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.382449980696668, 65.538660683918792]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "01.03.2018",
+        "objtype": "Stasjon",
+        "navn": "Røkland"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [15.313130555240912, 66.981590398715454]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Snippen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.810065736225409, 60.024089123483371]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Grorud"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.887596049072286, 59.949745137315432]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Skøyen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.677898756197306, 59.922582142524149]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Grefsen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.780138608048649, 59.941538850571135]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Holmlia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.796981769587349, 59.834510062179284]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Bryn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.817682416528202, 59.908076461393946]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Oslo S"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.753915630410555, 59.91070824297671]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Movatn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.813168003525423, 60.03781351278387]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Kjelsås"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.782667397749371, 59.966090455056531]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Haugenstua"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.909445441560672, 59.951202552855328]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ljan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.784923477546515, 59.853183781483743]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Nydalen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.769098438857416, 59.952401090739599]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Høybråten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.927465402849183, 59.948119070585314]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Nyland"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.8719296425105, 59.944014295996205]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Alna"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.834258201885039, 59.931037994575661]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Tøyen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.780499642935414, 59.921132576617488]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Nordstrand"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.785582611235416, 59.863794688970479]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Hauketo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.802987192520915, 59.846348332671383]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Rosenholm"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.797830251702262, 59.82379462425321]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.12.2015",
+        "objtype": "Stasjon",
+        "navn": "Nationaltheatret"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.733378432866408, 59.91497680213255]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Sandnes sentrum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.736626782247899, 58.852332270346942]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Egersund"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.002215249133483, 58.461346662245219]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Klepp"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.678038098385922, 58.771730685129597]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Paradis"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.742584944684325, 58.955457118757835]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Gausel"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.740328193951664, 58.899734581598857]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Jåttåvågen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.729251870009852, 58.913749172067426]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Varhaug"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.646503731320501, 58.618438822710488]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Vigrestad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.688516455001587, 58.569920431125482]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Moi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.551321100944931, 58.458207676326708]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hellvik"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.89737820154618, 58.485903523679752]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Bryne"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.649075275279014, 58.73325222326762]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Nærbø"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.641249901668897, 58.666735159839597]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Brusand"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.749101362375519, 58.540537677147519]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ogna"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.803167322857065, 58.519691355608416]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Stavanger"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.732958825188014, 58.966454714283898]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ganddal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.716977699619985, 58.823403076458057]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "19.01.2014",
+        "objtype": "Stasjon",
+        "navn": "Sirvåg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.807016031628107, 58.502796009998782]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Sandnes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.73342863691261, 58.846988909934524]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "15.01.2016",
+        "objtype": "Stasjon",
+        "navn": "Mariero"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.753400203467629, 58.935362968206469]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Øksnavadporten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [5.701415480506345, 58.786761338367469]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Lunden"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.114170393751041, 60.850579459214231]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Håreina"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.122631216675762, 60.839986015797969]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "12.05.2017",
+        "objtype": "Stasjon",
+        "navn": "Flåm"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.114096906005485, 60.862941038849335]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Berekvam"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.096030269461084, 60.78830567651044]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Blomheller"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.102077010876735, 60.771735239591834]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Reinunga"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.139049701114552, 60.743920898977002]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Vatnahalsen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.12951285762501, 60.743858008673804]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Kjosfossen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.135642787123158, 60.747091572159995]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Myrdal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.122685557097921, 60.734846664569616]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Upsete"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.012387341861962, 60.725432439868491]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Drangedal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.064703270316759, 59.096245241878229]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lunde"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.100544369170771, 59.299139253334026]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Notodden"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.267541877774509, 59.559142148216139]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Oklungen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.807664750028371, 59.179008111311681]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Skien"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.603648767138921, 59.219153514312701]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Bø"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.068629892845809, 59.409249695064325]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Trykkerud"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.336190723770738, 59.512164926282097]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Nordagutu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.322895500849873, 59.418313667235594]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "03.06.2016",
+        "objtype": "Stasjon",
+        "navn": "Porsgrunn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.658975326610525, 59.139511446775593]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Neslandsvatn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.156151548761065, 58.971271266051396]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Nisterud"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.486652718319259, 59.299936759545162]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Selsbakk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.373176880178702, 63.38951075968491]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Rotvoll"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.480687479821627, 63.436603654712933]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Langlete"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.979860664184267, 62.960395560375098]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Lerkendal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.409954477118704, 63.413894009416559]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Lilleby"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.432314777995764, 63.439936557713047]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Røstad (HiNT)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.31942917591403, 63.752985081189571]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Bergsgrav"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.471335585875016, 63.771443836522849]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ler"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.297728048592807, 63.19770331996866]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Hovin"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.230476930451605, 63.09892281079253]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Singsås"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.729003687469369, 62.956199249454016]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Lassemoen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [12.71385140686932, 64.696121723384579]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "25.02.2003",
+        "objtype": "Stasjon",
+        "navn": "Gudå"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.617529490568257, 63.443705258118285]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Levanger"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.300532877957229, 63.744447228800524]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Kopperå"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.848628327472907, 63.392087618104696]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Verdal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.484036471409942, 63.791007670923548]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Berkåk"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.014176784981787, 62.823348797309812]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "05.01.2016",
+        "objtype": "Stasjon",
+        "navn": "Hommelvik"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.794446747419089, 63.411763208988283]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.12.2015",
+        "objtype": "Stasjon",
+        "navn": "Stjørdal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.913498210020258, 63.470404683518872]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.12.2015",
+        "objtype": "Stasjon",
+        "navn": "Hell"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.899908471083847, 63.446177811499716]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Ronglan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.112789799626224, 63.666390682356734]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Oppdal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.69409917638777, 62.592899974344732]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Skogn"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.194292653574813, 63.705098698694826]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Åsen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.052293505695941, 63.609362127526666]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Steinkjer"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.494073183635589, 64.012537914054732]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Heimdal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.357713159236882, 63.350868091577397]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Røra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.40156579099002, 63.857228351294673]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Røros"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.382590914479639, 62.574099531622373]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Leangen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.463747325474042, 63.437054270228934]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Høsøien"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.3020053531536, 62.546937079847943]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Marienborg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.378864484488004, 63.421996177391676]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Glåmos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.416292249995514, 62.674545841041621]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Haltdalen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.145266652276028, 62.9283635968252]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Harran"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [12.492269888224182, 64.5680780040325]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Grong"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [12.336956124650538, 64.458308300586737]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Jørstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [12.235440546171947, 64.204860059259389]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Sparbu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.428721002917328, 63.91889199101319]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Skatval"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.823465003066255, 63.508671273828909]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Meråker"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.760477385152832, 63.42292053321173]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Hegra"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.104005037639848, 63.461143351950156]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Vikhammar"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.623009422990814, 63.438739324125493]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Melhus"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.275979687296918, 63.284747537511528]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Lademoen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.417756689805673, 63.437330553218509]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Trondheim S"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.398913267302808, 63.436579387188075]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Skansen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.377718491292812, 63.431200822565046]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Rognes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.457120802009129, 63.006525946152678]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Kotsøy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.560970614484008, 62.976488677278184]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.04.2015",
+        "objtype": "Stasjon",
+        "navn": "Kvål"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.280035883100053, 63.233561287976642]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "15.07.2016",
+        "objtype": "Stasjon",
+        "navn": "Værnes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.913835421093673, 63.453997831159839]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "17.06.2016",
+        "objtype": "Stasjon",
+        "navn": "Reitan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.378076704883869, 62.807787896305705]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "07.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Ålen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.308658301603819, 62.847271376164848]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Snåsa"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [12.379865814613748, 64.245998712058551]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Namsskogan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.152178104011567, 64.925642999257178]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Støren"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.285107778684718, 63.051554482471275]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "18.03.2015",
+        "objtype": "Stasjon",
+        "navn": "Kongsvoll"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.605691734772149, 62.307155677251707]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "12.07.2016",
+        "objtype": "Stasjon",
+        "navn": "Lundamo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.279920618613719, 63.152012431473658]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Storekvina"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.957874923610243, 58.379542358740288]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Kristiansand"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.987700514668642, 58.145735355040344]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Marnardal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.512425552663128, 58.212694117872232]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "12.05.2017",
+        "objtype": "Stasjon",
+        "navn": "Breland"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.719871452228621, 58.199622679613434]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Audnedal"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.36704722668822, 58.318980754917781]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Nodeland"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.834984784726928, 58.157257728307201]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Vennesla"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.967874089740945, 58.253048157701791]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "03.03.2014",
+        "objtype": "Stasjon",
+        "navn": "Sira"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.660214876969154, 58.419258772357068]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "24.04.2006",
+        "objtype": "Stasjon",
+        "navn": "Snartemo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.210994657206299, 58.331489765912991]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Gyland"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [6.839436797296043, 58.384407425864303]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Skoppum"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.410390177619927, 59.388437239847207]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Sandefjord"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.221944036052017, 59.135488661124292]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Stokke"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.300233959966052, 59.22140917250109]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Larvik"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.030095667695052, 59.050235859950938]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Tønsberg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.409752073040604, 59.271986779705784]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Sande"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.204869814538688, 59.585071787508198]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Torp (Sandefjord lufthavn)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.266148005222195, 59.165472233356567]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "06.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Eikenes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.895813181439864, 59.147312655732065]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "06.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Kjose"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.912684677008958, 59.110486236525375]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "17.04.2018",
+        "objtype": "Stasjon",
+        "navn": "Holmestrand"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.30934267764761, 59.491473410606247]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Fredrikstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.950734891535664, 59.209020046248327]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Spydeberg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.079568655445906, 59.621023546106869]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Moss"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.657010986142092, 59.431969108152806]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Rygge"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.748901905883633, 59.377436936376732]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Rakkestad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.339183841862219, 59.427280135602082]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Halden"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.383084187011864, 59.12008004689168]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Råde"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.865286856292496, 59.347590082337156]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Tomter"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.002651305321915, 59.659944665798307]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "09.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Askim"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.163162764557738, 59.581830751376472]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "11.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Kambo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [10.695296602829867, 59.481031411890555]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "10.09.2013",
+        "objtype": "Stasjon",
+        "navn": "Mysen"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.323687850379621, 59.552447427554171]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "30.01.2014",
+        "objtype": "Stasjon",
+        "navn": "Sarpsborg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.118352422131688, 59.286028312041083]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "12.07.2016",
+        "objtype": "Stasjon",
+        "navn": "Slitu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.261666054417818, 59.566972896967435]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Eidsberg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.3035894406877, 59.513750390877227]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Knapstad"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.032567637424707, 59.624927286230673]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "oppdatdato": "08.05.2015",
+        "objtype": "Stasjon",
+        "navn": "Heia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.329317462658256, 59.474232897897224]
+      }
+    }
+  ]
+}
