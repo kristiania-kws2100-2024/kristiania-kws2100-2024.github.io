@@ -5,6 +5,8 @@ import { FylkeFeature, FylkeLayer } from "./fylkeLayer";
 import { useViewExtent } from "../map/useViewExtent";
 import { Fill, Stroke, Style } from "ol/style";
 import { getStedsnavn } from "../sted/stedsNavn";
+import { useFeatures } from "../map/useFeatures";
+import { CountryFeature } from "../countries/countryLayer";
 
 const selectedStyle = new Style({
   stroke: new Stroke({
@@ -17,33 +19,9 @@ const selectedStyle = new Style({
 });
 
 export function FylkeAside() {
-  const { layers } = useContext(MapContext);
-  const viewExtent = useViewExtent();
-  const layer = useMemo(
-    () => layers.find((l) => l.getClassName() === "fylke") as FylkeLayer,
-    [layers],
+  const { features, visibleFeatures } = useFeatures<FylkeFeature>(
+    (l) => l.getClassName() === "fylke",
   );
-  const [features, setFeatures] = useState<FylkeFeature[]>([]);
-  const visibleFeatures = useMemo(() => {
-    return features
-      .filter((f) => f.getGeometry()?.intersectsExtent(viewExtent))
-      .sort((a, b) =>
-        getStedsnavn(a.getProperties()).localeCompare(
-          getStedsnavn(b.getProperties()),
-        ),
-      );
-  }, [features, viewExtent]);
-  function loadFeatures() {
-    setFeatures(layer?.getSource()?.getFeatures() || []);
-  }
-  useEffect(() => {
-    layer?.on("change", loadFeatures);
-    loadFeatures();
-    return () => {
-      layer?.un("change", loadFeatures);
-      setFeatures([]);
-    };
-  }, [layer]);
   const [currentFeature, setCurrentFeature] = useState<
     FylkeFeature | undefined
   >();
@@ -55,19 +33,25 @@ export function FylkeAside() {
   }, [currentFeature]);
 
   return (
-    <aside className={layer ? "show" : "hide"}>
+    <aside className={features.length ? "show" : "hide"}>
       <div>
         <h2>Fylker</h2>
         <div onMouseLeave={() => setCurrentFeature(undefined)}>
-          {visibleFeatures.map((f) => (
-            <div
-              key={f.getProperties().fylkenummer}
-              onMouseEnter={() => setCurrentFeature(f)}
-              className={f === currentFeature ? "active" : ""}
-            >
-              {getStedsnavn(f.getProperties())}
-            </div>
-          ))}
+          {visibleFeatures
+            .sort((a, b) =>
+              getStedsnavn(a.getProperties()).localeCompare(
+                getStedsnavn(b.getProperties()),
+              ),
+            )
+            .map((f) => (
+              <div
+                key={f.getProperties().fylkenummer}
+                onMouseEnter={() => setCurrentFeature(f)}
+                className={f === currentFeature ? "active" : ""}
+              >
+                {getStedsnavn(f.getProperties())}
+              </div>
+            ))}
         </div>
       </div>
     </aside>

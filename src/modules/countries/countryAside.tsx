@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { MapContext } from "../map/mapContext";
+import React, { useEffect, useState } from "react";
 
-import { CountryFeature, CountryLayer } from "./countryLayer";
-import { useViewExtent } from "../map/useViewExtent";
+import { CountryFeature } from "./countryLayer";
 import { Fill, Stroke, Style } from "ol/style";
-import { getStedsnavn } from "../sted/stedsNavn";
+import { useFeatures } from "../map/useFeatures";
 
 const selectedStyle = new Style({
   stroke: new Stroke({
@@ -17,31 +15,9 @@ const selectedStyle = new Style({
 });
 
 export function CountryAside() {
-  const { layers } = useContext(MapContext);
-  const viewExtent = useViewExtent();
-  const layer = useMemo(
-    () => layers.find((l) => l.getClassName() === "country") as CountryLayer,
-    [layers],
+  const { features, visibleFeatures } = useFeatures<CountryFeature>(
+    (l) => l.getClassName() === "country",
   );
-  const [features, setFeatures] = useState<CountryFeature[]>([]);
-  const visibleFeatures = useMemo(() => {
-    return features
-      .filter((f) => f.getGeometry()?.intersectsExtent(viewExtent))
-      .sort((a, b) =>
-        a.getProperties().ADMIN.localeCompare(b.getProperties().ADMIN),
-      );
-  }, [features, viewExtent]);
-  function loadFeatures() {
-    setFeatures(layer?.getSource()?.getFeatures() || []);
-  }
-  useEffect(() => {
-    layer?.on("change", loadFeatures);
-    loadFeatures();
-    return () => {
-      layer?.un("change", loadFeatures);
-      setFeatures([]);
-    };
-  }, [layer]);
   const [currentFeature, setCurrentFeature] = useState<
     CountryFeature | undefined
   >();
@@ -53,19 +29,23 @@ export function CountryAside() {
   }, [currentFeature]);
 
   return (
-    <aside className={layer ? "show" : "hide"}>
+    <aside className={features.length ? "show" : "hide"}>
       <div>
         <h2>Countries</h2>
         <div onMouseLeave={() => setCurrentFeature(undefined)}>
-          {visibleFeatures.map((c) => (
-            <div
-              key={c.getProperties().ISO_A3}
-              onMouseEnter={() => setCurrentFeature(c)}
-              className={c === currentFeature ? "active" : ""}
-            >
-              {c.getProperties().ADMIN}
-            </div>
-          ))}
+          {visibleFeatures
+            .sort((a, b) =>
+              a.getProperties().ADMIN.localeCompare(b.getProperties().ADMIN),
+            )
+            .map((c) => (
+              <div
+                key={c.getProperties().ISO_A3}
+                onMouseEnter={() => setCurrentFeature(c)}
+                className={c === currentFeature ? "active" : ""}
+              >
+                {c.getProperties().ADMIN}
+              </div>
+            ))}
         </div>
       </div>
     </aside>

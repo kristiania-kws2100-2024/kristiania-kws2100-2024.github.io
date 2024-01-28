@@ -4,7 +4,7 @@ import { countryLayer } from "./countryLayer";
 
 export function CountryLayerCheckbox() {
   const { setLayers, map } = useContext(MapContext);
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     if (checked) {
