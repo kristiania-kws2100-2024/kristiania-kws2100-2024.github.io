@@ -1,19 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MapContext } from "../map/mapContext";
-import VectorLayer from "ol/layer/Vector";
-import VectorSource from "ol/source/Vector";
-import { GeoJSON } from "ol/format";
-
-const kommuneLayer = new VectorLayer({
-  source: new VectorSource({
-    url: "/kommuner.json",
-    format: new GeoJSON(),
-  }),
-});
+import { kommuneLayer } from "./kommuneLayer";
 
 export function KommuneLayerCheckbox() {
   const { setLayers } = useContext(MapContext);
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     if (checked) {
