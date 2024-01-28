@@ -15,6 +15,7 @@ export function KommuneAside() {
   }
   useEffect(() => {
     kommuneLayer?.on("change", loadKommuneFeatures);
+    loadKommuneFeatures();
     return () => {
       kommuneLayer?.un("change", loadKommuneFeatures);
       setKommuner([]);
@@ -25,6 +26,9 @@ export function KommuneAside() {
     <aside className={kommuneLayer ? "show" : "hide"}>
       <div>
         <h2>{kommuner.length} Kommuner</h2>
+        {kommuner.map((k) => (
+          <div>{k.getProperties().kommunenummer}</div>
+        ))}
       </div>
     </aside>
   );
