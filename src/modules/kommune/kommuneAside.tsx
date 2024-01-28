@@ -3,6 +3,7 @@ import { MapContext } from "../map/mapContext";
 
 import { KommuneFeature, KommuneLayer } from "./kommuneLayer";
 import { useViewExtent } from "../map/useViewExtent";
+import { getStedsnavn } from "../sted/stedsNavn";
 
 export function KommuneAside() {
   const { layers } = useContext(MapContext);
@@ -35,7 +36,7 @@ export function KommuneAside() {
         <h2>{visibleFeatures.length} Kommuner</h2>
         {visibleFeatures.map((k) => (
           <div key={k.getProperties().kommunenummer}>
-            {k.getProperties().navn.find((n) => n.sprak === "nor")!.navn}
+            {getStedsnavn(k.getProperties())}
           </div>
         ))}
       </div>

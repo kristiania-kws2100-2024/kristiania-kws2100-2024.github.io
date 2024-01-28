@@ -4,6 +4,7 @@ import { MapContext } from "../map/mapContext";
 import { FylkeFeature, FylkeLayer } from "./fylkeLayer";
 import { useViewExtent } from "../map/useViewExtent";
 import { Fill, Stroke, Style } from "ol/style";
+import { getStedsnavn } from "../sted/stedsNavn";
 
 const selectedStyle = new Style({
   stroke: new Stroke({
@@ -24,9 +25,13 @@ export function FylkeAside() {
   );
   const [features, setFeatures] = useState<FylkeFeature[]>([]);
   const visibleFeatures = useMemo(() => {
-    return features.filter((f) =>
-      f.getGeometry()?.intersectsExtent(viewExtent),
-    );
+    return features
+      .filter((f) => f.getGeometry()?.intersectsExtent(viewExtent))
+      .sort((a, b) =>
+        getStedsnavn(a.getProperties()).localeCompare(
+          getStedsnavn(b.getProperties()),
+        ),
+      );
   }, [features, viewExtent]);
   function loadFeatures() {
     setFeatures(layer?.getSource()?.getFeatures() || []);
@@ -52,7 +57,7 @@ export function FylkeAside() {
   return (
     <aside className={layer ? "show" : "hide"}>
       <div>
-        <h2>{visibleFeatures.length} fylke</h2>
+        <h2>Fylker</h2>
         <div onMouseLeave={() => setCurrentFeature(undefined)}>
           {visibleFeatures.map((k) => (
             <div
@@ -60,7 +65,7 @@ export function FylkeAside() {
               onMouseEnter={() => setCurrentFeature(k)}
               className={k === currentFeature ? "active" : ""}
             >
-              {k.getProperties().navn.find((n) => n.sprak === "nor")!.navn}
+              {getStedsnavn(k.getProperties())}
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import { GeoJSON } from "ol/format";
 import { Feature } from "ol";
 import { Polygon } from "ol/geom";
 import { Stroke, Style } from "ol/style";
+import { StedsNavn } from "../sted/stedsNavn";
 
 export type FylkeLayer = VectorLayer<VectorSource<FylkeFeature>>;
 export type FylkeFeature = {
@@ -12,10 +13,6 @@ export type FylkeFeature = {
 export interface FylkeProperties {
   fylkenummer: string;
   navn: StedsNavn[];
-}
-export interface StedsNavn {
-  sprak: "nor" | "smj";
-  navn: string;
 }
 
 export const fylkeLayer = new VectorLayer({
