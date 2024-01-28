@@ -27,7 +27,7 @@ export function Application() {
   useEffect(() => map.setTarget(mapRef.current), []);
   useEffect(() => map.setLayers(layers), [layers]);
   return (
-    <MapContext.Provider value={{ map, setLayers }}>
+    <MapContext.Provider value={{ map, layers, setLayers }}>
       <header>
         <h1>Kommune kart</h1>
       </header>

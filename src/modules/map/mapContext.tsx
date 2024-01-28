@@ -10,8 +10,10 @@ export const map = new Map({
 });
 export const MapContext = React.createContext<{
   map: Map;
+  layers: Layer[];
   setLayers: Dispatch<SetStateAction<Layer[]>>;
 }>({
   map,
+  layers: [],
   setLayers: () => {},
 });
