@@ -2,48 +2,14 @@
 
 Deploy a React application that lets the user click on information on a map
 
-## Deployment (unchanged from lecture 2)
+## Set up:
 
-You can use the notes from [the course notes](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/?tab=readme-ov-file#manual-creation-to-avoid-lots-of-code) or the following instructions.
-
-<details>
-
-1. Create a new GitHub repository on your GitHub account
-2. Clone the project locally (with IntelliJ: File > New > Project from Version Control)
-3. Create an empty npm project: `echo {} > package.json`
-4. Add `vite` and `typescript` dev dependencies
-   - `npm install -D vite`
-5. Create a `dev` and `build` task which calls `vite` and `vite build`, respectively
-   - `npm pkg set scripts.dev=vite`
-6. Create `index.html`
-7. Create a GitHub Action workflow that calls `npm run build`. You can use GitHub's built-in workflow templates
-   as a starting point
-8. Update your GitHub Actions workflow to include [GitHub pages deployment](https://github.com/actions/deploy-pages)
-   - *NB*: You need to tell Vite to use a different base path. This was not showed in lecture
-     ```javascript
-     // vite.config.js
-     export default {
-       base: "/<your repo name, for example kws2100-exercise>"
-     }
-     ```
-
-You should improve the build process:
-- Add Typescript checking and prettier to the build process
-- Add husky to avoid bad commits
-
-</details>
-
-## Display and interact with information on map
-
-1. Add `react`, `react-dom` dependencies (plus @types definitions)
-2. Create `src/index.tsx` with a simple React application
-3. Add `ol` dependency and create a map with the Open Street Maps layer
-4. Add [kommuner in Norway](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/) as a vector layer
+1. Create a repository and deploy it [like exercise 2](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/02). You can use the notes from [the course notes](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/?tab=readme-ov-file#manual-creation-to-avoid-lots-of-code).
+2. Add a map with OpenLayers with an Open Street Map layer and a vector layer with [kommuner in Norway](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/). You can use the notes from [the course notes](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/?tab=readme-ov-file#creating-a-openlayers-map-in-react). 
    - NB: The path to your `kommuner.json` must reflect the `base` path in your `vite.config.js`.
-5. Commit and push your code to make sure it shows up on GitHub page
-6. Add a click handler on the map that displays the name of the clicked kommune in a dialog
+3. Commit and push your code to make sure it shows up on GitHub page
 
-### Interactions with the map
+### Interactions with the map (exercise 2)
 
 - The user should be able to focus on their own position
 - The user should be able to toggle display of kommune layer on and off
@@ -53,21 +19,23 @@ You should improve the build process:
 - When the user hovers on a feature in the map, the feature should be highlighted in the aside
 - When the user hovers on a feature in the aside, the feature should be highlighted in the map
 
+### Display more layers:
+
+1. Add [fylker](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/)
+   - NB: The `crs` definition in the GeoJSON must be removed for OpenLayers to handle it correctly. I'm not sure why
+2. Add [countries of the world](https://github.com/datasets/geo-countries/)
+   - NB: The dataset is too large to for prettier to work effectively with so the file should be added to `.prettierignore`
+3. Add [Norwegian Railroad stations](https://kart.dsb.no/)
+   - NB: Point features require an `image` on a style to be displayed on the map. The highlighted style from the other maps won't work
+
+You can find GeoJSON files to add in addition to or instead of these.
+
 ## Tips:
 
-- GitHub pages can be deployed by adding the `steps` `actions/upload-pages-artifact@v3` (specifies `path`) and
-  `actions/deploy-pages@v4`. This requires write permissions `pages` and `id-token` in the workflow file
-  and a `github-pages` environment variable
-- In order to display a map with OpenLayers, you have to create a Map object with a View and at least one layer.
-  The view must have center and zoom
-- You can use `new OSM()` (for Open Street Maps) as your first layer
-- Make sure you call the OpenLayers function `useGeographic()` at the top of your file. Otherwise, positions will be
-  displayed as meters from the equator instead of degrees latitude and longitude
-- If things are working weird, make sure you have `import {Map} from "ol"`, as there is a core JavaScript object that
-  is also called `Map`. Also, avoid calling your React component ~~`Map`~~ (as I once did and struggled with for a
-  long time)
-- A common error is for the map `<div>` to have zero size. Make sure you style it with `height` and `width`
-- To deal with clicks, use `map.on` to add an event handler (and `map.un` to remove it) and use
+- It's useful to extract code to helper functions, especially the code for keeping the active features up to date
+- To deal with clicks and hovers, use `map.on` to add an event handler (and `map.un` to remove it) and use
   `layer.getSource().getFeaturesAtCoordinate()` to find the clicked feature
+- To detect when data in a `VectorSource` has been updated, add a handler to the `source.on("change")` event
+- To detect when the view extent changes, add a handler to `view.on("change")`
 
-For a solution, check out [the reference code for lecture 3](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/03)
+For a solution, check out [the reference code for lecture 4](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/04)
