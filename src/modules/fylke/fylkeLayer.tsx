@@ -3,6 +3,7 @@ import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
 import { Feature } from "ol";
 import { Polygon } from "ol/geom";
+import { Stroke, Style } from "ol/style";
 
 export type FylkeLayer = VectorLayer<VectorSource<FylkeFeature>>;
 export type FylkeFeature = {
@@ -22,5 +23,8 @@ export const fylkeLayer = new VectorLayer({
   source: new VectorSource({
     url: "/fylker.json",
     format: new GeoJSON(),
+  }),
+  style: new Style({
+    stroke: new Stroke({ color: "black", width: 3 }),
   }),
 });

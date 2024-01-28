@@ -33,8 +33,13 @@ main aside > * {
 
 main aside.show {
   grid-template-columns: auto;
+  min-width: 30ch;
 }
 
 main aside.hide * {
   visibility: hidden;
+}
+
+aside .active {
+  font-weight: bold;
 }
