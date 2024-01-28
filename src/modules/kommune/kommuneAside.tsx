@@ -27,7 +27,9 @@ export function KommuneAside() {
       <div>
         <h2>{kommuner.length} Kommuner</h2>
         {kommuner.map((k) => (
-          <div>{k.getProperties().kommunenummer}</div>
+          <div key={k.getProperties().kommunenummer}>
+            {k.getProperties().kommunenummer}
+          </div>
         ))}
       </div>
     </aside>
