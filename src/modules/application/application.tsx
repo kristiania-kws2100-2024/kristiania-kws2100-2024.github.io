@@ -8,6 +8,8 @@ import { KommuneLayerCheckbox } from "../kommune/kommuneLayerCheckbox";
 import { map, MapContext } from "../map/mapContext";
 import { Layer } from "ol/layer";
 import { KommuneAside } from "../kommune/kommuneAside";
+import { FylkeLayerCheckbox } from "../fylke/fylkeLayerCheckbox";
+import { FylkeAside } from "../fylke/fylkeAside";
 
 export function Application() {
   function handleFocusUser(e: React.MouseEvent) {
@@ -38,9 +40,11 @@ export function Application() {
           Focus on me
         </a>
         <KommuneLayerCheckbox />
+        <FylkeLayerCheckbox />
       </nav>
       <main>
         <div ref={mapRef}></div>
+        <FylkeAside />
         <KommuneAside />
       </main>
     </MapContext.Provider>
