@@ -7,9 +7,9 @@ export function KommuneAside() {
   const kommuneLayer = layers.find((l) => l.getClassName() === "kommuner");
 
   return (
-    <aside>
+    <aside className={kommuneLayer ? "visible" : "hidden"}>
       <div>
-        <h2>Kommuner {kommuneLayer ? "visible" : "hidden"}</h2>
+        <h2>Kommuner</h2>
       </div>
     </aside>
   );
