@@ -12,3 +12,13 @@ nav {
   display: flex;
   gap: 1em;
 }
+
+main {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+main aside {
+  padding: 0.5rem;
+  min-width: 25ch;
+}
