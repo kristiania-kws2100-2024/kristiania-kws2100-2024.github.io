@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { MapContext } from "../map/mapContext";
 import VectorSource from "ol/source/Vector";
 import VectorLayer from "ol/layer/Vector";
@@ -26,14 +26,26 @@ function getStedsnavn(navn: Stedsnavn[]) {
 }
 
 function useKommuneFeatures() {
-  const { layers } = useContext(MapContext);
+  const { map, layers } = useContext(MapContext);
   const kommuneLayer = layers.find(
     (l) => l.getClassName() === "kommuner",
   ) as KommuneVectorLayer;
   const [features, setFeatures] = useState<KommuneFeature[]>();
+  const [viewExtent, setViewExtent] = useState(
+    map.getView().getViewStateAndExtent().extent,
+  );
+  const visibleFeatures = useMemo(
+    () =>
+      features?.filter((f) => f.getGeometry()?.intersectsExtent(viewExtent)),
+    [features, viewExtent],
+  );
 
   function handleSourceChange() {
     setFeatures(kommuneLayer?.getSource()?.getFeatures());
+  }
+
+  function handleViewChange() {
+    setViewExtent(map.getView().getViewStateAndExtent().extent);
   }
 
   useEffect(() => {
@@ -41,19 +53,23 @@ function useKommuneFeatures() {
     return () => kommuneLayer?.getSource()?.un("change", handleSourceChange);
   }, [kommuneLayer]);
 
-  return { kommuneLayer, features };
+  useEffect(() => {
+    map.getView().on("change", handleViewChange);
+    return () => map.getView().un("change", handleViewChange);
+  }, [map]);
+
+  return { kommuneLayer, features, visibleFeatures };
 }
 
 export function KommuneAside() {
-  const { features } = useKommuneFeatures();
+  const { visibleFeatures } = useKommuneFeatures();
 
   return (
-    <aside className={features?.length ? "visible" : "hidden"}>
+    <aside className={visibleFeatures?.length ? "visible" : "hidden"}>
       <div>
         <h2>Kommuner</h2>
-
         <ul>
-          {features?.map((k) => (
+          {visibleFeatures?.map((k) => (
             <li>{getStedsnavn(k.getProperties().navn)}</li>
           ))}
         </ul>
