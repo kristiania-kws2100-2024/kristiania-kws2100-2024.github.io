@@ -13,7 +13,7 @@ interface KommuneProperties {
 
 // "navn": [{ "rekkefolge": "", "sprak": "nor", "navn": "Værøy" }]
 interface Stedsnavn {
-  sprak: string;
+  sprak: "nor" | "sme" | "sma" | "smj" | "fkv";
   navn: string;
 }
 
