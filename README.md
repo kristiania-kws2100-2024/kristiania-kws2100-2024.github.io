@@ -100,7 +100,7 @@ Highlight: dark mode styling of the background map.
 This is an alternative to running `npm create vite@latest` and then removing all the code you don't need.
 
 1. `echo {} > package.json` (creates a package.json-file with only the text `{}`)
-   - ⚠️ If you are on Windows and using Powershell, this will create a totally empty file, which will not work. Do `echo "{}" > package.json` instead
+   - ⚠️ If you are on Windows and using Powershell, this will create a totally empty file, which will not work. Use cmd OR create a `package.json` file manually OR just skip this step if you know there is no `package.json` file in a directory above your project directory
 3. `npm install --save-dev vite typescript prettier`
 4. `npm install react react-dom`
 5. `npm pkg set scripts.dev=vite`
