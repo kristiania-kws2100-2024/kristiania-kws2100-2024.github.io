@@ -99,10 +99,11 @@ Highlight: dark mode styling of the background map.
 
 This is an alternative to running `npm create vite@latest` and then removing all the code you don't need.
 
-1. `echo {} > package.json` (creates an empty package.json-file)
-2. `npm install --save-dev vite typescript prettier`
-3. `npm install react react-dom`
-4. `npm pkg set scripts.dev=vite`
+1. `echo {} > package.json` (creates a package.json-file with only the text `{}`)
+   - ⚠️ If you are on Windows and using Powershell, this will create a totally empty file, which will not work. Do `echo "{}" > package.json` instead
+3. `npm install --save-dev vite typescript prettier`
+4. `npm install react react-dom`
+5. `npm pkg set scripts.dev=vite`
    <details>
 
    ```shell
@@ -113,21 +114,21 @@ This is an alternative to running `npm create vite@latest` and then removing all
    ```
    
    </details>
-5. Create `index.html`:
+6. Create `index.html`:
    ```html
    <body>
    <div id="root"></div>
    </body>
    <script src="src/main.tsx" type="module"></script>
    ```
-6. Create `src/main.tsx`:
+7. Create `src/main.tsx`:
    ```tsx
    import React from "react";
    import ReactDOM from "react-dom/client";
    const root = ReactDOM.createRoot(document.getElementById("root")!);
    root.render(<h1>Hello React</h1>);
    ```
-7. Run `npm run dev` to start developing
+8. Run `npm run dev` to start developing
 
 ### Building with check of Typescript and formatting
 
