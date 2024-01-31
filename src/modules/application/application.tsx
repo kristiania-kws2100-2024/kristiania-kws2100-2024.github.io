@@ -37,7 +37,7 @@ export function Application() {
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   useEffect(() => map.setTarget(mapRef.current), []);
   return (
-    <MapContext.Provider value={{ setLayers }}>
+    <MapContext.Provider value={{ layers, setLayers }}>
       <header>
         <h1>Kommune kart</h1>
       </header>
