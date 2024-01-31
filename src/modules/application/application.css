@@ -23,6 +23,8 @@ main aside {
   grid-template-columns: 0;
   transition: grid-template-columns 0.5s ease-in-out;
   overflow-x: clip;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
 }
 
 main aside.visible {
