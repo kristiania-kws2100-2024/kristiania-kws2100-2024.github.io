@@ -58,19 +58,25 @@ In this lecture, we will continue out exploration of vector layers. We will star
 
 ### Lecture 5: Point vector layers
 
-We will draw points on the map from a vector source and allow the user to interact with them. We will explore using images to represent data, clustering features together and custom drawing of point features using a canvas.
+[![Lecture 5 code](https://img.shields.io/badge/Lecture_5-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/05)
+[![Lecture 5 reference](https://img.shields.io/badge/Lecture_5-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/05)
+[![Lecture 5 exercise](https://img.shields.io/badge/Lecture_5-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/05)
 
-- Rendering functions
-- Rendering text for a point
-- Clustering points together
-- Finding clicked point features
-- Features in multiple layers
+We will draw points on the map from a vector source and allow the user to interact with them. We will explore styling based on feature properties.
+
+- Style functions
+- Style text for a point
+- Finding hovered point features
 
 ### Lecture 6: Tile layers and map projections
+
+(LECTURE TEXT IS AVAILABLE)
 
 **"Damn you, Gerhard!"**
 
 We will change the background layers in our map to display aerial photos and change the map projection to polar projection
+
+### No lecture in week 8
 
 ### Lecture 7: Assigment: Deployment of simple map applications
 
