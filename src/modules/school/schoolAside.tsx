@@ -1,14 +1,59 @@
 import { useVectorFeatures } from "../map/useVectorFeatures";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { activeSchoolStyle, SchoolFeature } from "./schoolFeature";
+import { MapContext } from "../map/mapContext";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import { Layer } from "ol/layer";
+import { MapBrowserEvent } from "ol";
+import { distance } from "ol/coordinate";
+import { Point } from "ol/geom";
+
+function useClosestFeature(layerSelector: (l: Layer) => boolean) {
+  const { map, layers } = useContext(MapContext);
+  const layer = useMemo(
+    () => layers.find(layerSelector),
+    [layers],
+  ) as VectorLayer<VectorSource>;
+  const [activeFeature, setActiveFeature] = useState<
+    SchoolFeature | undefined
+  >();
+
+  function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
+    const closestFeature = layer
+      .getSource()
+      ?.getClosestFeatureToCoordinate(e.coordinate);
+    if (closestFeature) {
+      const d = distance(
+        (closestFeature?.getGeometry() as Point).getCoordinates(),
+        e.coordinate,
+      );
+      //console.log(map.getView().getResolution());
+      if (d < 0.0025) {
+        setActiveFeature(closestFeature as SchoolFeature);
+      } else {
+        setActiveFeature(undefined);
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (layer) {
+      map.on("pointermove", handlePointerMove);
+    }
+    return () => map.un("pointermove", handlePointerMove);
+  }, [layer]);
+
+  return { activeFeature, setActiveFeature };
+}
 
 export function SchoolAside() {
   const { visibleFeatures } = useVectorFeatures<SchoolFeature>(
     (l) => l.getClassName() === "schools",
   );
-  const [activeFeature, setActiveFeature] = useState<
-    SchoolFeature | undefined
-  >();
+  const { activeFeature, setActiveFeature } = useClosestFeature(
+    (l) => l.getClassName() === "schools",
+  );
   useEffect(() => {
     activeFeature?.setStyle(activeSchoolStyle);
     return () => activeFeature?.setStyle(undefined);
