@@ -35,3 +35,11 @@ main aside > * {
   padding: 0.5rem;
   min-width: 25ch;
 }
+
+main aside ul {
+  cursor: pointer;
+}
+
+main aside li.active {
+  font-weight: bold;
+}
