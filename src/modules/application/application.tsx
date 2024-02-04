@@ -11,6 +11,7 @@ import { KommuneAside } from "../kommune/kommuneAside";
 import { FylkeLayerCheckbox } from "../fylke/fylkeLayerCheckbox";
 import { FylkeAside } from "../fylke/fylkeAside";
 import { SchoolLayerCheckbox } from "../school/schoolLayerCheckbox";
+import { SchoolAside } from "../school/schoolAside";
 
 export function Application() {
   function handleFocusUser(e: React.MouseEvent) {
@@ -48,6 +49,7 @@ export function Application() {
         <div ref={mapRef}></div>
         <FylkeAside />
         <KommuneAside />
+        <SchoolAside />
       </main>
     </MapContext.Provider>
   );

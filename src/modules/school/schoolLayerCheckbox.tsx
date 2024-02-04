@@ -9,6 +9,7 @@ const schoolLayer = new VectorLayer({
     url: "/skoler.json",
     format: new GeoJSON(),
   }),
+  className: "schools",
 });
 
 export function SchoolLayerCheckbox() {
