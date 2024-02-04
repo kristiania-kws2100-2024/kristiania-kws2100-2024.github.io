@@ -37,7 +37,7 @@ const fylkeLayer = new VectorLayer({
 });
 
 export function FylkeLayerCheckbox() {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   useLayer(fylkeLayer, checked);
 
   return (
