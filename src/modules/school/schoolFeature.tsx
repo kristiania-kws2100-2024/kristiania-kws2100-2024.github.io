@@ -5,7 +5,7 @@ export type SchoolFeature = {
   getProperties(): SchoolProperties;
 } & Feature<Point>;
 
-interface SchoolProperties {
+export interface SchoolProperties {
   navn: string;
   antall_elever: number;
   antall_ansatte: number;

@@ -33,6 +33,7 @@ export function useVectorFeatures<FEATURE extends Feature>(
   }, [layer]);
 
   useEffect(() => {
+    setTimeout(handleViewChange, 200);
     map.getView().on("change", handleViewChange);
     return () => map.getView().un("change", handleViewChange);
   }, [map]);
