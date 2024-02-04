@@ -5,6 +5,7 @@ import { Feature, MapBrowserEvent } from "ol";
 import { useVectorFeatures } from "../map/useVectorFeatures";
 import { Layer } from "ol/layer";
 import { MapContext } from "../map/mapContext";
+import { Stroke, Style } from "ol/style";
 
 type KommuneVectorLayer = VectorLayer<VectorSource<KommuneFeature>>;
 
@@ -53,12 +54,21 @@ function useActiveFeatures<FEATURE extends Feature>(
   return { activeFeatures, setActiveFeatures };
 }
 
+const activeStyle = new Style({
+  stroke: new Stroke({ color: "black", width: 3 }),
+});
+
 export function KommuneAside() {
   const { visibleFeatures } = useVectorFeatures<KommuneFeature>(
     (l) => l.getClassName() === "kommuner",
   );
   const { activeFeatures, setActiveFeatures } =
     useActiveFeatures<KommuneFeature>((l) => l.getClassName() === "kommuner");
+  useEffect(() => {
+    console.log("updateActiveFeatures");
+    activeFeatures.forEach((f) => f.setStyle(activeStyle));
+    return () => activeFeatures.forEach((f) => f.setStyle(undefined));
+  }, [activeFeatures]);
 
   return (
     <aside className={visibleFeatures?.length ? "visible" : "hidden"}>
