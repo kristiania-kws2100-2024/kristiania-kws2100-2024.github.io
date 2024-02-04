@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import VectorSource from "ol/source/Vector";
 import VectorLayer from "ol/layer/Vector";
-import { Feature } from "ol";
+import { Feature, MapBrowserEvent } from "ol";
 import { useVectorFeatures } from "../map/useVectorFeatures";
 import { Layer } from "ol/layer";
 import { MapContext } from "../map/mapContext";
@@ -30,7 +30,25 @@ function getStedsnavn(navn: Stedsnavn[]) {
 function useActiveFeatures<FEATURE extends Feature>(
   predicate: (l: Layer) => boolean,
 ) {
+  const { map, layers } = useContext(MapContext);
+  const layer = useMemo(
+    () => layers.find(predicate),
+    [layers],
+  ) as VectorLayer<VectorSource>;
   const [activeFeatures, setActiveFeatures] = useState<FEATURE[]>([]);
+  function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
+    const features = layer
+      ?.getSource()
+      ?.getFeaturesAtCoordinate(e.coordinate) as FEATURE[];
+    setActiveFeatures(features || []);
+  }
+
+  useEffect(() => {
+    if (layer) {
+      map.on("pointermove", handlePointerMove);
+    }
+    return () => map.un("pointermove", handlePointerMove);
+  }, [layer]);
 
   return { activeFeatures, setActiveFeatures };
 }
