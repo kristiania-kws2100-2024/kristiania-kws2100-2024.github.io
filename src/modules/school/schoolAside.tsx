@@ -54,7 +54,13 @@ export function SchoolAside() {
   }, [activeFeature]);
 
   return (
-    <aside className={visibleFeatures.length ? "visible" : "hidden"}>
+    <aside
+      className={
+        visibleFeatures.length && visibleFeatures.length < 100
+          ? "visible"
+          : "hidden"
+      }
+    >
       <div>
         <h2>Skoler</h2>
         <ul onMouseLeave={() => setActiveFeature(undefined)}>

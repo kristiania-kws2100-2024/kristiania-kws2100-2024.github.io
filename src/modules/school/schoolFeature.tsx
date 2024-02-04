@@ -1,7 +1,7 @@
 import { Feature } from "ol";
 import { Point } from "ol/geom";
 import { FeatureLike } from "ol/Feature";
-import { Circle, Fill, Stroke, Style } from "ol/style";
+import { Circle, Fill, Stroke, Style, Text } from "ol/style";
 
 export type SchoolFeature = {
   getProperties(): SchoolProperties;
@@ -41,6 +41,13 @@ export const activeSchoolStyle = (feature: FeatureLike) => {
           ? new Fill({ color: "blue" })
           : new Fill({ color: "purple" }),
       stroke: new Stroke({ color: "white", width: 3 }),
+    }),
+    text: new Text({
+      text: school.navn,
+      font: "bold 14px sans-serif",
+      stroke: new Stroke({ color: "white", width: 2 }),
+      fill: new Fill({ color: "black" }),
+      offsetY: -10,
     }),
   });
 };
