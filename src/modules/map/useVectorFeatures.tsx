@@ -9,7 +9,10 @@ export function useVectorFeatures<FEATURE extends Feature>(
   layerSelector: (l: Layer) => boolean,
 ) {
   const { map, layers } = useContext(MapContext);
-  const layer = layers.find(layerSelector) as VectorLayer<VectorSource>;
+  const layer = useMemo(
+    () => layers.find(layerSelector),
+    [layers],
+  ) as VectorLayer<VectorSource>;
   const [features, setFeatures] = useState<FEATURE[]>([]);
   const [viewExtent, setViewExtent] = useState(
     map.getView().getViewStateAndExtent().extent,
@@ -29,7 +32,10 @@ export function useVectorFeatures<FEATURE extends Feature>(
 
   useEffect(() => {
     layer?.getSource()?.on("change", handleSourceChange);
-    return () => layer?.getSource()?.un("change", handleSourceChange);
+    return () => {
+      layer?.getSource()?.un("change", handleSourceChange);
+      setFeatures([]);
+    };
   }, [layer]);
 
   useEffect(() => {

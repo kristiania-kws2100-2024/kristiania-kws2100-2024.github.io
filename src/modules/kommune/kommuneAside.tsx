@@ -27,7 +27,7 @@ function getStedsnavn(navn: Stedsnavn[]) {
 
 export function KommuneAside() {
   const { visibleFeatures } = useVectorFeatures<KommuneFeature>(
-    (l) => l.getClassName() === "kommune",
+    (l) => l.getClassName() === "kommuner",
   );
 
   return (
