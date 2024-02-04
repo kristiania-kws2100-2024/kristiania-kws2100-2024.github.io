@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { MapContext } from "../map/mapContext";
-import VectorSource from "ol/source/Vector";
-import VectorLayer from "ol/layer/Vector";
+import React from "react";
 import { Feature } from "ol";
+import { useVectorFeatures } from "../map/useVectorFeatures";
 
-type FylkeVectorLayer = VectorLayer<VectorSource<FylkeFeature>>;
+export type FylkeFeature = {
+  getProperties(): FylkeProperties;
+} & Feature;
 
 interface FylkeProperties {
   fylkesnummer: string;
@@ -17,52 +17,14 @@ interface Stedsnavn {
   navn: string;
 }
 
-export type FylkeFeature = {
-  getProperties(): FylkeProperties;
-} & Feature;
-
 function getStedsnavn(navn: Stedsnavn[]) {
   return navn.find((n) => n.sprak === "nor")?.navn;
 }
 
-function useFylkeFeatures() {
-  const { map, layers } = useContext(MapContext);
-  const layer = layers.find(
-    (l) => l.getClassName() === "fylker",
-  ) as FylkeVectorLayer;
-  const [features, setFeatures] = useState<FylkeFeature[]>();
-  const [viewExtent, setViewExtent] = useState(
-    map.getView().getViewStateAndExtent().extent,
-  );
-  const visibleFeatures = useMemo(
-    () =>
-      features?.filter((f) => f.getGeometry()?.intersectsExtent(viewExtent)),
-    [features, viewExtent],
-  );
-
-  function handleSourceChange() {
-    setFeatures(layer?.getSource()?.getFeatures());
-  }
-
-  function handleViewChange() {
-    setViewExtent(map.getView().getViewStateAndExtent().extent);
-  }
-
-  useEffect(() => {
-    layer?.getSource()?.on("change", handleSourceChange);
-    return () => layer?.getSource()?.un("change", handleSourceChange);
-  }, [layer]);
-
-  useEffect(() => {
-    map.getView().on("change", handleViewChange);
-    return () => map.getView().un("change", handleViewChange);
-  }, [map]);
-
-  return { layer, features, visibleFeatures };
-}
-
 export function FylkeAside() {
-  const { visibleFeatures } = useFylkeFeatures();
+  const { visibleFeatures } = useVectorFeatures<FylkeFeature>(
+    (l) => l.getClassName() === "fylker",
+  );
 
   return (
     <aside className={visibleFeatures?.length ? "visible" : "hidden"}>

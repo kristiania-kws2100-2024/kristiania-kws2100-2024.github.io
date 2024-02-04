@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { MapContext } from "../map/mapContext";
+import React, { useState } from "react";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
 import { Fill, Stroke, Style, Text } from "ol/style";
 import { FylkeFeature } from "./fylkeAside";
+import { useLayer } from "../map/useLayer";
 
 const fylkeLayer = new VectorLayer({
   className: "fylker",
@@ -38,17 +38,7 @@ const fylkeLayer = new VectorLayer({
 
 export function FylkeLayerCheckbox() {
   const [checked, setChecked] = useState(true);
-
-  const { setLayers } = useContext(MapContext);
-
-  useEffect(() => {
-    if (checked) {
-      setLayers((old) => [...old, fylkeLayer]);
-    }
-    return () => {
-      setLayers((old) => old.filter((l) => l !== fylkeLayer));
-    };
-  }, [checked]);
+  useLayer(fylkeLayer, checked);
 
   return (
     <div>
