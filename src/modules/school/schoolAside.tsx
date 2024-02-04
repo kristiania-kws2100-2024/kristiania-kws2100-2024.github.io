@@ -21,11 +21,17 @@ export function SchoolAside() {
   );
 
   return (
-    <aside className={visibleFeatures?.length ? "visible" : "hidden"}>
+    <aside className={visibleFeatures.length ? "visible" : "hidden"}>
       <div>
         <h2>Skoler</h2>
         <ul>
-          {visibleFeatures?.map((s) => <li>{s.getProperties().navn}</li>)}
+          {[...visibleFeatures]
+            .sort((a, b) =>
+              a.getProperties().navn.localeCompare(b.getProperties().navn),
+            )
+            .map((s) => (
+              <li>{s.getProperties().navn}</li>
+            ))}
         </ul>
       </div>
     </aside>

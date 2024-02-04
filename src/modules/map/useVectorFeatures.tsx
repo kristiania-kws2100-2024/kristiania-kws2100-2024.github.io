@@ -10,13 +10,12 @@ export function useVectorFeatures<FEATURE extends Feature>(
 ) {
   const { map, layers } = useContext(MapContext);
   const layer = layers.find(layerSelector) as VectorLayer<VectorSource>;
-  const [features, setFeatures] = useState<FEATURE[]>();
+  const [features, setFeatures] = useState<FEATURE[]>([]);
   const [viewExtent, setViewExtent] = useState(
     map.getView().getViewStateAndExtent().extent,
   );
   const visibleFeatures = useMemo(
-    () =>
-      features?.filter((f) => f.getGeometry()?.intersectsExtent(viewExtent)),
+    () => features.filter((f) => f.getGeometry()?.intersectsExtent(viewExtent)),
     [features, viewExtent],
   );
 
