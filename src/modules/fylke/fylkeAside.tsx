@@ -7,7 +7,7 @@ import { Feature } from "ol";
 type FylkeVectorLayer = VectorLayer<VectorSource<FylkeFeature>>;
 
 interface FylkeProperties {
-  fylkenummer: string;
+  fylkesnummer: string;
   navn: Stedsnavn[];
 }
 
@@ -17,7 +17,7 @@ interface Stedsnavn {
   navn: string;
 }
 
-type FylkeFeature = {
+export type FylkeFeature = {
   getProperties(): FylkeProperties;
 } & Feature;
 
