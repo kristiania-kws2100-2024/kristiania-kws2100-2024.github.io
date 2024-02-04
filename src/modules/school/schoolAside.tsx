@@ -1,6 +1,6 @@
 import { useVectorFeatures } from "../map/useVectorFeatures";
-import React, { useState } from "react";
-import { SchoolFeature } from "./schoolFeature";
+import React, { useEffect, useState } from "react";
+import { activeSchoolStyle, SchoolFeature } from "./schoolFeature";
 
 export function SchoolAside() {
   const { visibleFeatures } = useVectorFeatures<SchoolFeature>(
@@ -9,6 +9,10 @@ export function SchoolAside() {
   const [activeFeature, setActiveFeature] = useState<
     SchoolFeature | undefined
   >();
+  useEffect(() => {
+    activeFeature?.setStyle(activeSchoolStyle);
+    return () => activeFeature?.setStyle(undefined);
+  }, [activeFeature]);
 
   return (
     <aside className={visibleFeatures.length ? "visible" : "hidden"}>
