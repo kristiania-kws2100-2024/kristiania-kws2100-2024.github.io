@@ -6,8 +6,7 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { Layer } from "ol/layer";
 import { MapBrowserEvent } from "ol";
-import { distance } from "ol/coordinate";
-import { Point } from "ol/geom";
+import { FeatureLike } from "ol/Feature";
 
 function useClosestFeature(layerSelector: (l: Layer) => boolean) {
   const { map, layers } = useContext(MapContext);
@@ -20,20 +19,15 @@ function useClosestFeature(layerSelector: (l: Layer) => boolean) {
   >();
 
   function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
-    const closestFeature = layer
-      .getSource()
-      ?.getClosestFeatureToCoordinate(e.coordinate);
-    if (closestFeature) {
-      const d = distance(
-        (closestFeature?.getGeometry() as Point).getCoordinates(),
-        e.coordinate,
-      );
-      //console.log(map.getView().getResolution());
-      if (d < 0.0025) {
-        setActiveFeature(closestFeature as SchoolFeature);
-      } else {
-        setActiveFeature(undefined);
-      }
+    const features: FeatureLike[] = [];
+    map.forEachFeatureAtPixel(e.pixel, (f) => features.push(f), {
+      hitTolerance: 4,
+      layerFilter: (l) => l === layer,
+    });
+    if (features.length === 1) {
+      setActiveFeature(features[0] as SchoolFeature);
+    } else {
+      setActiveFeature(undefined);
     }
   }
 
