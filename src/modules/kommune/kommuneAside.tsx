@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import VectorSource from "ol/source/Vector";
 import VectorLayer from "ol/layer/Vector";
-import { Feature, MapBrowserEvent } from "ol";
+import { Feature } from "ol";
 import { useVectorFeatures } from "../map/useVectorFeatures";
-import { Layer } from "ol/layer";
-import { MapContext } from "../map/mapContext";
 import { Stroke, Style } from "ol/style";
+import { useActiveFeatures } from "../map/useActiveFeatures";
 
 type KommuneVectorLayer = VectorLayer<VectorSource<KommuneFeature>>;
 
@@ -26,32 +25,6 @@ type KommuneFeature = {
 
 function getStedsnavn(navn: Stedsnavn[]) {
   return navn.find((n) => n.sprak === "nor")?.navn;
-}
-
-function useActiveFeatures<FEATURE extends Feature>(
-  predicate: (l: Layer) => boolean,
-) {
-  const { map, layers } = useContext(MapContext);
-  const layer = useMemo(
-    () => layers.find(predicate),
-    [layers],
-  ) as VectorLayer<VectorSource>;
-  const [activeFeatures, setActiveFeatures] = useState<FEATURE[]>([]);
-  function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
-    const features = layer
-      ?.getSource()
-      ?.getFeaturesAtCoordinate(e.coordinate) as FEATURE[];
-    setActiveFeatures(features || []);
-  }
-
-  useEffect(() => {
-    if (layer) {
-      map.on("pointermove", handlePointerMove);
-    }
-    return () => map.un("pointermove", handlePointerMove);
-  }, [layer]);
-
-  return { activeFeatures, setActiveFeatures };
 }
 
 const activeStyle = new Style({
@@ -77,6 +50,7 @@ export function KommuneAside() {
         <ul onMouseLeave={() => setActiveFeatures([])}>
           {visibleFeatures?.map((k) => (
             <li
+              key={k.getProperties().kommunenummer}
               onMouseEnter={() => setActiveFeatures([k])}
               className={activeFeatures.includes(k) ? "active" : ""}
             >
