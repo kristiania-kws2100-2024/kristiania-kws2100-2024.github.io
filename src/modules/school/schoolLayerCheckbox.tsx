@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLayer } from "../map/useLayer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
 import { Circle, Fill, Stroke, Style } from "ol/style";
-import { Feature } from "ol";
+import { Feature, MapBrowserEvent } from "ol";
 import { Point } from "ol/geom";
 import { FeatureLike } from "ol/Feature";
+import { MapContext } from "../map/mapContext";
 
 const schoolLayer = new VectorLayer({
   source: new VectorSource({
@@ -38,9 +39,25 @@ function schoolStyle(f: FeatureLike) {
 }
 
 export function SchoolLayerCheckbox() {
+  const { map } = useContext(MapContext);
   const [checked, setChecked] = useState(true);
 
+  function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
+    console.log("pointermove", e.coordinate);
+    const featuresAtCoordinate = schoolLayer
+      .getSource()
+      ?.getClosestFeatureToCoordinate(e.coordinate);
+    console.log(featuresAtCoordinate?.getProperties().navn);
+  }
+
   useLayer(schoolLayer, checked);
+
+  useEffect(() => {
+    if (checked) {
+      map?.on("pointermove", handlePointerMove);
+    }
+    return () => map?.un("pointermove", handlePointerMove);
+  }, [checked]);
 
   return (
     <div>
