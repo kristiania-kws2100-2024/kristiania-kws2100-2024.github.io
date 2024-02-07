@@ -20,7 +20,7 @@ export function Application() {
       const { latitude, longitude } = pos.coords;
       map.getView().animate({
         center: [longitude, latitude],
-        zoom: 10,
+        zoom: 12,
       });
     });
   }

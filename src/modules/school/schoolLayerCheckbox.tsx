@@ -10,13 +10,14 @@ const schoolLayer = new VectorLayer({
     url: "/schools.json",
     format: new GeoJSON(),
   }),
-  style: new Style({
-    image: new Circle({
-      stroke: new Stroke({ color: "white", width: 2 }),
-      fill: new Fill({ color: "blue" }),
-      radius: 4,
+  style: (feature) =>
+    new Style({
+      image: new Circle({
+        stroke: new Stroke({ color: "white", width: 2 }),
+        fill: new Fill({ color: "blue" }),
+        radius: 3 + feature.getProperties().antall_elever / 150,
+      }),
     }),
-  }),
 });
 
 export function SchoolLayerCheckbox() {
