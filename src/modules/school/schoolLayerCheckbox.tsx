@@ -3,12 +3,11 @@ import { useLayer } from "../map/useLayer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
-import { Circle, Fill, Stroke, Style } from "ol/style";
+import { Circle, Fill, Stroke, Style, Text } from "ol/style";
 import { Feature, MapBrowserEvent } from "ol";
 import { Point } from "ol/geom";
 import { FeatureLike } from "ol/Feature";
 import { MapContext } from "../map/mapContext";
-import { act } from "react-dom/test-utils";
 
 const schoolLayer = new VectorLayer({
   source: new VectorSource({
@@ -50,6 +49,13 @@ function activeSchoolStyle(f: FeatureLike) {
         color: school.eierforhold === "Offentlig" ? "blue" : "purple",
       }),
       radius: 3 + school.antall_elever / 150,
+    }),
+    text: new Text({
+      text: school.navn,
+      offsetY: -15,
+      font: "bold 14px sans-serif",
+      fill: new Fill({ color: "black" }),
+      stroke: new Stroke({ color: "white", width: 2 }),
     }),
   });
 }
@@ -96,6 +102,7 @@ export function SchoolLayerCheckbox() {
           onChange={(e) => setChecked(e.target.checked)}
         />
         Show schools
+        {activeFeature && " (" + activeFeature.getProperties().navn + ")"}
       </label>
     </div>
   );
