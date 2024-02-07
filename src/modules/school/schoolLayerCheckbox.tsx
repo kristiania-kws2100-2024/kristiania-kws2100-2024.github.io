@@ -8,6 +8,7 @@ import { Feature, MapBrowserEvent } from "ol";
 import { Point } from "ol/geom";
 import { FeatureLike } from "ol/Feature";
 import { MapContext } from "../map/mapContext";
+import { act } from "react-dom/test-utils";
 
 const schoolLayer = new VectorLayer({
   source: new VectorSource({
@@ -30,7 +31,21 @@ function schoolStyle(f: FeatureLike) {
   const school = feature.getProperties();
   return new Style({
     image: new Circle({
-      stroke: new Stroke({ color: "white", width: 2 }),
+      stroke: new Stroke({ color: "white", width: 1 }),
+      fill: new Fill({
+        color: school.eierforhold === "Offentlig" ? "blue" : "purple",
+      }),
+      radius: 3 + school.antall_elever / 150,
+    }),
+  });
+}
+
+function activeSchoolStyle(f: FeatureLike) {
+  const feature = f as SchoolFeature;
+  const school = feature.getProperties();
+  return new Style({
+    image: new Circle({
+      stroke: new Stroke({ color: "white", width: 3 }),
       fill: new Fill({
         color: school.eierforhold === "Offentlig" ? "blue" : "purple",
       }),
@@ -53,11 +68,14 @@ export function SchoolLayerCheckbox() {
     });
     if (features.length === 1) {
       setActiveFeature(features[0] as SchoolFeature);
+    } else {
+      setActiveFeature(undefined);
     }
   }
 
   useEffect(() => {
-    console.log(activeFeature?.getProperties().navn);
+    activeFeature?.setStyle(activeSchoolStyle);
+    return () => activeFeature?.setStyle(undefined);
   }, [activeFeature]);
 
   useLayer(schoolLayer, checked);
