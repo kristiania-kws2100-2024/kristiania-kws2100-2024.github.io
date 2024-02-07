@@ -18,6 +18,7 @@ const schoolLayer = new VectorLayer({
 });
 
 type SchoolProperties = {
+  navn: string;
   antall_elever: number;
   eierforhold: "Offentlig" | "Privat";
 };
@@ -42,13 +43,22 @@ export function SchoolLayerCheckbox() {
   const { map } = useContext(MapContext);
   const [checked, setChecked] = useState(true);
 
+  const [activeFeature, setActiveFeature] = useState<SchoolFeature>();
+
   function handlePointerMove(e: MapBrowserEvent<MouseEvent>) {
-    console.log("pointermove", e.coordinate);
-    const featuresAtCoordinate = schoolLayer
-      .getSource()
-      ?.getClosestFeatureToCoordinate(e.coordinate);
-    console.log(featuresAtCoordinate?.getProperties().navn);
+    const features: FeatureLike[] = [];
+    map.forEachFeatureAtPixel(e.pixel, (f) => features.push(f), {
+      hitTolerance: 5,
+      layerFilter: (l) => l === schoolLayer,
+    });
+    if (features.length === 1) {
+      setActiveFeature(features[0] as SchoolFeature);
+    }
   }
+
+  useEffect(() => {
+    console.log(activeFeature?.getProperties().navn);
+  }, [activeFeature]);
 
   useLayer(schoolLayer, checked);
 
