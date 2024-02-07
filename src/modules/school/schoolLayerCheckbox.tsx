@@ -16,19 +16,23 @@ const schoolLayer = new VectorLayer({
   style: schoolStyle,
 });
 
-interface SchoolProperties {
+type SchoolProperties = {
   antall_elever: number;
-}
+  eierforhold: "Offentlig" | "Privat";
+};
 
 type SchoolFeature = { getProperties(): SchoolProperties } & Feature<Point>;
 
 function schoolStyle(f: FeatureLike) {
   const feature = f as SchoolFeature;
+  const school = feature.getProperties();
   return new Style({
     image: new Circle({
       stroke: new Stroke({ color: "white", width: 2 }),
-      fill: new Fill({ color: "blue" }),
-      radius: 3 + feature.getProperties().antall_elever / 150,
+      fill: new Fill({
+        color: school.eierforhold === "Offentlig" ? "blue" : "purple",
+      }),
+      radius: 3 + school.antall_elever / 150,
     }),
   });
 }
