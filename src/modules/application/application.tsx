@@ -19,6 +19,7 @@ import { FylkeAside } from "../fylke/fylkeAside";
 import { SchoolLayerCheckbox } from "../school/schoolLayerCheckbox";
 import { SchoolAside } from "../school/schoolAside";
 import { BaselayerSelector } from "../baselayer/baselayerSelector";
+import { View } from "ol";
 
 export function Application() {
   function handleFocusUser(e: React.MouseEvent) {
@@ -32,6 +33,8 @@ export function Application() {
     });
   }
 
+  const [view, setView] = useState(new View({ center: [10, 59], zoom: 8 }));
+  useEffect(() => map.setView(view), [view]);
   const [baseLayer, setBaseLayer] = useState<Layer>(
     new TileLayer({ source: new OSM() }),
   );
@@ -40,6 +43,21 @@ export function Application() {
     () => [baseLayer, ...featureLayers],
     [baseLayer, featureLayers],
   );
+  const projection = useMemo(
+    () => baseLayer.getSource()!.getProjection(),
+    [baseLayer],
+  );
+  useEffect(() => {
+    if (projection)
+      setView(
+        (old) =>
+          new View({
+            center: old.getCenter(),
+            zoom: old.getZoom(),
+            projection: projection,
+          }),
+      );
+  }, [projection]);
   useEffect(() => map.setLayers(layers), [layers]);
 
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
@@ -53,6 +71,7 @@ export function Application() {
       </header>
       <nav>
         <BaselayerSelector />
+        {projection?.getCode()}
         <a href={"#"} onClick={handleFocusUser}>
           Focus on me
         </a>
