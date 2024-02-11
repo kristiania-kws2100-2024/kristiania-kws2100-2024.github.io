@@ -18,18 +18,19 @@ proj4.defs([
     "EPSG:3575",
     "+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +type=crs",
   ],
+  [
+    "EPSG:32632",
+    "+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +type=crs\n",
+  ],
 ]);
 register(proj4);
 
 const parser = new WMTSCapabilities();
 
-async function loadWmtsLayer(url: string, layer: string, matrixSet: string) {
+async function loadWmtsLayer(url: string, config: any) {
   const response = await fetch(url);
   const text = await response.text();
-  const options = optionsFromCapabilities(parser.read(text), {
-    layer,
-    matrixSet,
-  })!;
+  const options = optionsFromCapabilities(parser.read(text), config)!;
   return new TileLayer({ source: new WMTS(options) });
 }
 
@@ -44,25 +45,28 @@ function useAsyncLayer(fn: () => Promise<Layer>) {
 function loadKartverketLayer() {
   return loadWmtsLayer(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_wmts?request=GetCapabilities&service=WMS",
-    "norgeskart_bakgrunn",
-    "EPSG:4326",
+    {
+      layer: "norgeskart_bakgrunn",
+      matrixSet: "EPSG:32632",
+    },
   );
 }
 
 function loadPictureLayer() {
   return loadWmtsLayer(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",
-    "Nibcache_web_mercator_v2",
-    "default028mm",
+    {
+      layer: "Nibcache_web_mercator_v2",
+      matrixSet: "default028mm",
+    },
   );
 }
 
 function loadPolarLayer() {
-  return loadWmtsLayer(
-    "/arctic-sdi-capabilities.xml",
-    "arctic_cascading",
-    "3575",
-  );
+  return loadWmtsLayer("/arctic-sdi-capabilities.xml", {
+    layer: "arctic_cascading",
+    matrixSet: "3575",
+  });
 }
 
 export function BaselayerSelector() {
