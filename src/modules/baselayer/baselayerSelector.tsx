@@ -5,6 +5,7 @@ import { MapContext } from "../map/mapContext";
 import { Layer } from "ol/layer";
 import { optionsFromCapabilities } from "ol/source/WMTS";
 import { WMTSCapabilities } from "ol/format";
+import { useLayer } from "../map/useLayer";
 
 const parser = new WMTSCapabilities();
 
@@ -18,6 +19,14 @@ async function loadWmtsLayer(url: string, layer: string, matrixSet: string) {
   return new TileLayer({ source: new WMTS(options) });
 }
 
+function useAsyncLayer(fn: () => Promise<Layer>) {
+  const [layer, setLayer] = useState<Layer>();
+  useEffect(() => {
+    fn().then(setLayer);
+  }, []);
+  return layer;
+}
+
 function loadPictureLayer() {
   return loadWmtsLayer(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",
@@ -28,7 +37,7 @@ function loadPictureLayer() {
 
 export function BaselayerSelector() {
   const { setBaseLayer } = useContext(MapContext);
-  const [pictureLayer, setPictureLayer] = useState<Layer>();
+  const pictureLayer = useAsyncLayer(loadPictureLayer);
   const options = {
     osm: {
       name: "Open Street Map",
@@ -50,12 +59,9 @@ export function BaselayerSelector() {
     },
   };
   const [selected, setSelected] = useState<keyof typeof options>("osm");
-  useEffect(() => {
-    loadPictureLayer().then(setPictureLayer);
-  }, []);
 
   useEffect(() => {
-    if (options[selected]?.layer) setBaseLayer(options[selected].layer);
+    if (options[selected]?.layer) setBaseLayer(options[selected].layer!);
   }, [selected]);
 
   return (
