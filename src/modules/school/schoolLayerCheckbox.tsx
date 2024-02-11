@@ -65,7 +65,7 @@ function activeSchoolStyle(f: FeatureLike, resolution: number) {
 
 export function SchoolLayerCheckbox() {
   const { map } = useContext(MapContext);
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const [activeFeature, setActiveFeature] = useState<SchoolFeature>();
 
