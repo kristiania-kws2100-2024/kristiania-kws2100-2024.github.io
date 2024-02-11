@@ -70,15 +70,28 @@ We will draw points on the map from a vector source and allow the user to intera
 
 ### Lecture 6: Tile layers and map projections
 
-(LECTURE TEXT IS AVAILABLE)
+[![Lecture 6 code](https://img.shields.io/badge/Lecture_6-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/06)
+[![Lecture 6 reference](https://img.shields.io/badge/Lecture_6-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/06)
+[![Lecture 6 exercise](https://img.shields.io/badge/Lecture_6-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/06)
 
 **"Damn you, Gerhard!"**
 
-We will change the background layers in our map to display aerial photos and change the map projection to polar projection
+We will change the background layers in our map to display aerial photos and change the map projection to polar projection. In the process, we will learn that the earth is indeed round.
+
+- Restructure the map layers to vary base layer
+- Use a few [Stadia maps](https://stadiamaps.com/)
+- Add [aerial photos of Norway](https://kartkatalog.geonorge.no/metadata/norge-i-bilder-wmts-euref89-utm33/072662f8-41c9-4e9a-a55a-343dee0c3f84) ("Norge i bilder")
+- Add [Norwegian official map](https://kartkatalog.geonorge.no/metadata/norges-grunnkart-cache/860f8b53-1dcf-4a39-87a4-71b3e9125dcb) ("Norges grunnkart"), introducting some projection strangeness
+- Add [Arctic Spacial Data Infrastructure](https://arctic-sdi.org/services/topografic-basemap/) polar map, going all in on projections
+
+#### Reference:
+
+- [UTM 32V i Store Norske Leksikon](https://snl.no/UTM)
+- [Map Men: Why Every Map is Wrong](https://www.youtube.com/watch?v=jtBV3GgQLg8) (silly, but educational)
 
 ### No lecture in week 8
 
-### Lecture 7: Assigment: Deployment of simple map applications
+### Lecture 7: TypeScript and React review
 
 ### Lecture 8: Query property data
 
