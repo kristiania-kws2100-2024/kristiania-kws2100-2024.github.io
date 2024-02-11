@@ -5,7 +5,15 @@ import { MapContext } from "../map/mapContext";
 import { Layer } from "ol/layer";
 import { optionsFromCapabilities } from "ol/source/WMTS";
 import { WMTSCapabilities } from "ol/format";
-import { useLayer } from "../map/useLayer";
+import proj4 from "proj4";
+
+import { register } from "ol/proj/proj4";
+
+proj4.defs(
+  "EPSG:3571",
+  "+proj=laea +lat_0=90 +lon_0=180 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +type=crs",
+);
+register(proj4);
 
 const parser = new WMTSCapabilities();
 
@@ -43,10 +51,19 @@ function loadPictureLayer() {
   );
 }
 
+function loadPolarLayer() {
+  return loadWmtsLayer(
+    "/arctic-sdi-capabilities.xml",
+    "arctic_cascading",
+    "3571",
+  );
+}
+
 export function BaselayerSelector() {
   const { setBaseLayer } = useContext(MapContext);
   const kartverketLayer = useAsyncLayer(loadKartverketLayer);
   const pictureLayer = useAsyncLayer(loadPictureLayer);
+  const polarLayer = useAsyncLayer(loadPolarLayer);
   const options = {
     osm: {
       name: "Open Street Map",
@@ -69,6 +86,10 @@ export function BaselayerSelector() {
     bilder: {
       name: "Norge i bilder",
       layer: pictureLayer,
+    },
+    polar: {
+      name: "Polar",
+      layer: polarLayer,
     },
   };
   const [selected, setSelected] = useState<keyof typeof options>("osm");
