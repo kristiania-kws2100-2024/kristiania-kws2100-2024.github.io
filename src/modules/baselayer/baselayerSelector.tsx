@@ -27,6 +27,14 @@ function useAsyncLayer(fn: () => Promise<Layer>) {
   return layer;
 }
 
+function loadKartverketLayer() {
+  return loadWmtsLayer(
+    "https://opencache.statkart.no/gatekeeper/gk/gk.open_wmts?request=GetCapabilities&service=WMS",
+    "norgeskart_bakgrunn",
+    "EPSG:4326",
+  );
+}
+
 function loadPictureLayer() {
   return loadWmtsLayer(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",
@@ -37,6 +45,7 @@ function loadPictureLayer() {
 
 export function BaselayerSelector() {
   const { setBaseLayer } = useContext(MapContext);
+  const kartverketLayer = useAsyncLayer(loadKartverketLayer);
   const pictureLayer = useAsyncLayer(loadPictureLayer);
   const options = {
     osm: {
@@ -53,6 +62,10 @@ export function BaselayerSelector() {
         source: new StadiaMaps({ layer: "alidade_smooth_dark" }),
       }),
     },
+    kartverket: {
+      name: "Kartverket",
+      layer: kartverketLayer,
+    },
     bilder: {
       name: "Norge i bilder",
       layer: pictureLayer,
@@ -61,7 +74,10 @@ export function BaselayerSelector() {
   const [selected, setSelected] = useState<keyof typeof options>("osm");
 
   useEffect(() => {
-    if (options[selected]?.layer) setBaseLayer(options[selected].layer!);
+    if (options[selected]?.layer) {
+      console.log(options[selected].layer!.getSource()?.getProjection());
+      setBaseLayer(options[selected].layer!);
+    }
   }, [selected]);
 
   return (
