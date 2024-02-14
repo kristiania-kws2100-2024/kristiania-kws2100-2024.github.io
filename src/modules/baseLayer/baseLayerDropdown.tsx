@@ -7,10 +7,16 @@ import { WMTSCapabilities } from "ol/format";
 import proj4 from "proj4";
 import { register } from "ol/proj/proj4";
 
-proj4.defs(
-  "EPSG:3571",
-  "+proj=laea +lat_0=90 +lon_0=180 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +type=crs",
-);
+proj4.defs([
+  [
+    "EPSG:3571",
+    "+proj=laea +lat_0=90 +lon_0=180 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +type=crs",
+  ],
+  [
+    "EPSG:3575",
+    "+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +type=crs",
+  ],
+]);
 register(proj4);
 
 const parser = new WMTSCapabilities();
@@ -48,7 +54,7 @@ async function loadKartverket() {
 async function loadPolar() {
   return await loadWtmsSource("/arctic-sdi.xml", {
     layer: "arctic_cascading",
-    matrixSet: "3571",
+    matrixSet: "3575",
   });
 }
 
