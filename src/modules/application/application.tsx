@@ -19,6 +19,7 @@ import { FylkeAside } from "../fylke/fylkeAside";
 import { SchoolLayerCheckbox } from "../school/schoolLayerCheckbox";
 import { SchoolAside } from "../school/schoolAside";
 import { BaseLayerDropdown } from "../baseLayer/baseLayerDropdown";
+import { View } from "ol";
 
 export function Application() {
   function handleFocusUser(e: React.MouseEvent) {
@@ -35,6 +36,24 @@ export function Application() {
   const [baseLayer, setBaseLayer] = useState<Layer>(
     () => new TileLayer({ source: new OSM() }),
   );
+
+  const [view, setView] = useState(new View({ center: [10, 59], zoom: 8 }));
+  useEffect(() => map.setView(view), [view]);
+
+  useEffect(() => {
+    const projection = baseLayer?.getSource()?.getProjection();
+    if (projection) {
+      setView(
+        (oldView) =>
+          new View({
+            center: oldView.getCenter(),
+            zoom: oldView.getZoom(),
+            projection,
+          }),
+      );
+    }
+  }, [baseLayer]);
+
   const [vectorLayers, setVectorLayers] = useState<Layer[]>([]);
   const layers = useMemo(
     () => [baseLayer, ...vectorLayers],

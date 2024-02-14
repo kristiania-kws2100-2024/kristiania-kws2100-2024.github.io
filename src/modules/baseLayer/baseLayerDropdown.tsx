@@ -4,6 +4,14 @@ import { OSM, StadiaMaps, WMTS } from "ol/source";
 import { MapContext } from "../map/mapContext";
 import { optionsFromCapabilities } from "ol/source/WMTS";
 import { WMTSCapabilities } from "ol/format";
+import proj4 from "proj4";
+import { register } from "ol/proj/proj4";
+
+proj4.defs(
+  "EPSG:3571",
+  "+proj=laea +lat_0=90 +lon_0=180 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +type=crs",
+);
+register(proj4);
 
 const parser = new WMTSCapabilities();
 
@@ -37,15 +45,25 @@ async function loadKartverket() {
   );
 }
 
+async function loadPolar() {
+  return await loadWtmsSource("/arctic-sdi.xml", {
+    layer: "arctic_cascading",
+    matrixSet: "3571",
+  });
+}
+
 const ortoPhotoLayer = new TileLayer();
 const kartverketLayer = new TileLayer();
 
+const polarLayer = new TileLayer();
+
 export function BaseLayerDropdown() {
-  const { setBaseLayer } = useContext(MapContext);
+  const { setBaseLayer, map } = useContext(MapContext);
 
   useEffect(() => {
     loadKartverket().then((source) => kartverketLayer.setSource(source));
     loadFlyfotoLayer().then((source) => ortoPhotoLayer.setSource(source));
+    loadPolar().then((source) => polarLayer.setSource(source));
   }, []);
 
   const baseLayerOptions = [
@@ -79,7 +97,7 @@ export function BaseLayerDropdown() {
     {
       id: "polar",
       name: "Arktisk",
-      layer: new TileLayer(),
+      layer: polarLayer,
     },
   ];
   const [selectedLayer, setSelectedLayer] = useState(baseLayerOptions[0]);
@@ -102,6 +120,8 @@ export function BaseLayerDropdown() {
         ))}
       </select>
       {selectedLayer.name}
+      {map.getView().getProjection().getCode()}
+      {selectedLayer.layer.getSource()?.getProjection()?.getCode()}
     </div>
   );
 }
