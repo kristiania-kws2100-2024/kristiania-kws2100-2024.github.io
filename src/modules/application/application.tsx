@@ -12,6 +12,7 @@ import { FylkeLayerCheckbox } from "../fylke/fylkeLayerCheckbox";
 import { FylkeAside } from "../fylke/fylkeAside";
 import { SchoolLayerCheckbox } from "../school/schoolLayerCheckbox";
 import { SchoolAside } from "../school/schoolAside";
+import { BaseLayerDropdown } from "../baseLayer/baseLayerDropdown";
 
 export function Application() {
   function handleFocusUser(e: React.MouseEvent) {
@@ -38,6 +39,7 @@ export function Application() {
         <h1>Kommune kart</h1>
       </header>
       <nav>
+        <BaseLayerDropdown />
         <a href={"#"} onClick={handleFocusUser}>
           Focus on me
         </a>
