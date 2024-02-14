@@ -120,9 +120,9 @@ This is an alternative to running `npm create vite@latest` and then removing all
 
 1. `echo {} > package.json` (creates a package.json-file with only the text `{}`)
    - ⚠️ If you are on Windows and using Powershell, this will create a totally empty file, which will not work. Use cmd OR create a `package.json` file manually OR just skip this step if you know there is no `package.json` file in a directory above your project directory
-3. `npm install --save-dev vite typescript prettier`
-4. `npm install react react-dom`
-5. `npm pkg set scripts.dev=vite`
+2. `npm install --save-dev vite typescript prettier`
+3. `npm install react react-dom`
+4. `npm pkg set scripts.dev=vite`
    <details>
 
    ```shell
@@ -133,36 +133,36 @@ This is an alternative to running `npm create vite@latest` and then removing all
    ```
    
    </details>
-6. Create `index.html`:
+5. Create `index.html`:
    ```html
    <body>
    <div id="root"></div>
    </body>
    <script src="src/main.tsx" type="module"></script>
    ```
-7. Create `src/main.tsx`:
+6. Create `src/main.tsx`:
    ```tsx
    import React from "react";
    import ReactDOM from "react-dom/client";
    const root = ReactDOM.createRoot(document.getElementById("root")!);
    root.render(<h1>Hello React</h1>);
    ```
-8. Run `npm run dev` to start developing
+7. Run `npm run dev` to start developing
 
 ### Building with check of Typescript and formatting
 
 Set up:
 ```shell
-npm pkg set scripts.build="npm run check && vite build"
-npm pkg set scripts.check="prettier --check . && tsc --noEmit"
+npm pkg set scripts.build="npm test && vite build"
+npm pkg set scripts.test="prettier --check . && tsc --noEmit"
 ```
 
 Clean up:
 
 ```shell
-npx prettier --write .
-npx tsc --init --jsx react
 npm install --save-dev @types/react @types/react-dom
+npx tsc --init --jsx react
+npx prettier --write .
 ```
 
 ### Set up GitHub Actions to deploy to GitHub pages
@@ -181,6 +181,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       id-token: write
       pages: write
     environment:
@@ -212,12 +213,12 @@ export default {
 
 #### Install husky
 
-Husky helps prevent you from checking in bad code:
+[Husky](https://typicode.github.io/husky/) helps prevent you from checking in bad code:
 
 1. `npm install --save-dev husky`
-2. `npm pkg set scripts.prepare="husky install"`
-3. `npm run prepare`
-4. `npx husky add .husky/pre-push "npm run check"`
+2. `npx husky init`
+
+Note: By default, Husky creates a file `.husky/pre-commit` which runs `npm test`. If you want to run another script, just change the contents of the file. If you want it to run before push instead of before commits, rename the file to `pre-push`
 
 
 ### Creating a OpenLayers map in React
