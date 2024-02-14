@@ -31,7 +31,9 @@ export function BaseLayerDropdown() {
         value={selectedLayer.id}
       >
         {baseLayerOptions.map(({ id, name }) => (
-          <option value={id}>{name}</option>
+          <option key={id} value={id}>
+            {name}
+          </option>
         ))}
       </select>
       {selectedLayer.name}

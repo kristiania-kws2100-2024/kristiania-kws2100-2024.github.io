@@ -36,22 +36,17 @@ export function Application() {
     () => new TileLayer({ source: new OSM() }),
   );
   const [vectorLayers, setVectorLayers] = useState<Layer[]>([]);
-  const allLayers = useMemo(
+  const layers = useMemo(
     () => [baseLayer, ...vectorLayers],
     [baseLayer, vectorLayers],
   );
-  useEffect(() => map.setLayers(allLayers), [allLayers]);
+  useEffect(() => map.setLayers(layers), [layers]);
 
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   useEffect(() => map.setTarget(mapRef.current), []);
   return (
     <MapContext.Provider
-      value={{
-        map,
-        layers: vectorLayers,
-        setLayers: setVectorLayers,
-        setBaseLayer,
-      }}
+      value={{ map, vectorLayers, setVectorLayers, setBaseLayer }}
     >
       <header>
         <h1>Kommune kart</h1>

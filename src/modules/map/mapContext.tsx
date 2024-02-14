@@ -11,12 +11,12 @@ export const map = new Map({
 
 export const MapContext = React.createContext<{
   map: Map;
-  setLayers: Dispatch<SetStateAction<Layer[]>>;
-  layers: Layer[];
+  setVectorLayers: Dispatch<SetStateAction<Layer[]>>;
+  vectorLayers: Layer[];
   setBaseLayer: (layer: Layer) => void;
 }>({
   map,
-  setLayers: () => {},
-  layers: [],
+  setVectorLayers: () => {},
+  vectorLayers: [],
   setBaseLayer: () => {},
 });

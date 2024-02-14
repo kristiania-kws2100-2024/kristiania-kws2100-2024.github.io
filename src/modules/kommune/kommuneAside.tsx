@@ -26,8 +26,8 @@ function getStedsnavn(navn: Stedsnavn[]) {
 }
 
 function useKommuneFeatures() {
-  const { map, layers } = useContext(MapContext);
-  const layer = layers.find(
+  const { map, vectorLayers } = useContext(MapContext);
+  const layer = vectorLayers.find(
     (l) => l.getClassName() === "kommuner",
   ) as KommuneVectorLayer;
   const [features, setFeatures] = useState<KommuneFeature[]>();
