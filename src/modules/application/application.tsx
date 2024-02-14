@@ -1,4 +1,10 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React, {
+  MutableRefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import TileLayer from "ol/layer/Tile";
 import { OSM } from "ol/source";
 
@@ -26,15 +32,27 @@ export function Application() {
     });
   }
 
-  const [layers, setLayers] = useState<Layer[]>([
-    new TileLayer({ source: new OSM() }),
-  ]);
-  useEffect(() => map.setLayers(layers), [layers]);
+  const [baseLayer, setBaseLayer] = useState<Layer>(
+    () => new TileLayer({ source: new OSM() }),
+  );
+  const [vectorLayers, setVectorLayers] = useState<Layer[]>([]);
+  const allLayers = useMemo(
+    () => [baseLayer, ...vectorLayers],
+    [baseLayer, vectorLayers],
+  );
+  useEffect(() => map.setLayers(allLayers), [allLayers]);
 
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   useEffect(() => map.setTarget(mapRef.current), []);
   return (
-    <MapContext.Provider value={{ map, layers, setLayers }}>
+    <MapContext.Provider
+      value={{
+        map,
+        layers: vectorLayers,
+        setLayers: setVectorLayers,
+        setBaseLayer,
+      }}
+    >
       <header>
         <h1>Kommune kart</h1>
       </header>
