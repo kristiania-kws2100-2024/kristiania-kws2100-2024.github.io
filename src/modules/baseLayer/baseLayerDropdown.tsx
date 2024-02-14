@@ -23,6 +23,21 @@ export function BaseLayerDropdown() {
         source: new StadiaMaps({ layer: "alidade_smooth_dark" }),
       }),
     },
+    {
+      id: "kartverket",
+      name: "Kartverket",
+      layer: new TileLayer(),
+    },
+    {
+      id: "ortophoto",
+      name: "Flyfoto",
+      layer: new TileLayer(),
+    },
+    {
+      id: "polar",
+      name: "Arktisk",
+      layer: new TileLayer(),
+    },
   ];
   const [selectedLayer, setSelectedLayer] = useState(baseLayerOptions[0]);
   useEffect(() => setBaseLayer(selectedLayer.layer), [selectedLayer]);
