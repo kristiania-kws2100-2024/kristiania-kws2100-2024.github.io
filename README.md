@@ -180,18 +180,20 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      contents: read
-      id-token: write
-      pages: write
+      id-token: write   # to verify the deployment originates from an appropriate
+      pages: write      # to deploy to Pages
+      contents: read    # to checkout private repositories
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: 20.x
           cache: "npm"
       - run: npm ci
       - run: npm run build
@@ -200,6 +202,7 @@ jobs:
           path: ./dist
       - uses: actions/deploy-pages@v4
         id: deployment
+
 ```
 
 This will publish your project as `https://<your username>.github.io/<repository name>`. By default, Vite expects index.html to fetch JavaScript from the server root. In order to fetch content from `/<repository name>`, you need the following `vite.config.js`:
@@ -223,7 +226,18 @@ Note: By default, Husky creates a file `.husky/pre-commit` which runs `npm test`
 
 ### Creating a OpenLayers map in React
 
+First you need to install the `ol` dependency:
+
+- `npm install ol`
+
+
 ```tsx
+import React, { MutableRefObject, useEffect, useRef } from "react";
+import { Map, View } from "ol";
+import TileLayer from "ol/layer/Tile";
+import { OSM } from "ol/source";
+import { useGeographic } from "ol/proj";
+
 // By calling the "useGeographic" function in OpenLayers, we tell that we want coordinates to be in degrees
 //  instead of meters, which is the default. Without this `center: [11, 60]` doesn't work on the view
 useGeographic();
@@ -231,28 +245,26 @@ useGeographic();
 // Here we create a Map object. Make sure you `import { Map } from "ol"` or otherwise, standard Javascript
 //  map data structure will be used
 const map = new Map({
-  // The map will be centered on 60 degrees latitude and 11 degrees longitude, with a certain zoom level  
+  // The map will be centered on 60 degrees latitude and 11 degrees longitude, with a certain zoom level
   view: new View({ center: [11, 60], zoom: 10 }),
   // images displayed on the map will be from the Open Street Map (OSM) tile layer
-  layers: [new TileLayer({source: new OSM()})]
-})
+  layers: [new TileLayer({ source: new OSM() })],
+});
 
 // A functional React component
-function App() {
+export function Application() {
   // `useRef` bridges the gap between JavaScript functions that expect DOM objects and React components
-  // `as MutableRefObject` is required by TypeScript to avoid us binding the wrong ref to the wrong component  
+  // `as MutableRefObject` is required by TypeScript to avoid us binding the wrong ref to the wrong component
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   // When we display the page, we want the OpenLayers map object to target the DOM object refererred to by the
-  // map React component 
+  // map React component
   useEffect(() => {
     map.setTarget(mapRef.current);
   }, []);
 
   // This is the location (in React) where we want the map to be displayed
-  return (
-    <div ref={mapRef}></div>
-  )
+  return <div ref={mapRef}></div>;
 }
 ```
 
