@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { RegisterUserDialog } from "./RegisterUserDialog";
 
 function Square({ value, onSquareClick }: { value: number, onSquareClick: () => void }) {
   return <button
@@ -13,6 +14,16 @@ export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares = history[currentMove];
+  const [language, setLanguage] = useState(navigator.language);
+
+  useEffect(() => {
+    function handleLanguageChange() {
+      setLanguage(navigator.language);
+    }
+    addEventListener("languagechange", handleLanguageChange);
+    return () => removeEventListener("languagechange", handleLanguageChange);
+  }, []);
+
   const xIsNext = currentMove % 2 === 0;
 
   function handlePlay(index: number) {
@@ -41,19 +52,22 @@ export default function Game() {
   });
 
   return (
-    <div className="game">
-      <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+    <div>
+      <div className="game">
+        <div className="game-board">
+          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        </div>
+        <div className="game-info">
+          <ol>{moves}</ol>
+        </div>
       </div>
-      <div className="game-info">
-        <ol>{moves}</ol>
-      </div>
+      <div>{language}</div>
     </div>
   );
 }
 
 
-function Board({ squares, xIsNext, onPlay }: {squares: number[], xIsNext: boolean, onPlay: (index: number) => void}) {
+function Board({ squares, xIsNext, onPlay }: { squares: number[], xIsNext: boolean, onPlay: (index: number) => void }) {
   const winner = calculateWinner(squares);
   const status = winner ? "Winner: " + winner : "Next player: " + (xIsNext ? "X" : "0");
 
