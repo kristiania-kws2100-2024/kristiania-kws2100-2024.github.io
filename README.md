@@ -93,6 +93,10 @@ We will change the background layers in our map to display aerial photos and cha
 
 ### Lecture 7: TypeScript and React review
 
+[![Lecture 7 code](https://img.shields.io/badge/Lecture_7-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/07)
+[![Lecture 7 reference](https://img.shields.io/badge/Lecture_7-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/07)
+[![Lecture 7 exercise](https://img.shields.io/badge/Lecture_7-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/07)
+
 - [We follow the React getting started guide](https://react.dev/learn)
 - We go through essential React concepts: Components
   - Component definitions
