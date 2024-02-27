@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { ApplicationTexts, SupportedLanguagesType } from "./ApplicationTexts";
+import React, { useContext, useEffect, useState } from "react";
+import { ApplicationTexts, SupportedLanguagesType, TextsContext } from "./ApplicationTexts";
 
 
-function Square({ value, onSquareClick }: { value: number, onSquareClick: () => void }) {
+function Square({ value, onSquareClick }: { value: string, onSquareClick: () => void }) {
   return <button
     className="square"
     onClick={onSquareClick}
@@ -21,6 +21,7 @@ export default function Game() {
     function handleLanguageChange() {
       setLanguage(navigator.language as SupportedLanguagesType);
     }
+
     addEventListener("languagechange", handleLanguageChange);
     return () => removeEventListener("languagechange", handleLanguageChange);
   }, []);
@@ -54,24 +55,27 @@ export default function Game() {
   });
 
   return (
-    <div>
-      <div className="game">
-        <div className="game-board">
-          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+    <TextsContext.Provider value={{texts}}>
+      <div>
+        <div className="game">
+          <div className="game-board">
+            <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+          </div>
+          <div className="game-info">
+            <ol>{moves}</ol>
+          </div>
         </div>
-        <div className="game-info">
-          <ol>{moves}</ol>
-        </div>
+        <div>{language}</div>
       </div>
-      <div>{language}</div>
-    </div>
+    </TextsContext.Provider>
   );
 }
 
 
-function Board({ squares, xIsNext, onPlay }: { squares: number[], xIsNext: boolean, onPlay: (index: number) => void }) {
+function Board({ squares, xIsNext, onPlay }: { squares: string[], xIsNext: boolean, onPlay: (index: number) => void }) {
+  const {texts} = useContext(TextsContext);
   const winner = calculateWinner(squares);
-  const status = winner ? "Winner: " + winner : "Next player: " + (xIsNext ? "X" : "0");
+  const status = winner ? texts.declareWinner(winner) : "Next player: " + (xIsNext ? "X" : "0");
 
   return <>
     <div className={"status"}>{status}</div>
@@ -94,7 +98,7 @@ function Board({ squares, xIsNext, onPlay }: { squares: number[], xIsNext: boole
 }
 
 
-function calculateWinner(squares: number[]) {
+function calculateWinner(squares: string[]): string|undefined {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -111,5 +115,5 @@ function calculateWinner(squares: number[]) {
       return squares[a];
     }
   }
-  return null;
+  return undefined;
 }
