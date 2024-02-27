@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-const ApplicationTexts = {
-  "en": {
-    goToStart: "Go to game start"
-  },
-  "nb": {
-    goToStart: "Gå til starten"
-  }
-}
+import { ApplicationTexts, SupportedLanguagesType } from "./ApplicationTexts";
 
 
 function Square({ value, onSquareClick }: { value: number, onSquareClick: () => void }) {
@@ -23,11 +15,11 @@ export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares = history[currentMove];
-  const [language, setLanguage] = useState<"en"|"nb">(navigator.language as "en"|"nb");
+  const [language, setLanguage] = useState(navigator.language as SupportedLanguagesType);
 
   useEffect(() => {
     function handleLanguageChange() {
-      setLanguage(navigator.language as "en"|"nb");
+      setLanguage(navigator.language as SupportedLanguagesType);
     }
     addEventListener("languagechange", handleLanguageChange);
     return () => removeEventListener("languagechange", handleLanguageChange);
