@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@types/react": "^18.2.59",
+    "@types/react-dom": "^18.2.19",
     "vite": "^5.1.4"
   },
   "scripts": {
