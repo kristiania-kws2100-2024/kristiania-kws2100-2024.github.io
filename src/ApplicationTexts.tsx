@@ -1,7 +1,12 @@
 export const SupportedLanguages = ["en", "nb"] as const;
 export type SupportedLanguagesType = typeof SupportedLanguages[number];
 
-export const ApplicationTexts = {
+interface ApplicationTextBundle {
+  goToStart: string;
+}
+
+
+export const ApplicationTexts: Record<SupportedLanguagesType, ApplicationTextBundle> = {
   "en": {
     goToStart: "Go to game start"
   },
