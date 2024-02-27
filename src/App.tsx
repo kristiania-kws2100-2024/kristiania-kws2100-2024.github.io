@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { RegisterUserDialog } from "./RegisterUserDialog";
+
+const ApplicationTexts = {
+  "en": {
+    goToStart: "Go to game start"
+  },
+  "nb": {
+    goToStart: "Gå til starten"
+  }
+}
+
 
 function Square({ value, onSquareClick }: { value: number, onSquareClick: () => void }) {
   return <button
@@ -14,15 +23,16 @@ export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares = history[currentMove];
-  const [language, setLanguage] = useState(navigator.language);
+  const [language, setLanguage] = useState<"en"|"nb">(navigator.language as "en"|"nb");
 
   useEffect(() => {
     function handleLanguageChange() {
-      setLanguage(navigator.language);
+      setLanguage(navigator.language as "en"|"nb");
     }
     addEventListener("languagechange", handleLanguageChange);
     return () => removeEventListener("languagechange", handleLanguageChange);
   }, []);
+  const texts = ApplicationTexts[language];
 
   const xIsNext = currentMove % 2 === 0;
 
@@ -43,7 +53,7 @@ export default function Game() {
   }
 
   const moves = history.map((_, move) => {
-    const description = move > 0 ? `Move to move #${move}` : "Go to game start";
+    const description = move > 0 ? `Move to move #${move}` : texts.goToStart;
     return (
       <li key={move}>
         <button onClick={() => jumpTo(move)}>{description}</button>
