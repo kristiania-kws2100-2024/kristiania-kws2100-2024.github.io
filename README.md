@@ -93,6 +93,24 @@ We will change the background layers in our map to display aerial photos and cha
 
 ### Lecture 7: TypeScript and React review
 
+- [We follow the React getting started guide](https://react.dev/learn)
+- We go through essential React concepts: Components
+  - Component definitions
+  - Component usage
+  - Props
+  - Event handlers
+- We go through essential React [hooks](https://react.dev/reference/react/hooks)
+  - useState
+  - useEffect
+  - useContext
+  - useMemo
+  - useRef
+- TypeScript demonstration
+  - string union types
+  - interface types
+  - return types
+  - higher order types
+
 ### Lecture 8: Query property data
 
 Using the [Norwegian Land Register](https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16), we will develop functionality to show properties close to the users location on a map
