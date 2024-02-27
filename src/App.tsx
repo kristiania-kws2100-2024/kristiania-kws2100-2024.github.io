@@ -11,20 +11,24 @@ function Square({ value, onSquareClick }: { value: string, onSquareClick: () => 
   </button>;
 }
 
-export default function Game() {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
-  const [currentMove, setCurrentMove] = useState(0);
-  const currentSquares = history[currentMove];
+function useNavigatorLanguage() {
   const [language, setLanguage] = useState(navigator.language as SupportedLanguagesType);
 
   useEffect(() => {
     function handleLanguageChange() {
       setLanguage(navigator.language as SupportedLanguagesType);
     }
-
     addEventListener("languagechange", handleLanguageChange);
     return () => removeEventListener("languagechange", handleLanguageChange);
   }, []);
+  return language;
+}
+
+export default function Game() {
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const currentSquares = history[currentMove];
+  const language = useNavigatorLanguage();
   const texts = ApplicationTexts[language];
 
   const xIsNext = currentMove % 2 === 0;
@@ -75,7 +79,7 @@ export default function Game() {
 function Board({ squares, xIsNext, onPlay }: { squares: string[], xIsNext: boolean, onPlay: (index: number) => void }) {
   const {texts} = useContext(TextsContext);
   const winner = calculateWinner(squares);
-  const status = winner ? texts.declareWinner(winner) : "Next player: " + (xIsNext ? "X" : "0");
+  const status = winner ? texts.declareWinner(winner) : texts.nextPlayer(xIsNext ? "X" : "0");
 
   return <>
     <div className={"status"}>{status}</div>

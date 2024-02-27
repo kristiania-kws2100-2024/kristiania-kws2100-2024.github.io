@@ -7,6 +7,7 @@ interface ApplicationTextBundle {
   goToStart: string;
   goToMove(move: number): string;
   declareWinner(winner: string): string;
+  nextPlayer(string: string): string;
 }
 
 
@@ -14,12 +15,14 @@ export const ApplicationTexts: Record<SupportedLanguagesType, ApplicationTextBun
   "en": {
     goToStart: "Go to game start",
     goToMove: (move) => `Move to move #${move}`,
-    declareWinner: (winner) => `Winner: ${winner}`
+    declareWinner: (winner) => `Winner: ${winner}`,
+    nextPlayer: (player) => `Next player: ${player}`
   },
   "nb": {
     goToStart: "Gå til starten",
     goToMove: (move) => `Gå til steg #${move}`,
-    declareWinner: (winner) => `Vinner: ${winner}`
+    declareWinner: (winner) => `Vinner: ${winner}`,
+    nextPlayer: (player) => `Neste spiller: ${player}`
   }
 };
 
