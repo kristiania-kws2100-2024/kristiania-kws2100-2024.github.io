@@ -21,6 +21,17 @@ const map = new Map({
         format: new GeoJSON(),
       }),
     }),
+    new VectorLayer({
+      source: new VectorSource({
+        strategy: (extent, resolution) =>
+          resolution < 0.00005 ? [extent] : [],
+        url: (extent, resolution, projection) =>
+          `/api/eiendommer?bbox=${JSON.stringify(
+            extent,
+          )}&resolution=${resolution}`,
+        format: new GeoJSON(),
+      }),
+    }),
   ],
 });
 
@@ -29,7 +40,18 @@ interface ProfileDto {
 }
 
 function ZoomToMeLink() {
-  return <a href={"#"}>Zoom to me</a>;
+  function handleClick(e: React.MouseEvent) {
+    e.preventDefault();
+    navigator.geolocation.getCurrentPosition((res) => {
+      const { latitude, longitude } = res.coords;
+      map.getView().animate({ center: [longitude, latitude], zoom: 15 });
+    });
+  }
+  return (
+    <a href={"#"} onClick={handleClick}>
+      Zoom to me
+    </a>
+  );
 }
 
 export function Application() {

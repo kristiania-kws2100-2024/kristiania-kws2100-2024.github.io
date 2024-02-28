@@ -5,7 +5,7 @@ const app = express();
 
 app.use((req, res, next) => {
   res.on("finish", () => {
-    console.log(res.statusCode, req.method, req.path);
+    console.log(res.statusCode, req.method, req.path, req.query);
   });
   next();
 });
