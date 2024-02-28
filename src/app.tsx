@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { nb } from "./applicationTexts/nb";
+import { en } from "./applicationTexts/en";
+
 
 type SquareValue = "X" | "O" | null;
 
@@ -60,6 +63,9 @@ function Board({ xIsNext, squares, onPlay }: {
 
 export default function Game() {
   const [userLanguage, setUserLanguage] = useState(navigator.language);
+
+  const applicationTexts = userLanguage === "nb" ? nb : en;
+
   useEffect(() => {
     function handleLanguageChange() {
       setUserLanguage(navigator.language)
@@ -87,7 +93,7 @@ export default function Game() {
   const moves = history.map((_, move) => {
     let description;
     if (move === 0) {
-      description = userLanguage === "nb" ? "Gå til starten" : "Go to start";
+      description = applicationTexts.goToStart;
     } else {
       description = "Go to move # " + move;
     }
