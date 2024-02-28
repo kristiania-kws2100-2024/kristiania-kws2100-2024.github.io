@@ -5,12 +5,23 @@ import { useGeographic } from "ol/proj";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import { OSM } from "ol/source";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import { GeoJSON } from "ol/format";
 
 useGeographic();
 
 const map = new Map({
   view: new View({ center: [11, 60], zoom: 10 }),
-  layers: [new TileLayer({ source: new OSM() })],
+  layers: [
+    new TileLayer({ source: new OSM() }),
+    new VectorLayer({
+      source: new VectorSource({
+        url: "/api/kommuner",
+        format: new GeoJSON(),
+      }),
+    }),
+  ],
 });
 
 interface ProfileDto {
