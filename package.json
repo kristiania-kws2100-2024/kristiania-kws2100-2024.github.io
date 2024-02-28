@@ -4,7 +4,9 @@
     "prettier": "^3.2.5"
   },
   "scripts": {
-    "test": "prettier --check .",
+    "test": "prettier --check . && npm run test:client && npm run test:server",
+    "test:client": "cd client && npm test",
+    "test:server": "cd server && npm test",
     "dev": "concurrently npm:dev:client npm:dev:server",
     "dev:client": "cd client && npm run dev",
     "dev:server": "cd server && npm run dev"
