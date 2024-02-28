@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type SquareValue = "X" | "O" | null;
 
 interface SquareProps {
   value: SquareValue;
+
   onSquareClick(): void;
 }
 
-function Square({value, onSquareClick}: SquareProps) {
+function Square({ value, onSquareClick }: SquareProps) {
   return <button className="square" onClick={onSquareClick}>{value}</button>;
 }
 
-function Board({xIsNext, squares, onPlay}: {
+function Board({ xIsNext, squares, onPlay }: {
   xIsNext: boolean;
   squares: SquareValue[];
   onPlay(squares: SquareValue[]): void
 }) {
-  const winner = calculateWinner(squares)
+  const winner = calculateWinner(squares);
   let status;
   if (winner) {
     status = "Winner " + winner;
@@ -34,7 +35,7 @@ function Board({xIsNext, squares, onPlay}: {
     } else {
       nextSquares[i] = "O";
     }
-    onPlay(nextSquares)
+    onPlay(nextSquares);
   }
 
   return <>
@@ -58,6 +59,14 @@ function Board({xIsNext, squares, onPlay}: {
 }
 
 export default function Game() {
+  const [userLanguage, setUserLanguage] = useState(navigator.language);
+  useEffect(() => {
+    function handleLanguageChange() {
+      setUserLanguage(navigator.language)
+    }
+    addEventListener("languagechange", handleLanguageChange);
+    return () => removeEventListener("languagechange", handleLanguageChange)
+  }, []);
   const [history, setHistory] = useState([
     Array(9).fill(null)
   ]);
@@ -72,28 +81,32 @@ export default function Game() {
   function handlePlay(nextSquares: SquareValue[]) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1)
+    setCurrentMove(nextHistory.length - 1);
   }
 
   const moves = history.map((_, move) => {
     let description;
     if (move === 0) {
-      description = "Go to game start";
+      description = userLanguage === "nb" ? "Gå til starten" : "Go to start";
     } else {
       description = "Go to move # " + move;
     }
     return <li key={move}>
       <button onClick={() => jumpTo(move)}>{description}</button>
-    </li>
+    </li>;
   });
-  return <div className={"game"}>
-    <div id="game-board">
-      <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+  return <>
+    <div>{userLanguage}</div>
+    <div className={"game"}>
+
+      <div id="game-board">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div id="game-info">
+        <ol>{moves}</ol>
+      </div>
     </div>
-    <div id="game-info">
-      <ol>{moves}</ol>
-    </div>
-  </div>
+  </>;
 }
 
 
