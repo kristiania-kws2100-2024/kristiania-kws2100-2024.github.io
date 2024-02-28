@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { nb } from "./applicationTexts/nb";
 import { en } from "./applicationTexts/en";
 import { useUserLanguage } from "./useUserLanguage";
 import { ApplicationTexts } from "./applicationTexts/applicationTexts";
+
+const ApplicationTextContext = React.createContext<ApplicationTexts>(en);
 
 
 type SquareValue = "X" | "O" | null;
@@ -17,12 +19,12 @@ function Square({ value, onSquareClick }: SquareProps) {
   return <button className="square" onClick={onSquareClick}>{value}</button>;
 }
 
-function Board({ xIsNext, squares, onPlay, applicationTexts }: {
+function Board({ xIsNext, squares, onPlay }: {
   xIsNext: boolean;
   squares: SquareValue[];
   onPlay(squares: SquareValue[]): void;
-  applicationTexts: ApplicationTexts
 }) {
+  const applicationTexts = useContext(ApplicationTextContext);
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
@@ -95,18 +97,18 @@ export default function Game() {
       <button onClick={() => jumpTo(move)}>{description}</button>
     </li>;
   });
-  return <>
+  return <ApplicationTextContext.Provider value={applicationTexts}>
     <div>{userLanguage}</div>
     <div className={"game"}>
 
       <div id="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} applicationTexts={applicationTexts} />
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div id="game-info">
         <ol>{moves}</ol>
       </div>
     </div>
-  </>;
+  </ApplicationTextContext.Provider>;
 }
 
 
