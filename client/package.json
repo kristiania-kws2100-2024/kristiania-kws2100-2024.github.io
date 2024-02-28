@@ -1,9 +1,11 @@
 {
   "devDependencies": {
+    "typescript": "^5.3.3",
     "vite": "^5.1.4"
   },
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "check": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^18.2.0",
