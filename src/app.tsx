@@ -95,7 +95,7 @@ export default function Game() {
     if (move === 0) {
       description = applicationTexts.goToStart;
     } else {
-      description = "Go to move # " + move;
+      description = applicationTexts.goToMove(move);
     }
     return <li key={move}>
       <button onClick={() => jumpTo(move)}>{description}</button>
