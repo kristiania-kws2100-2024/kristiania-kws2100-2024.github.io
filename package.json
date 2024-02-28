@@ -7,7 +7,8 @@
     "test": "prettier --check . && npm run test:client && npm run test:server",
     "test:client": "cd client && npm test",
     "test:server": "cd server && npm test",
-    "dev": "concurrently npm:dev:client npm:dev:server",
+    "dev": "npm run dev:docker && concurrently npm:dev:client npm:dev:server",
+    "dev:docker": "docker compose create && docker compose start",
     "dev:client": "cd client && npm run dev",
     "dev:server": "cd server && npm run dev",
     "prepare": "husky"
