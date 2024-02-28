@@ -2,11 +2,17 @@
 
 [![Running website](https://img.shields.io/badge/Course-website-green)](https://kristiania-kws2100-2024.github.io/)
 
-Welcome to this course in Geographic Information Systems (GIS) for the web. In this course, we will use popular and powerfull open-source software to explore geographic information systems on the web. The course will use [OpenLayers](https://openlayers.org/) as a web framework for information systems and [PostGIS](https://postgis.net/) as a geographical information database. We will build web applications with the React framework and use Express to create APIs on top of PostGIS.
+Welcome to this course in Geographic Information Systems (GIS) for the web. In this course, we will use popular and
+powerful open-source software to explore geographic information systems on the web. The course will
+use [OpenLayers](https://openlayers.org/) as a web framework for information systems and [PostGIS](https://postgis.net/)
+as a geographical information database. We will build web applications with the React framework and use Express to
+create APIs on top of PostGIS.
 
 ## Understanding the course
 
-In this course, we expect you to create working web applications with geographic functionality. During the lectures, you will see live coding of how such applications may be constructed and the relevant topics will be explained along the way.
+In this course, we expect you to create working web applications with geographic functionality. During the lectures, you
+will see live coding of how such applications may be constructed and the relevant topics will be explained along the
+way.
 
 The lectures will be recorded and the recordings will be available to students in Panopto in Canvas.
 
@@ -18,7 +24,9 @@ The lectures will be recorded and the recordings will be available to students i
 [![Lecture 1 reference](https://img.shields.io/badge/Lecture_1-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/01)
 [![Lecture 1 exercise](https://img.shields.io/badge/Lecture_1-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/01)
 
-We will create a React application that will display a simple map with a background layer from [Open Street Map](https://www.openstreetmap.org/) and a [vector layer](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/).
+We will create a React application that will display a simple map with a background layer
+from [Open Street Map](https://www.openstreetmap.org/) and
+a [vector layer](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/).
 
 ### Lecture 2: Publishing maps with interaction
 
@@ -26,7 +34,8 @@ We will create a React application that will display a simple map with a backgro
 [![Lecture 2 reference](https://img.shields.io/badge/Lecture_2-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/02)
 [![Lecture 2 exercise](https://img.shields.io/badge/Lecture_2-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/02)
 
-We will publish a basic Vite application to GitHub pages and then add a map where you can click on features to get more information
+We will publish a basic Vite application to GitHub pages and then add a map where you can click on features to get more
+information
 
 ### Lecture 3: Interacting with the polygon elements
 
@@ -44,7 +53,10 @@ In this lecture, we will make sure that the user can interact with kommuner:
 [![Lecture 4 reference](https://img.shields.io/badge/Lecture_4-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/04)
 [![Lecture 4 exercise](https://img.shields.io/badge/Lecture_4-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/04)
 
-In this lecture, we will continue out exploration of vector layers. We will start with an "empty" map and add a [polygon feature layer](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/) with an aside that stays in sync with the visible object on the map. We will then add more feature layers from [international](https://github.com/datasets/geo-countries) and [Norwegian](https://kart.dsb.no/) sources.
+In this lecture, we will continue out exploration of vector layers. We will start with an "empty" map and add
+a [polygon feature layer](https://www.eriksmistad.no/norges-fylker-og-kommuner-i-geojson-format/) with an aside that
+stays in sync with the visible object on the map. We will then add more feature layers
+from [international](https://github.com/datasets/geo-countries) and [Norwegian](https://kart.dsb.no/) sources.
 
 - Starting point: Empty map
 - Add kommune layer with checkbox
@@ -55,14 +67,14 @@ In this lecture, we will continue out exploration of vector layers. We will star
 - Highlight active features in map
 - Add layers with countries and stations (points)
 
-
 ### Lecture 5: Point vector layers
 
 [![Lecture 5 code](https://img.shields.io/badge/Lecture_5-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/05)
 [![Lecture 5 reference](https://img.shields.io/badge/Lecture_5-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/05)
 [![Lecture 5 exercise](https://img.shields.io/badge/Lecture_5-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/05)
 
-We will draw points on the map from a vector source and allow the user to interact with them. We will explore styling based on feature properties.
+We will draw points on the map from a vector source and allow the user to interact with them. We will explore styling
+based on feature properties.
 
 - Style functions
 - Style text for a point
@@ -76,13 +88,23 @@ We will draw points on the map from a vector source and allow the user to intera
 
 **"Damn you, Gerhard!"**
 
-We will change the background layers in our map to display aerial photos and change the map projection to polar projection. In the process, we will learn that the earth is indeed round.
+We will change the background layers in our map to display aerial photos and change the map projection to polar
+projection. In the process, we will learn that the earth is indeed round.
 
 - Restructure the map layers to vary base layer
 - Use a few [Stadia maps](https://stadiamaps.com/)
-- Add [aerial photos of Norway](https://kartkatalog.geonorge.no/metadata/norge-i-bilder-wmts-euref89-utm33/072662f8-41c9-4e9a-a55a-343dee0c3f84) ("Norge i bilder")
-- Add [Norwegian official map](https://kartkatalog.geonorge.no/metadata/norges-grunnkart-cache/860f8b53-1dcf-4a39-87a4-71b3e9125dcb) ("Norges grunnkart"), introducting some projection strangeness
-- Add [Arctic Spacial Data Infrastructure](https://arctic-sdi.org/services/topografic-basemap/) polar map, going all in on projections
+-
+
+Add [aerial photos of Norway](https://kartkatalog.geonorge.no/metadata/norge-i-bilder-wmts-euref89-utm33/072662f8-41c9-4e9a-a55a-343dee0c3f84) ("
+Norge i bilder")
+
+-
+
+Add [Norwegian official map](https://kartkatalog.geonorge.no/metadata/norges-grunnkart-cache/860f8b53-1dcf-4a39-87a4-71b3e9125dcb) ("
+Norges grunnkart"), introducing some projection strangeness
+
+- Add [Arctic Spacial Data Infrastructure](https://arctic-sdi.org/services/topografic-basemap/) polar map, going all in
+  on projections
 
 #### Reference:
 
@@ -117,31 +139,36 @@ We will change the background layers in our map to display aerial photos and cha
 
 ### Lecture 8: Query property data
 
-Using the [Norwegian Land Register](https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16), we will develop functionality to show properties close to the users location on a map
+Using
+the [Norwegian Land Register](https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16),
+we will develop functionality to show properties close to the users location on a map
 
 In this manner, we will start exploring the PostGIS geographical database extension for Postgresql.
 
 ### Lecture 9: Importing road data
 
-Using Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metadata/elveg-20/77944f7e-3d75-4f6d-ae04-c528cc72e8f6), we will import a dataset into PostGIS to query it.
+Using
+Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metadata/elveg-20/77944f7e-3d75-4f6d-ae04-c528cc72e8f6),
+we will import a dataset into PostGIS to query it.
 
 ## Lecture 10: Vector tile layers
 
 Highlight: dark mode styling of the background map.
 
-### Lecture 11: Drawing on the map 
+### Lecture 11: Drawing on the map
 
 ### Lecture 12: Getting ready for the exam
 
 ## Reference material
-
 
 ### Manual creation to avoid lots of code
 
 This is an alternative to running `npm create vite@latest` and then removing all the code you don't need.
 
 1. `echo {} > package.json` (creates a package.json-file with only the text `{}`)
-   - ⚠️ If you are on Windows and using Powershell, this will create a totally empty file, which will not work. Use cmd OR create a `package.json` file manually OR just skip this step if you know there is no `package.json` file in a directory above your project directory
+   - ⚠️ If you are on Windows and using Powershell, this will create a totally empty file, which will not work. Use cmd
+     OR create a `package.json` file manually OR just skip this step if you know there is no `package.json` file in a
+     directory above your project directory
 2. `npm install --save-dev vite typescript prettier`
 3. `npm install react react-dom`
 4. `npm pkg set scripts.dev=vite`
@@ -153,12 +180,13 @@ This is an alternative to running `npm create vite@latest` and then removing all
    npm install react react-dom
    npm pkg set scripts.dev=vite
    ```
-   
+
    </details>
+
 5. Create `index.html`:
    ```html
    <body>
-   <div id="root"></div>
+     <div id="root"></div>
    </body>
    <script src="src/main.tsx" type="module"></script>
    ```
@@ -174,6 +202,7 @@ This is an alternative to running `npm create vite@latest` and then removing all
 ### Building with check of Typescript and formatting
 
 Set up:
+
 ```shell
 npm pkg set scripts.build="npm test && vite build"
 npm pkg set scripts.test="prettier --check . && tsc --noEmit"
@@ -189,7 +218,8 @@ npx prettier --write .
 
 ### Set up GitHub Actions to deploy to GitHub pages
 
-You can either start with a template by clicking on GitHub Actions on your repository on github.com or write you workflow from scratch
+You can either start with a template by clicking on GitHub Actions on your repository on GitHub.com or write you
+workflow from scratch
 
 #### `.github/workflows/publish.yaml`
 
@@ -205,9 +235,9 @@ jobs:
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      id-token: write   # to verify the deployment originates from an appropriate
-      pages: write      # to deploy to Pages
-      contents: read    # to checkout private repositories
+      id-token: write # to verify the deployment originates from an appropriate
+      pages: write # to deploy to Pages
+      contents: read # to checkout private repositories
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -224,16 +254,17 @@ jobs:
           path: ./dist
       - uses: actions/deploy-pages@v4
         id: deployment
-
 ```
 
-This will publish your project as `https://<your username>.github.io/<repository name>`. By default, Vite expects index.html to fetch JavaScript from the server root. In order to fetch content from `/<repository name>`, you need the following `vite.config.js`:
+This will publish your project as `https://<your username>.github.io/<repository name>`. By default, Vite expects
+index.html to fetch JavaScript from the server root. In order to fetch content from `/<repository name>`, you need the
+following `vite.config.js`:
 
 ```javascript
 // vite.config.js
 export default {
- base: "/<your repo name>"
-}
+  base: "/<your repo name>",
+};
 ```
 
 #### Install husky
@@ -243,15 +274,15 @@ export default {
 1. `npm install --save-dev husky`
 2. `npx husky init`
 
-Note: By default, Husky creates a file `.husky/pre-commit` which runs `npm test`. If you want to run another script, just change the contents of the file. If you want it to run before push instead of before commits, rename the file to `pre-push`
-
+Note: By default, Husky creates a file `.husky/pre-commit` which runs `npm test`. If you want to run another script,
+just change the contents of the file. If you want it to run before push instead of before commits, rename the file
+to `pre-push`
 
 ### Creating a OpenLayers map in React
 
 First you need to install the `ol` dependency:
 
 - `npm install ol`
-
 
 ```tsx
 import React, { MutableRefObject, useEffect, useRef } from "react";
@@ -290,6 +321,30 @@ export function Application() {
 }
 ```
 
+### Doing a code review on GitHub
+
+Code reviews on GitHub are best done with Pull Requests. This means that you generally want to create a branch that gets
+reviewed. For the assignment, this has already been done for you by creating a `feedback` branch. The `main` branch
+has a Pull Request **_into_** the `feedback` branch. **_You should not merge this pull request_**
+
+1. Give your reviewers access to your repository under Settings > Collaborators and teams
+   - Reviewers need minimum "Reader" access
+   - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
+2. The reviewer should go to the repository and select Pull requests and select the Feedback Pull request
+3. The easiest way to give a review is to go to Files changes and add comments by clicking on lines for files
+4. When you're giving a review make sure that you Finish the review or nobody else will see your comments
+5. Everyone who has access to the repository will be able to see the comments by looking at the Pull request
+
+If you made the mistake of merging the Feedback branch, it will be a bit more difficult to give a good review, but the
+following process works okay:
+
+1. (As above) Give your reviewers access to your repository under Settings > Collaborators and teams
+   - Reviewers need minimum "Reader" access
+   - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
+2. The reviewer should explore the code in the repository at GitHub.com
+3. The reviewer should click on the line number for a line they have a comment for and select "Reference in new issue"
+   - Good issues includes "I liked this because", "Won't this do the wrong thing because", and "I don't understand
+     what's going on here"
+4. When you receive issues from a reviewer, you should close the issues with a comment
+
 ### Creating a PostGIS API in Express
-
-
