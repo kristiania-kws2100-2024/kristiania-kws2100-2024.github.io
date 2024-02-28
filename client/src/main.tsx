@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 
+interface ProfileDto {
+  username: string;
+}
+
 function Application() {
-  return <h1>Hello React</h1>;
+  async function fetchProfile() {
+    const res = await fetch("/api/profile");
+    if (!res.ok) {
+      throw Error(res.statusText);
+    }
+    setProfile(await res.json());
+  }
+
+  const [profile, setProfile] = useState<ProfileDto>();
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  return <h1>Hello {profile?.username || "stranger"}</h1>;
 }
 
 const root = ReactDOM.createRoot(document.getElementById("app")!);
