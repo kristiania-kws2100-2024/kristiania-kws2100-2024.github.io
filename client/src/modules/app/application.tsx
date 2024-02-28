@@ -1,6 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 
 import "./application.css";
+import { useGeographic } from "ol/proj";
+import { Map, View } from "ol";
+import TileLayer from "ol/layer/Tile";
+import { OSM } from "ol/source";
+
+useGeographic();
+
+const map = new Map({
+  view: new View({ center: [11, 60], zoom: 10 }),
+  layers: [new TileLayer({ source: new OSM() })],
+});
 
 interface ProfileDto {
   username: string;
@@ -23,6 +34,8 @@ export function Application() {
   useEffect(() => {
     fetchProfile();
   }, []);
+  const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
+  useEffect(() => map.setTarget(mapRef.current), []);
 
   return (
     <>
@@ -35,7 +48,7 @@ export function Application() {
         {profile && <div>{profile.username}</div>}
       </nav>
       <main>
-        <div />
+        <div className={"map"} ref={mapRef} />
       </main>
     </>
   );
