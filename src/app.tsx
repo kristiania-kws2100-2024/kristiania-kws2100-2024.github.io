@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { nb } from "./applicationTexts/nb";
 import { en } from "./applicationTexts/en";
 import { useUserLanguage } from "./useUserLanguage";
+import { ApplicationTexts } from "./applicationTexts/applicationTexts";
 
 
 type SquareValue = "X" | "O" | null;
@@ -16,17 +17,18 @@ function Square({ value, onSquareClick }: SquareProps) {
   return <button className="square" onClick={onSquareClick}>{value}</button>;
 }
 
-function Board({ xIsNext, squares, onPlay }: {
+function Board({ xIsNext, squares, onPlay, applicationTexts }: {
   xIsNext: boolean;
   squares: SquareValue[];
-  onPlay(squares: SquareValue[]): void
+  onPlay(squares: SquareValue[]): void;
+  applicationTexts: ApplicationTexts
 }) {
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = "Winner " + winner;
+    status = applicationTexts.winner(winner);
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "0");
+    status = applicationTexts.nextPlayer((xIsNext ? "X" : "O"));
   }
 
   function handleClick(i: number) {
@@ -98,7 +100,7 @@ export default function Game() {
     <div className={"game"}>
 
       <div id="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} applicationTexts={applicationTexts} />
       </div>
       <div id="game-info">
         <ol>{moves}</ol>
