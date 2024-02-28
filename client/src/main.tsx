@@ -23,4 +23,4 @@ function Application() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById("app")!);
-root.render(<Application />)
+root.render(<Application />);
