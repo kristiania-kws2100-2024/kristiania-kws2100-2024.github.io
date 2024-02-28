@@ -1,5 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import App from "./app";
+
+import "./styles.css";
 
 const root = ReactDOM.createRoot(document.getElementById("app"))
-root.render(<h2>Hello class</h2>)
+
+root.render(<App />)
