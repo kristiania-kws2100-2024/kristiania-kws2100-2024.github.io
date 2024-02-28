@@ -1,0 +1,18 @@
+* {
+  margin: unset;
+}
+
+nav {
+  display: flex;
+}
+
+header,
+nav {
+  padding: 0.25em;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  height: 100dvh;
+}

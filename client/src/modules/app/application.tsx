@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 
+import "./application.css";
+
 interface ProfileDto {
   username: string;
+}
+
+function ZoomToMeLink() {
+  return <a href={"#"}>Zoom to me</a>;
 }
 
 export function Application() {
@@ -18,5 +24,19 @@ export function Application() {
     fetchProfile();
   }, []);
 
-  return <h1>Hello {profile?.username || "stranger"}</h1>;
+  return (
+    <>
+      <header>
+        <h1>My map application</h1>
+      </header>
+      <nav>
+        <ZoomToMeLink />
+        <div style={{ flex: 1 }}></div>
+        {profile && <div>{profile.username}</div>}
+      </nav>
+      <main>
+        <div />
+      </main>
+    </>
+  );
 }
