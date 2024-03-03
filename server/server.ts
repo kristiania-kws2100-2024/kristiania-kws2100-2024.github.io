@@ -23,23 +23,19 @@ app.get("/api/profile", (req, res) => {
 app.get("/api/kommuner", async (req, res) => {
   const result = await postgresql.query(
     `
-        select json_build_object(
-                       'type', 'FeatureCollection',
-                       'features', json_agg(
-                               json_build_object(
-                                       'type', 'Feature',
-                                       'geometry', st_asgeojson(st_simplify(omrade, 0.0001))::json,
-                                       'properties', json_build_object(
-                                               'id', kommunenummer,
-                                               'navn', kommunenavn
-                                                     )
-                               )
-                                   )
-               )
+        select json_agg(json_build_object(
+                'type', 'Feature',
+                'geometry', st_asgeojson(st_simplify(omrade, 0.0001))::json,
+                'properties', json_build_object(
+                        'id', kommunenummer,
+                        'navn', kommunenavn
+                              )
+                        )
+               ) as features
         from kommune
     `,
   );
-  res.json(result.rows[0].json_build_object);
+  res.json({ type: "FeatureCollection", features: result.rows[0].features });
 });
 app.get("/api/eiendommer", async (req, res) => {
   const { bbox } = req.query;
@@ -49,25 +45,17 @@ app.get("/api/eiendommer", async (req, res) => {
   const bounds = JSON.parse(bbox.toString());
   const result = await postgresql.query(
     `
-        select json_build_object(
-                       'type', 'FeatureCollection',
-                       'features', json_agg(
-                               json_build_object(
-                                       'type', 'Feature',
-                                       'geometry', st_asgeojson(representasjonspunkt)::json,
-                                       'properties', json_build_object('id', adresseid, 'navn', adressetekst)
-                               )
-                                   )
-               )
+        select json_agg(json_build_object(
+                'type', 'Feature',
+                'geometry', st_asgeojson(representasjonspunkt)::json,
+                'properties', json_build_object('id', adresseid, 'navn', adressetekst)
+                        )) as features
         from vegadresse
-        where st_contains(st_makeenvelope(
-                                  $1, $2, $3, $4,
-                                  4326
-                          ), representasjonspunkt);
+        where st_contains(st_makeenvelope($1, $2, $3, $4, 4326), representasjonspunkt);
     `,
     bounds,
   );
-  res.json(result.rows[0].json_build_object);
+  res.json({ type: "FeatureCollection", features: result.rows[0].features });
 });
 
 app.listen(3000);
