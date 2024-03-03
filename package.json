@@ -11,6 +11,14 @@
     "dev:docker": "docker compose create && docker compose start",
     "dev:client": "cd client && npm run dev",
     "dev:server": "cd server && npm run dev",
+    "postgis:create:norway": "echo create database norway_data | docker exec -i postgis /usr/bin/psql --user postgres postgres",
+    "postgis:create:norway:postgis": "echo create extension postgis | docker exec -i postgis /usr/bin/psql --user postgres norway_data",
+    "postgis:load:kommuner": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql",
+    "postgis:load:grunnkretser": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0000_Norge_25833_Grunnkretser_PostGIS.sql",
+    "postgis:load:eiendom:oslo": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0301_Oslo_25832_MatrikkelenAdresse_PostGIS.sql",
+    "postgis:load": "npm run postgis:load:kommuner && npm run postgis:load:grunnkretser && npm run postgis:load:eiendom:oslo",
+    "postgis:import": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < database/import-norway-data.sql",
+    "postgis:create": "npm run postgis:create:norway && npm run postgis:create:norway:postgis && npm run postgis:load && npm run postgis:import",
     "prepare": "husky"
   }
 }
