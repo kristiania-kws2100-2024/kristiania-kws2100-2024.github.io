@@ -42,6 +42,11 @@ app.get("/api/kommuner", async (req, res) => {
   res.json(result.rows[0].json_build_object);
 });
 app.get("/api/eiendommer", async (req, res) => {
+  const { bbox } = req.query;
+  if (!bbox) {
+    return res.sendStatus(400);
+  }
+  const bounds = JSON.parse(bbox.toString());
   const result = await postgresql.query(
     `
         select json_build_object(
@@ -50,19 +55,17 @@ app.get("/api/eiendommer", async (req, res) => {
                                json_build_object(
                                        'type', 'Feature',
                                        'geometry', st_asgeojson(representasjonspunkt)::json,
-                                       'properties', json_build_object(
-                                               'id', adresseid,
-                                               'navn', adressetekst
-                                                     )
+                                       'properties', json_build_object('id', adresseid, 'navn', adressetekst)
                                )
                                    )
                )
         from vegadresse
         where st_contains(st_makeenvelope(
-                                  10.778520961202608, 59.89164954785713, 10.801266093648895, 59.89752614937723,
+                                  $1, $2, $3, $4,
                                   4326
                           ), representasjonspunkt);
     `,
+    bounds,
   );
   res.json(result.rows[0].json_build_object);
 });
