@@ -44,7 +44,7 @@ function ZoomToMeLink() {
     e.preventDefault();
     navigator.geolocation.getCurrentPosition((res) => {
       const { latitude, longitude } = res.coords;
-      map.getView().animate({ center: [longitude, latitude], zoom: 15 });
+      map.getView().animate({ center: [longitude, latitude], zoom: 17 });
     });
   }
   return (
