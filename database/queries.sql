@@ -1,6 +1,5 @@
 select
     st_asgeojson(representasjonspunkt),
-    st_asgeojson(st_transform(representasjonspunkt, 4326)),
     *
 from vegadresse
 where adressenavn = 'Kongens gate' and nummer = 22;
@@ -20,27 +19,27 @@ where
     b.adressenavn = 'Urtegata' and b.nummer = 9;
 
 
-select st_distance(a.representasjonspunkt, b.representasjonspunkt) avstand, *
+select st_distance(a.representasjonspunkt, b.representasjonspunkt, true) avstand, *
 from vegadresse a, vegadresse b
 where
     b.adressenavn = 'Urtegata' and b.nummer = 9
   and
-    st_distance(a.representasjonspunkt, b.representasjonspunkt) < 100
+    st_dwithin(a.representasjonspunkt, b.representasjonspunkt, 100.0, true)
 order by avstand;
 
 select
     a.adressetekst,
-    k.kommunenavn,
+    g.grunnkretsnavn,
     a.representasjonspunkt,
-    k.omrade,
-    st_asgeojson(st_transform(a.representasjonspunkt, 4326)),
-    st_asgeojson(st_transform(k.omrade, 4326))
-from vegadresse a, vegadresse b, kommune k
+    g.omrade,
+    st_asgeojson(a.representasjonspunkt),
+    st_asgeojson(g.omrade)
+from vegadresse a, vegadresse b, grunnkrets g
 where
-    b.adressenavn = 'Urtegata' and b.nummer = 9
+    a.adressenavn = 'Kongens gate' and a.nummer = 22
   and
-    st_distance(a.representasjonspunkt, b.representasjonspunkt) < 100
-  and  st_contains(st_transform(k.omrade, 4326), st_transform(a.representasjonspunkt, 4326))
+    st_dwithin(a.representasjonspunkt, b.representasjonspunkt, 100.0, true)
+  and  st_contains(g.omrade, a.representasjonspunkt)
 ;
 
 
