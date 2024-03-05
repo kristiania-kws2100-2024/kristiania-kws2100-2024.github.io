@@ -1,0 +1,7 @@
+version: "3"
+services:
+  postgis:
+    container_name: postgis
+    image: postgis/postgis
+    ports:
+      - "5432:5432"
