@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "vite",
+    "dev:server": "cd server && npm run dev",
     "dev:docker": "docker compose create && docker compose start",
     "database": "npm run database:create && npm run database:load && npm run database:import",
     "database:create": "npm run database:create:database && npm run database:create:extension",
