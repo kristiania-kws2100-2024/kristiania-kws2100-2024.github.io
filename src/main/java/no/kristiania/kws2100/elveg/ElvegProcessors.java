@@ -38,7 +38,7 @@ public class ElvegProcessors {
 
     static class VeglenkeProcessor extends AbstractElvegProcessor {
         public VeglenkeProcessor(Connection connection) throws SQLException {
-            super(connection.prepareStatement("insert into veglenke (kommunenummer, id, type_veg) values (?, ?, ?)"));
+            super(connection.prepareStatement("insert into veglenke (kommunenummer, id, type_veg, senterlinje) values (?, ?, ?, st_geomfromewkt(?))"));
         }
 
         @Override
@@ -51,6 +51,7 @@ public class ElvegProcessors {
             statement.setString(1, veglenke.getKommunenummer());
             statement.setString(2, veglenke.getId());
             statement.setString(3, veglenke.getTypeVeg());
+            statement.setString(4, veglenke.getSenterlinje().toEwkt());
             addBatch();
         }
 
@@ -69,7 +70,7 @@ public class ElvegProcessors {
 
     public static class FartsgrenseProcessor extends AbstractElvegProcessor {
         FartsgrenseProcessor(Connection connection) throws SQLException {
-            super(connection.prepareStatement("insert into fartsgrense (id, verdi) values (?, ?)"));
+            super(connection.prepareStatement("insert into fartsgrense (id, verdi, senterlinje) values (?, ?, st_geomfromewkt(?))"));
         }
 
         @Override
@@ -81,13 +82,14 @@ public class ElvegProcessors {
         private void writeElvegElement(Elveg.Fartsgrense fartsgrense) throws SQLException {
             statement.setString(1, fartsgrense.getId());
             statement.setString(2, fartsgrense.getFartsgrenseVerdi());
+            statement.setString(3, fartsgrense.getSenterlinje().toEwkt());
             addBatch();
         }
 
         private Elveg.Fartsgrense readElvegElement(Element element) {
             return new Elveg.Fartsgrense()
                     .setId(element.attr(Gml.NS.name("id")))
-                    .setFartsgrenseVerdi(textOrNull(element.find("fartgrenseVerdi")))
+                    .setFartsgrenseVerdi(textOrNull(element.find("fartsgrenseVerdi")))
                     .setSenterlinje(Gml.GmlLineString.fromXml(element.find("senterlinje", "*").single()));
         }
     }
