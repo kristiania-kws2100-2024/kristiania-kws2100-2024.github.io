@@ -48,6 +48,7 @@ where a.adressenavn = 'Kongens gate'
 
 ```sql
 select b.adressetekst,
+       st_distance(b.representasjonspunkt, b.representasjonspunkt, true) avstand,
        g.grunnkretsnavn,
        a.representasjonspunkt,
        g.omrade,
