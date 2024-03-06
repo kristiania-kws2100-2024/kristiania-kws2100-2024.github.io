@@ -23,11 +23,13 @@ app.get("/api/kommuner", async (req, res) => {
 });
 
 app.get("/api/adresser", async (req, res) => {
+  const extent = JSON.parse(req.query.extent!.toString());
   const result = await postgresql.query(
     `select adresseid, adressetekst, st_transform(representasjonspunkt, 4326)::json as geometry
     from adresser
-    where adressenavn = 'Prinsens gate'
+    where st_contains(st_makeenvelope($1, $2, $3, $4, 4326), st_transform(representasjonspunkt, 4326))
     limit 3000`,
+    extent,
   );
   res.json({
     type: "FeatureCollection",

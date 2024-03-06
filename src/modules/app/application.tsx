@@ -27,7 +27,8 @@ const map = new Map({
     }),
     new VectorLayer({
       source: new VectorSource({
-        url: "/api/adresser",
+        strategy: (extent, resolution) => (resolution < 0.0001 ? [extent] : []),
+        url: (extent) => `/api/adresser?extent=${JSON.stringify(extent)}`,
         format: new GeoJSON(),
       }),
     }),
