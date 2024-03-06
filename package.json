@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "database:load:kommuner": "docker exec -i /postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql"
+  }
+}
