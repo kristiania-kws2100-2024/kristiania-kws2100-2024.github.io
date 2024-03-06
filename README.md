@@ -28,9 +28,11 @@ Instead of serving geographical data from a static file, we want to serve it fro
 3. Import kommuner into PostGIS
    - Hint: "docker exec -i postgis /usr/bin/psql --user postgres norway_data < **path to .sql-file**"
 4. Download [addresses](https://kartkatalog.geonorge.no/metadata/matrikkelen-adresse/f7df7a18-b30f-4745-bd64-d0863812350c)
-   from Geonorge and import into PostGIS - Hint: "docker exec -i postgis /usr/bin/psql --user postgres norway_data < **path to .sql-file**"
+   from Geonorge and import into PostGIS - Hint: "docker exec -i postgis /usr/bin/psql --user postgres norway_data < **path
+   to .sql-file**"
 5. Download [grunnkrets](https://kartkatalog.geonorge.no/metadata/matrikkelen-adresse/f7df7a18-b30f-4745-bd64-d0863812350c)
-   from Geonorge and import into PostGIS - Hint: "docker exec -i postgis /usr/bin/psql --user postgres norway_data < **path to .sql-file**"
+   from Geonorge and import into PostGIS - Hint: "docker exec -i postgis /usr/bin/psql --user postgres norway_data < **path
+   to .sql-file**"
 6. Connect to the database using IntelliJ and copy data from imports
    - `create table public.kommune as select kommunenummer, ... from schema.kommune`
    - Hint: If you use `st_transform` to convert the reference system to the data, you will be able to join later
@@ -47,12 +49,7 @@ Instead of serving geographical data from a static file, we want to serve it fro
 - Join the addresses from the previous step with the grunnkrets where they reside
   - Hint: Use the [`ST_Contains`](https://postgis.net/docs/ST_Contains.html)-function
 
-## Part 3: Expose kommune-data with Express
-
-Hint: Use [`st_asgeojson()::json`](https://postgis.net/docs/ST_AsGeoJSON.html) to export data. Adjust the amount of data
-exported with [`st_simplify()`](https://postgis.net/docs/ST_Simplify.html)
-
-## Part 4: Consume data with OpenLayers
+## Part 3: Consume APIs with a Vite project
 
 Set up `vite.config.js` to use express as backend:
 
@@ -68,8 +65,10 @@ export default defineConfig({
 });
 ```
 
-# Part 5: Expose properties with OpenLayers
+## Part 4: Expose kommune-data with Express
 
-Hint: The VectorSource must have a loading strategy that makes it load only on high resolutions, and a loading
-function that sends the bounding box to the API. The API must
-use `st_contains(st_makeenvelope($1, $2, $3, $4, 4326), representasjonspunkt)`
+Hint: See course notes for how to expose an API from PostGIS with Express.
+
+Use VectorSource `strategy` and `url` as a function to only fetch data in view.
+Use [`ST_Contains`](https://postgis.net/docs/ST_Contains.html) and
+[`ST_MakeEnvelope`](https://postgis.net/docs/ST_MakeEnvelope.html) to filter the data in the API
