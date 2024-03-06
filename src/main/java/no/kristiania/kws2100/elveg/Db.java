@@ -87,5 +87,13 @@ public class Db {
             result.addAll(columns.values());
             return result;
         }
+
+        public <U> ColumnMapper<T> columns(String prefix, Function<T, U> getter, ColumnMapper<U> columnMapper) {
+            for (var column : columnMapper.columns.entrySet()) {
+                columns.put(prefix + column.getKey(), o -> column.getValue().apply(getter.apply(o)));
+                columnExpressions.put(prefix + column.getKey(), columnMapper.columnExpressions.get(column.getKey()));
+            }
+            return this;
+        }
     }
 }

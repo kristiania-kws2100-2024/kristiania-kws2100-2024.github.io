@@ -33,6 +33,14 @@ public class ElvegProcessors {
             statement.executeBatch();
             statement.close();
         }
+
+        protected Elveg.LineærPosisjonStrekning readLineærPosisjon(Element element) {
+            return new Elveg.LineærPosisjonStrekning()
+                    .setLenkeSekvens(textOrNull(element.find("lenkesekvens", "Identifikasjon", "lokalId")))
+                    .setRetning(element.find("retning").single().text())
+                    .setFraPosisjon(Double.parseDouble(element.find("fraPosisjon").single().text()))
+                    .setTilPosisjon(Double.parseDouble(element.find("tilPosisjon").single().text()));
+        }
     }
 
 
@@ -48,6 +56,14 @@ public class ElvegProcessors {
         public final void process(Element element) throws SQLException {
             tableMapper.setParameters(statement, readElvegElement(element));
             addBatch();
+        }
+
+        protected static Db.ColumnMapper<Elveg.LineærPosisjonStrekning> getLineærPosisjonStrekningColumnMapper() {
+            return Db.columnMapper(Elveg.LineærPosisjonStrekning.class)
+                    .column("lenkesekvens", Elveg.LineærPosisjonStrekning::getLenkeSekvens)
+                    .column("fra", Elveg.LineærPosisjonStrekning::getFraPosisjon)
+                    .column("til", Elveg.LineærPosisjonStrekning::getTilPosisjon)
+                    .column("retning", Elveg.LineærPosisjonStrekning::getRetning);
         }
 
         protected abstract T readElvegElement(Element element);
@@ -95,83 +111,44 @@ public class ElvegProcessors {
     public static class FartsgrenseProcessor extends AbstractElvegMapperProcessor<Elveg.Fartsgrense> {
         FartsgrenseProcessor(Connection connection, String kommunenummer) throws SQLException {
             super(connection, Db.tableMapper("fartsgrense", Db.columnMapper(Elveg.Fartsgrense.class)
-                            .primaryKey("kommunenummer", _ -> kommunenummer)
-                            .primaryKey("id", Elveg.Fartsgrense::getId)
-                            .column("lokal_id", Elveg.Fartsgrense::getLokalId)
-                            .column("verdi", Elveg.Fartsgrense::getFartsgrenseVerdi)
-                            .column("senterlinje", "ST_GeomFromEwkt(?)", l -> l.getSenterlinje().toEwkt())
+                    .primaryKey("kommunenummer", _ -> kommunenummer)
+                    .primaryKey("id", Elveg.Fartsgrense::getId)
+                    .column("lokal_id", Elveg.Fartsgrense::getLokalId)
+                    .column("verdi", Elveg.Fartsgrense::getFartsgrenseVerdi)
+                    .column("senterlinje", "ST_GeomFromEwkt(?)", l -> l.getSenterlinje().toEwkt())
+                    .columns("pos_", Elveg.Fartsgrense::getLineærPosisjon, getLineærPosisjonStrekningColumnMapper())
             ));
-            /*
-                    .columns("pos_", mapper(Elveg.LineærPosisjonStrekning.class)
-                            .column("id", Elveg.LineærPosisjonStrekning::getId)
-                            .column("fra", Elveg.LineærPosisjonStrekning::getFra)
-                            .column("til", Elveg.LineærPosisjonStrekning::getTil)
-                            .column("retning", Elveg.LineærPosisjonStrekning::getRetning)
-                    ));
-
-             */
         }
 
         protected Elveg.Fartsgrense readElvegElement(Element element) {
-            /*
-
-                        <lineærPosisjon>
-                <LineærPosisjonStrekning>
-                    <lineærReferanseMetode>normalisert</lineærReferanseMetode>
-                    <retning>med</retning>
-                    <lenkesekvens>
-                        <Identifikasjon>
-                            <lokalId>930272</lokalId>
-                            <navnerom>vegvesen.no.nvdb.rls</navnerom>
-                        </Identifikasjon>
-                    </lenkesekvens>
-                    <fraPosisjon>0.0</fraPosisjon>
-                    <tilPosisjon>1.0</tilPosisjon>
-                </LineærPosisjonStrekning>
-            </lineærPosisjon>
-
-             */
             return new Elveg.Fartsgrense()
                     .setId(element.attr(Gml.NS.name("id")))
                     .setLokalId(textOrNull(element.find("identifikasjon", "Identifikasjon", "lokalId")))
                     .setFartsgrenseVerdi(textOrNull(element.find("fartsgrenseVerdi")))
+                    .setLineærPosisjon(readLineærPosisjon(element.find("lineærPosisjon", "LineærPosisjonStrekning").single()))
                     .setSenterlinje(Gml.GmlLineString.fromXml(element.find("senterlinje", "*").single()));
         }
+
     }
 
     public static class FunksjonellVegklasseProcessor extends AbstractElvegMapperProcessor<Elveg.FunksjonellVegklasse> {
         public FunksjonellVegklasseProcessor(Connection connection, String kommunenummer) throws SQLException {
             super(connection, Db.tableMapper("funksjonell_vegklasse", Db.columnMapper(Elveg.FunksjonellVegklasse.class)
                     .primaryKey("kommunenummer", _ -> kommunenummer)
-                    .primaryKey("id", Elveg.FunksjonellVegklasse::getId)
-                    .column("lokal_id", Elveg.FunksjonellVegklasse::getLokalId)
-                    .column("vegklasse", Elveg.FunksjonellVegklasse::getVegklasse)
+                    .primaryKey("id", l -> l.getId())
+                    .column("lokal_id", l -> l.getLokalId())
+                    .column("vegklasse", l -> l.getVegklasse())
                     .column("senterlinje", "ST_GeomFromEWKT(?)", l -> l.getSenterlinje().toEwkt())
+                    .columns("pos_", l -> l.getLineærPosisjon(), getLineærPosisjonStrekningColumnMapper())
             ));
         }
 
         protected Elveg.FunksjonellVegklasse readElvegElement(Element element) {
-            /*
-
-                        <lineærPosisjon>
-                <LineærPosisjonStrekning>
-                    <lineærReferanseMetode>normalisert</lineærReferanseMetode>
-                    <retning>med</retning>
-                    <lenkesekvens>
-                        <Identifikasjon>
-                            <lokalId>930690</lokalId>
-                            <navnerom>vegvesen.no.nvdb.rls</navnerom>
-                        </Identifikasjon>
-                    </lenkesekvens>
-                    <fraPosisjon>0.0</fraPosisjon>
-                    <tilPosisjon>0.15632936</tilPosisjon>
-                </LineærPosisjonStrekning>
-            </lineærPosisjon>
-*/
             return new Elveg.FunksjonellVegklasse()
                     .setId(element.attr(Gml.NS.name("id")))
                     .setLokalId(textOrNull(element.find("identifikasjon", "Identifikasjon", "lokalId")))
                     .setVegklasse(Integer.parseInt(element.find("vegklasse").single().text()))
+                    .setLineærPosisjon(readLineærPosisjon(element.find("lineærPosisjon", "LineærPosisjonStrekning").single()))
                     .setSenterlinje(Gml.GmlLineString.fromXml(element.find("senterlinje", "*").single()));
         }
     }

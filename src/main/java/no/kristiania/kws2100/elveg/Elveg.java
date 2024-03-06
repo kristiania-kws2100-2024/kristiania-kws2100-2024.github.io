@@ -16,6 +16,7 @@ public class Elveg {
     @Data
     public static class Fartsgrense {
         private String id, lokalId, fartsgrenseVerdi;
+        private LineærPosisjonStrekning lineærPosisjon;
         private Gml.GmlLineString senterlinje;
     }
 
@@ -23,6 +24,14 @@ public class Elveg {
     public static class FunksjonellVegklasse {
         private String id, lokalId;
         private int vegklasse;
+        private LineærPosisjonStrekning lineærPosisjon;
         private Gml.GmlLineString senterlinje;
+    }
+
+    @Data
+    public static class LineærPosisjonStrekning {
+        private String retning;
+        private String lenkeSekvens;
+        private double fraPosisjon, tilPosisjon;
     }
 }
