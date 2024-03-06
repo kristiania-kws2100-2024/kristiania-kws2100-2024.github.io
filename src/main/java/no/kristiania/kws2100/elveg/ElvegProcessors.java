@@ -36,27 +36,50 @@ public class ElvegProcessors {
     }
 
 
-    static class VeglenkeProcessor extends AbstractElvegProcessor {
-        public VeglenkeProcessor(Connection connection) throws SQLException {
-            super(connection.prepareStatement("insert into veglenke (kommunenummer, id, lokal_id, type_veg, senterlinje) values (?, ?, ?, ?, st_geomfromewkt(?))"));
+    private static abstract class AbstractElvegMapperProcessor<T> extends AbstractElvegProcessor {
+        private final Db.TableMapper<T> tableMapper;
+
+        public AbstractElvegMapperProcessor(Connection connection, Db.TableMapper<T> tableMapper) throws SQLException {
+            super(tableMapper.prepareStatement(connection));
+            this.tableMapper = tableMapper;
         }
 
         @Override
-        public void process(Element element) throws SQLException {
-            var veglenke = readElvegElement(element);
-            writeElvegElement(veglenke);
-        }
-
-        private void writeElvegElement(Elveg.Veglenke veglenke) throws SQLException {
-            statement.setString(1, veglenke.getKommunenummer());
-            statement.setString(2, veglenke.getId());
-            statement.setString(3, veglenke.getLokalId());
-            statement.setString(4, veglenke.getTypeVeg());
-            statement.setString(5, veglenke.getSenterlinje().toEwkt());
+        public final void process(Element element) throws SQLException {
+            tableMapper.setParameters(statement, readElvegElement(element));
             addBatch();
         }
 
-        private Elveg.Veglenke readElvegElement(Element element) {
+        protected abstract T readElvegElement(Element element);
+    }
+
+    static class VeglenkeProcessor extends AbstractElvegMapperProcessor<Elveg.Veglenke> {
+        public VeglenkeProcessor(Connection connection) throws SQLException {
+            super(connection, Db.tableMapper("veglenke", Db.columnMapper(Elveg.Veglenke.class)
+                    .primaryKey("kommunenummer", Elveg.Veglenke::getKommunenummer)
+                    .primaryKey("id", Elveg.Veglenke::getId)
+                    .column("lokal_id", Elveg.Veglenke::getLokalId)
+                    .column("type_veg", Elveg.Veglenke::getTypeVeg)
+                    .column("senterlinje", "ST_GeomFromEWKT(?)", l -> l.getSenterlinje().toEwkt())
+            ));
+        }
+
+        protected Elveg.Veglenke readElvegElement(Element element) {
+            /*
+                        <lenkesekvens>
+                <Lenkesekvensreferanse>
+                    <identifikasjon>
+                        <Identifikasjon>
+                            <lokalId>922888</lokalId>
+                            <navnerom>vegvesen.no.nvdb.rls</navnerom>
+                        </Identifikasjon>
+                    </identifikasjon>
+                    <startposisjon>0.0</startposisjon>
+                    <sluttposisjon>0.33000017</sluttposisjon>
+                </Lenkesekvensreferanse>
+            </lenkesekvens>
+
+             */
             return new Elveg.Veglenke()
                     .setKommunenummer(textOrNull(element.find("kommunenummer")))
                     .setId(element.attr(Gml.NS.name("id")))
@@ -69,30 +92,45 @@ public class ElvegProcessors {
         }
     }
 
-    public static class FartsgrenseProcessor extends AbstractElvegProcessor {
-        private final String kommunenummer;
-
+    public static class FartsgrenseProcessor extends AbstractElvegMapperProcessor<Elveg.Fartsgrense> {
         FartsgrenseProcessor(Connection connection, String kommunenummer) throws SQLException {
-            super(connection.prepareStatement("insert into fartsgrense (kommunenummer, id, lokal_id, verdi, senterlinje) values (?, ?, ?, ?, st_geomfromewkt(?))"));
-            this.kommunenummer = kommunenummer;
+            super(connection, Db.tableMapper("fartsgrense", Db.columnMapper(Elveg.Fartsgrense.class)
+                            .primaryKey("kommunenummer", _ -> kommunenummer)
+                            .primaryKey("id", Elveg.Fartsgrense::getId)
+                            .column("lokal_id", Elveg.Fartsgrense::getLokalId)
+                            .column("verdi", Elveg.Fartsgrense::getFartsgrenseVerdi)
+                            .column("senterlinje", "ST_GeomFromEwkt(?)", l -> l.getSenterlinje().toEwkt())
+            ));
+            /*
+                    .columns("pos_", mapper(Elveg.LineærPosisjonStrekning.class)
+                            .column("id", Elveg.LineærPosisjonStrekning::getId)
+                            .column("fra", Elveg.LineærPosisjonStrekning::getFra)
+                            .column("til", Elveg.LineærPosisjonStrekning::getTil)
+                            .column("retning", Elveg.LineærPosisjonStrekning::getRetning)
+                    ));
+
+             */
         }
 
-        @Override
-        public void process(Element element) throws SQLException {
-            var fartsgrense = readElvegElement(element);
-            writeElvegElement(fartsgrense);
-        }
+        protected Elveg.Fartsgrense readElvegElement(Element element) {
+            /*
 
-        private void writeElvegElement(Elveg.Fartsgrense fartsgrense) throws SQLException {
-            statement.setString(1, kommunenummer);
-            statement.setString(2, fartsgrense.getId());
-            statement.setString(3, fartsgrense.getLokalId());
-            statement.setString(4, fartsgrense.getFartsgrenseVerdi());
-            statement.setString(5, fartsgrense.getSenterlinje().toEwkt());
-            addBatch();
-        }
+                        <lineærPosisjon>
+                <LineærPosisjonStrekning>
+                    <lineærReferanseMetode>normalisert</lineærReferanseMetode>
+                    <retning>med</retning>
+                    <lenkesekvens>
+                        <Identifikasjon>
+                            <lokalId>930272</lokalId>
+                            <navnerom>vegvesen.no.nvdb.rls</navnerom>
+                        </Identifikasjon>
+                    </lenkesekvens>
+                    <fraPosisjon>0.0</fraPosisjon>
+                    <tilPosisjon>1.0</tilPosisjon>
+                </LineærPosisjonStrekning>
+            </lineærPosisjon>
 
-        private Elveg.Fartsgrense readElvegElement(Element element) {
+             */
             return new Elveg.Fartsgrense()
                     .setId(element.attr(Gml.NS.name("id")))
                     .setLokalId(textOrNull(element.find("identifikasjon", "Identifikasjon", "lokalId")))
@@ -101,30 +139,35 @@ public class ElvegProcessors {
         }
     }
 
-    public static class FunksjonellVegklasseProcessor extends AbstractElvegProcessor {
-        private final String kommunenummer;
-
+    public static class FunksjonellVegklasseProcessor extends AbstractElvegMapperProcessor<Elveg.FunksjonellVegklasse> {
         public FunksjonellVegklasseProcessor(Connection connection, String kommunenummer) throws SQLException {
-            super(connection.prepareStatement("insert into funksjonell_vegklasse (kommunenummer, id, lokal_id, vegklasse, senterlinje) values (?, ?, ?, ?, st_geomfromewkt(?))"));
-            this.kommunenummer = kommunenummer;
+            super(connection, Db.tableMapper("funksjonell_vegklasse", Db.columnMapper(Elveg.FunksjonellVegklasse.class)
+                    .primaryKey("kommunenummer", _ -> kommunenummer)
+                    .primaryKey("id", Elveg.FunksjonellVegklasse::getId)
+                    .column("lokal_id", Elveg.FunksjonellVegklasse::getLokalId)
+                    .column("vegklasse", Elveg.FunksjonellVegklasse::getVegklasse)
+                    .column("senterlinje", "ST_GeomFromEWKT(?)", l -> l.getSenterlinje().toEwkt())
+            ));
         }
 
-        @Override
-        public void process(Element element) throws SQLException {
-            var vegklasse = readElvegElement(element);
-            writeElvegElement(vegklasse);
-        }
+        protected Elveg.FunksjonellVegklasse readElvegElement(Element element) {
+            /*
 
-        private void writeElvegElement(Elveg.FunksjonellVegklasse fartsgrense) throws SQLException {
-            statement.setString(1, kommunenummer);
-            statement.setString(2, fartsgrense.getId());
-            statement.setString(3, fartsgrense.getLokalId());
-            statement.setInt(4, fartsgrense.getVegklasse());
-            statement.setString(5, fartsgrense.getSenterlinje().toEwkt());
-            addBatch();
-        }
-
-        private Elveg.FunksjonellVegklasse readElvegElement(Element element) {
+                        <lineærPosisjon>
+                <LineærPosisjonStrekning>
+                    <lineærReferanseMetode>normalisert</lineærReferanseMetode>
+                    <retning>med</retning>
+                    <lenkesekvens>
+                        <Identifikasjon>
+                            <lokalId>930690</lokalId>
+                            <navnerom>vegvesen.no.nvdb.rls</navnerom>
+                        </Identifikasjon>
+                    </lenkesekvens>
+                    <fraPosisjon>0.0</fraPosisjon>
+                    <tilPosisjon>0.15632936</tilPosisjon>
+                </LineærPosisjonStrekning>
+            </lineærPosisjon>
+*/
             return new Elveg.FunksjonellVegklasse()
                     .setId(element.attr(Gml.NS.name("id")))
                     .setLokalId(textOrNull(element.find("identifikasjon", "Identifikasjon", "lokalId")))
