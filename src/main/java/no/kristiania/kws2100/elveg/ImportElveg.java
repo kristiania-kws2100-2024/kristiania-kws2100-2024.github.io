@@ -16,17 +16,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 import java.util.zip.ZipFile;
 
 public class ImportElveg implements AutoCloseable {
 
     private final Map<QualifiedName, ElementProcessor> elementProcessors = new HashMap<>();
+    private final Map<String, Integer> elementCount = new TreeMap<>();
 
-    public ImportElveg(DataSource dataSource) throws SQLException {
+    public ImportElveg(DataSource dataSource, String kommunenummer) throws SQLException {
         var connection = dataSource.getConnection();
         elementProcessors.put(Elveg.NS.name("Fartsgrense"), element -> {});
         elementProcessors.put(Elveg.NS.name("Beredskapsveg"), element -> {});
-        elementProcessors.put(Elveg.NS.name("Fartsgrense"), new ElvegProcessors.FartsgrenseProcessor(connection));
+        elementProcessors.put(Elveg.NS.name("Fartsgrense"), new ElvegProcessors.FartsgrenseProcessor(connection, kommunenummer));
         elementProcessors.put(Elveg.NS.name("FartsgrenseVariabel"), element -> {});
         elementProcessors.put(Elveg.NS.name("FunksjonellVegklasse"), element -> {});
         elementProcessors.put(Elveg.NS.name("Gågatereguleringer"), element -> {});
@@ -44,10 +46,11 @@ public class ImportElveg implements AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws SQLException {
         for (var value : elementProcessors.values()) {
             value.close();
         }
+        System.out.println("element counts " + elementCount);
     }
 
     public static void main(String[] args) throws SQLException, IOException {
@@ -69,8 +72,10 @@ public class ImportElveg implements AutoCloseable {
                 if (zipEntry.getSize() < 10_000_000) {
                     System.out.println("Processing " + zipEntry);
                     try (var inputStream = zipFile.getInputStream(zipEntry)) {
-                        var importElveg = new ImportElveg(dataSource);
-                        importElveg.processElvegFile(inputStream);
+                        var kommunenummer = zipEntry.toString().substring(0, 4);
+                        try (var importElveg = new ImportElveg(dataSource, kommunenummer)) {
+                            importElveg.processElvegFile(inputStream);
+                        }
                     }
                 } else {
                     System.out.println("Skipping " + zipEntry);
@@ -82,7 +87,9 @@ public class ImportElveg implements AutoCloseable {
     private void processElvegFile(InputStream inputStream) throws SQLException {
         var filter = Xml.filter("member", "*");
         for (var element : filter.iterate(new InputStreamReader(inputStream))) {
-            this.elementProcessors.computeIfAbsent(element.getName(), name -> {
+            var tagName = element.getName();
+            elementCount.put(tagName.getName(), elementCount.getOrDefault(tagName.getName(), 0) + 1);
+            this.elementProcessors.computeIfAbsent(tagName, name -> {
                 throw new IllegalArgumentException("Missing processor for " + name);
             }).process(element);
         }

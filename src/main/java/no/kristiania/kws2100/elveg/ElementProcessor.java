@@ -8,5 +8,5 @@ public interface ElementProcessor extends AutoCloseable {
     void process(Element element) throws SQLException;
 
     @Override
-    default void close() throws Exception {}
+    default void close() throws SQLException {}
 }

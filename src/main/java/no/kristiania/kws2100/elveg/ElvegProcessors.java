@@ -29,7 +29,7 @@ public class ElvegProcessors {
         }
 
         @Override
-        public void close() throws Exception {
+        public void close() throws SQLException {
             statement.executeBatch();
             statement.close();
         }
@@ -69,8 +69,11 @@ public class ElvegProcessors {
     }
 
     public static class FartsgrenseProcessor extends AbstractElvegProcessor {
-        FartsgrenseProcessor(Connection connection) throws SQLException {
-            super(connection.prepareStatement("insert into fartsgrense (id, verdi, senterlinje) values (?, ?, st_geomfromewkt(?))"));
+        private final String kommunenummer;
+
+        FartsgrenseProcessor(Connection connection, String kommunenummer) throws SQLException {
+            super(connection.prepareStatement("insert into fartsgrense (kommunenummer, id, verdi, senterlinje) values (?, ?, ?, st_geomfromewkt(?))"));
+            this.kommunenummer = kommunenummer;
         }
 
         @Override
@@ -80,9 +83,10 @@ public class ElvegProcessors {
         }
 
         private void writeElvegElement(Elveg.Fartsgrense fartsgrense) throws SQLException {
-            statement.setString(1, fartsgrense.getId());
-            statement.setString(2, fartsgrense.getFartsgrenseVerdi());
-            statement.setString(3, fartsgrense.getSenterlinje().toEwkt());
+            statement.setString(1, kommunenummer);
+            statement.setString(2, fartsgrense.getId());
+            statement.setString(3, fartsgrense.getFartsgrenseVerdi());
+            statement.setString(4, fartsgrense.getSenterlinje().toEwkt());
             addBatch();
         }
 
