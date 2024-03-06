@@ -21,7 +21,7 @@ const map = new Map({
     new TileLayer({ source: new OSM() }),
     new VectorLayer({
       source: new VectorSource({
-        url: "/kommuner.json",
+        url: "/api/kommuner",
         format: new GeoJSON(),
       }),
     }),
