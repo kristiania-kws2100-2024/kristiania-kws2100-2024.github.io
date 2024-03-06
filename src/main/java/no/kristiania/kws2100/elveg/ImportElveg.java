@@ -3,6 +3,7 @@ package no.kristiania.kws2100.elveg;
 import org.eaxy.Element;
 import org.eaxy.ElementSet;
 import org.eaxy.Namespace;
+import org.eaxy.QualifiedName;
 import org.eaxy.Xml;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -14,16 +15,36 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
-import java.util.TreeSet;
 import java.util.zip.ZipFile;
 
 public class ImportElveg {
 
-    private static final Namespace GML = new Namespace("http://www.opengis.net/gml/3.2", "gml");
+    private static final Namespace ELVEG_NS = new Namespace("http://skjema.geonorge.no/SOSI/produktspesifikasjon/Elveg/2.0");
+
+
+    private Map<QualifiedName, ElementProcessor> elementProcessors = new HashMap<>();
 
     public ImportElveg(DataSource dataSource) {
-
+        elementProcessors.put(ELVEG_NS.name("Fartsgrense"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Beredskapsveg"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Fartsgrense"), this::processFartsgrense);
+        elementProcessors.put(ELVEG_NS.name("FartsgrenseVariabel"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("FunksjonellVegklasse"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Gågatereguleringer"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Høydebegrensning"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("InnkjøringForbudt"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Jernbanekryssing"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Landbruksvegklasse"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Motorveg"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Serviceveg"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Svingerestriksjon"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Trafikkreguleringer"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("Veglenke"), this::processVeglenke);
+        elementProcessors.put(ELVEG_NS.name("Vegsperring"), element -> {});
+        elementProcessors.put(ELVEG_NS.name("VærutsattVeg"), element -> {});
     }
 
     public static void main(String[] args) throws SQLException, IOException {
@@ -55,80 +76,13 @@ public class ImportElveg {
     private void processElvegFile(InputStream inputStream) {
         var filter = Xml.filter("member", "*");
         for (var element : filter.iterate(new InputStreamReader(inputStream))) {
-            switch (element.getName().getName()) {
-                case "Beredskapsveg" -> processBeredskapsveg(element);
-                case "Fartsgrense" -> processFartsgrense(element);
-                case "FartsgrenseVariabel" -> processFartsgrenseVariabel(element);
-                case "FunksjonellVegklasse" -> processFunksjonellVegklasse(element);
-                case "Gågatereguleringer" -> processGågatereguleringer(element);
-                case "Høydebegrensning" -> processHøydebegrensning(element);
-                case "InnkjøringForbudt" -> processInnkjøringForbudt(element);
-                case "Jernbanekryssing" -> processJernbanekryssing(element);
-                case "Landbruksvegklasse" -> processLandbruksvegklasse(element);
-                case "Motorveg" -> processMotorveg(element);
-                case "Serviceveg" -> processServiceveg(element);
-                case "Svingerestriksjon" -> processSvingerestriksjon(element);
-                case "Trafikkreguleringer" -> processTrafikkreguleringer(element);
-                case "Veglenke" -> processVeglenke(element);
-                case "Vegsperring" -> processVegsperring(element);
-                case "VærutsattVeg" -> processVærutsattVeg(element);
-                default -> throw new IllegalArgumentException("Unknown element type " + element);
-            }
+            this.elementProcessors.computeIfAbsent(element.getName(), name -> {
+                throw new IllegalArgumentException("Missing processor for " + name);
+            }).process(element);
         }
     }
 
-    private static void processVærutsattVeg(Element element) {
-
-    }
-
-    private static void processTrafikkreguleringer(Element element) {
-
-    }
-
-    private static void processSvingerestriksjon(Element element) {
-
-    }
-
-    private static void processServiceveg(Element element) {
-
-    }
-
-    private static void processMotorveg(Element element) {
-
-    }
-
-    private static void processLandbruksvegklasse(Element element) {
-
-    }
-
-    private static void processJernbanekryssing(Element element) {
-
-    }
-
-    private static void processInnkjøringForbudt(Element element) {
-
-    }
-
-    private static void processHøydebegrensning(Element element) {
-
-    }
-
-    private static void processGågatereguleringer(Element element) {
-
-    }
-
-    private static void processFartsgrenseVariabel(Element element) {
-
-    }
-
-    private static void processBeredskapsveg(Element element) {
-    }
-
-    private static void processVegsperring(Element element) {
-
-    }
-
-    private static void processVeglenke(Element element) {
+    private void processVeglenke(Element element) {
 
         var veglenke = new Elveg.Veglenke()
                 .setDetaljnivå(textOrNull(element.find("detaljnivå")))
@@ -143,13 +97,9 @@ public class ImportElveg {
         return elementSet.isPresent() ? elementSet.first().text() : null;
     }
 
-    private static void processFunksjonellVegklasse(Element element) {
-
-    }
-
-    private static void processFartsgrense(Element element) {
+    private void processFartsgrense(Element element) {
         var fartsgrense = new Elveg.Fartsgrense()
-                .setId(element.attr(GML.name("id")))
+                .setId(element.attr(Gml.GML.name("id")))
                 .setFartsgrenseVerdi(textOrNull(element.find("fartgrenseVerdi")))
                 .setSenterlinje(Gml.GmlLineString.fromXml(element.find("senterlinje", "*").single()));
     }
