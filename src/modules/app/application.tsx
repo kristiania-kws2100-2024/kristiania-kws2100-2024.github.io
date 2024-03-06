@@ -3,6 +3,9 @@ import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import { OSM } from "ol/source";
 import { useGeographic } from "ol/proj";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import { GeoJSON } from "ol/format";
 
 // By calling the "useGeographic" function in OpenLayers, we tell that we want coordinates to be in degrees
 //  instead of meters, which is the default. Without this `center: [11, 60]` doesn't work on the view
@@ -14,7 +17,15 @@ const map = new Map({
   // The map will be centered on 60 degrees latitude and 11 degrees longitude, with a certain zoom level
   view: new View({ center: [11, 60], zoom: 10 }),
   // images displayed on the map will be from the Open Street Map (OSM) tile layer
-  layers: [new TileLayer({ source: new OSM() })],
+  layers: [
+    new TileLayer({ source: new OSM() }),
+    new VectorLayer({
+      source: new VectorSource({
+        url: "/kommuner.json",
+        format: new GeoJSON(),
+      }),
+    }),
+  ],
 });
 
 // A functional React component
