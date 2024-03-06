@@ -4,6 +4,8 @@ create table veglenke
     id            varchar(30),
     lokal_id      varchar(30)                 not null,
     type_veg      varchar(100),
+    adressekode   integer,
+    adressenavn   varchar(100),
     senterlinje   geometry(LineStringZ, 5973) not null,
     primary key (kommunenummer, id)
 );

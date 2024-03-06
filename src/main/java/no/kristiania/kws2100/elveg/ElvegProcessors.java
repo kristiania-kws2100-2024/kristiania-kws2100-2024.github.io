@@ -76,26 +76,15 @@ public class ElvegProcessors {
                     .primaryKey("id", Elveg.Veglenke::getId)
                     .column("lokal_id", Elveg.Veglenke::getLokalId)
                     .column("type_veg", Elveg.Veglenke::getTypeVeg)
+                    .columns("", Elveg.Veglenke::getVeglenkeadresse, Db.columnMapper(Elveg.Veglenkeadresse.class)
+                            .column("adressekode", Elveg.Veglenkeadresse::getAdressekode)
+                            .column("adressenavn", Elveg.Veglenkeadresse::getAdressenavn)
+                    )
                     .column("senterlinje", "ST_GeomFromEWKT(?)", l -> l.getSenterlinje().toEwkt())
             ));
         }
 
         protected Elveg.Veglenke readElvegElement(Element element) {
-            /*
-                        <lenkesekvens>
-                <Lenkesekvensreferanse>
-                    <identifikasjon>
-                        <Identifikasjon>
-                            <lokalId>922888</lokalId>
-                            <navnerom>vegvesen.no.nvdb.rls</navnerom>
-                        </Identifikasjon>
-                    </identifikasjon>
-                    <startposisjon>0.0</startposisjon>
-                    <sluttposisjon>0.33000017</sluttposisjon>
-                </Lenkesekvensreferanse>
-            </lenkesekvens>
-
-             */
             return new Elveg.Veglenke()
                     .setKommunenummer(textOrNull(element.find("kommunenummer")))
                     .setId(element.attr(Gml.NS.name("id")))
@@ -104,7 +93,16 @@ public class ElvegProcessors {
                     .setTypeVeg(element.find("typeVeg").first().text())
                     .setFeltoversikt(textOrNull(element.find("feltoversikt")))
                     .setKonnekteringslenke("true".equals(element.find("konnekteringslenke").first().text()))
+                    .setVeglenkeadresse(readVeglenkeadresse(element.find("veglenkeadresse", "Veglenkeadresse").singleOrDefault()))
                     .setSenterlinje(Gml.GmlLineString.fromXml(element.find("senterlinje", "*").single()));
+        }
+
+        private static Elveg.Veglenkeadresse readVeglenkeadresse(Element element) {
+            if (element == null) return null;
+            return new Elveg.Veglenkeadresse()
+                    .setAdressekode(Long.parseLong(element.find("adressekode").single().text()))
+                    .setAdressenavn(element.find("adressenavn").single().text())
+                    .setSideveg("true".equals(element.find("sideveg").single().text()));
         }
     }
 

@@ -90,7 +90,10 @@ public class Db {
 
         public <U> ColumnMapper<T> columns(String prefix, Function<T, U> getter, ColumnMapper<U> columnMapper) {
             for (var column : columnMapper.columns.entrySet()) {
-                columns.put(prefix + column.getKey(), o -> column.getValue().apply(getter.apply(o)));
+                columns.put(prefix + column.getKey(), o -> {
+                    var nested = getter.apply(o);
+                    return nested != null ? column.getValue().apply(nested) : null;
+                });
                 columnExpressions.put(prefix + column.getKey(), columnMapper.columnExpressions.get(column.getKey()));
             }
             return this;

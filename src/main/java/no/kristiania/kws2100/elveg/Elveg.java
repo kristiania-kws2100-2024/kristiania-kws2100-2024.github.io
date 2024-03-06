@@ -11,6 +11,7 @@ public class Elveg {
         private String kommunenummer, id, lokalId, typeVeg, detaljnivå, feltoversikt;
         private boolean konnekteringslenke;
         private Gml.GmlLineString senterlinje;
+        private Veglenkeadresse veglenkeadresse;
     }
 
     @Data
@@ -33,5 +34,12 @@ public class Elveg {
         private String retning;
         private String lenkeSekvens;
         private double fraPosisjon, tilPosisjon;
+    }
+
+    @Data
+    public static class Veglenkeadresse {
+        private Long adressekode;
+        private String adressenavn;
+        private Boolean sideveg;
     }
 }
