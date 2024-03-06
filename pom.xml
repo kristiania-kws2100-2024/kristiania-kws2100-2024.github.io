@@ -43,6 +43,7 @@
                 <configuration>
                     <target>21</target>
                     <source>21</source>
+                    <encoding>utf-8</encoding>
                     <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
             </plugin>

@@ -35,9 +35,7 @@ public class Gml {
         }
 
         public String toEwkt() {
-            return "LINESTRING(" +
-                   positions.stream().map(GmlPoint3d::toEwktInner).collect(Collectors.joining(", "))
-                    + ")";
+            return STR."LINESTRING(\{positions.stream().map(GmlPoint3d::toEwktInner).collect(Collectors.joining(", "))})";
         }
     }
 
@@ -52,7 +50,7 @@ public class Gml {
         }
 
         public String toEwktInner() {
-            return x + " " + y + " " + z;
+            return STR."\{x} \{y} \{z}";
         }
     }
 }

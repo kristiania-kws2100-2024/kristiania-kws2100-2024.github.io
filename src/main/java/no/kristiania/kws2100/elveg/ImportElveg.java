@@ -26,23 +26,23 @@ public class ImportElveg implements AutoCloseable {
 
     public ImportElveg(DataSource dataSource, String kommunenummer) throws SQLException {
         var connection = dataSource.getConnection();
-        elementProcessors.put(Elveg.NS.name("Fartsgrense"), element -> {});
-        elementProcessors.put(Elveg.NS.name("Beredskapsveg"), element -> {});
+        elementProcessors.put(Elveg.NS.name("Fartsgrense"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("Beredskapsveg"), _ -> {});
         elementProcessors.put(Elveg.NS.name("Fartsgrense"), new ElvegProcessors.FartsgrenseProcessor(connection, kommunenummer));
-        elementProcessors.put(Elveg.NS.name("FartsgrenseVariabel"), element -> {});
+        elementProcessors.put(Elveg.NS.name("FartsgrenseVariabel"), _ -> {});
         elementProcessors.put(Elveg.NS.name("FunksjonellVegklasse"), new ElvegProcessors.FunksjonellVegklasseProcessor(connection, kommunenummer));
-        elementProcessors.put(Elveg.NS.name("Gågatereguleringer"), element -> {});
-        elementProcessors.put(Elveg.NS.name("Høydebegrensning"), element -> {});
-        elementProcessors.put(Elveg.NS.name("InnkjøringForbudt"), element -> {});
-        elementProcessors.put(Elveg.NS.name("Jernbanekryssing"), element -> {});
-        elementProcessors.put(Elveg.NS.name("Landbruksvegklasse"), element -> {});
-        elementProcessors.put(Elveg.NS.name("Motorveg"), element -> {});
-        elementProcessors.put(Elveg.NS.name("Serviceveg"), element -> {});
-        elementProcessors.put(Elveg.NS.name("Svingerestriksjon"), element -> {});
-        elementProcessors.put(Elveg.NS.name("Trafikkreguleringer"), element -> {});
+        elementProcessors.put(Elveg.NS.name("Gågatereguleringer"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("Høydebegrensning"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("InnkjøringForbudt"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("Jernbanekryssing"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("Landbruksvegklasse"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("Motorveg"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("Serviceveg"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("Svingerestriksjon"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("Trafikkreguleringer"), _ -> {});
         elementProcessors.put(Elveg.NS.name("Veglenke"), new ElvegProcessors.VeglenkeProcessor(connection));
-        elementProcessors.put(Elveg.NS.name("Vegsperring"), element -> {});
-        elementProcessors.put(Elveg.NS.name("VærutsattVeg"), element -> {});
+        elementProcessors.put(Elveg.NS.name("Vegsperring"), _ -> {});
+        elementProcessors.put(Elveg.NS.name("VærutsattVeg"), _ -> {});
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ImportElveg implements AutoCloseable {
         for (var value : elementProcessors.values()) {
             value.close();
         }
-        System.out.println("element counts " + elementCount);
+        System.out.println(STR."element counts \{elementCount}");
     }
 
     public static void main(String[] args) throws SQLException, IOException {
@@ -70,7 +70,7 @@ public class ImportElveg implements AutoCloseable {
         try (var zipFile = new ZipFile(path.toFile())) {
             for (var zipEntry : Collections.list(zipFile.entries())) {
                 if (zipEntry.getSize() < 10_000_000) {
-                    System.out.println("Processing " + zipEntry);
+                    System.out.println(STR."Processing \{zipEntry}");
                     try (var inputStream = zipFile.getInputStream(zipEntry)) {
                         var kommunenummer = zipEntry.toString().substring(0, 4);
                         try (var importElveg = new ImportElveg(dataSource, kommunenummer)) {
@@ -78,7 +78,7 @@ public class ImportElveg implements AutoCloseable {
                         }
                     }
                 } else {
-                    System.out.println("Skipping " + zipEntry);
+                    System.out.println(STR."Skipping \{zipEntry}");
                 }
             }
         }
@@ -89,8 +89,9 @@ public class ImportElveg implements AutoCloseable {
         for (var element : filter.iterate(new InputStreamReader(inputStream))) {
             var tagName = element.getName();
             elementCount.put(tagName.getName(), elementCount.getOrDefault(tagName.getName(), 0) + 1);
+            //noinspection resource
             this.elementProcessors.computeIfAbsent(tagName, name -> {
-                throw new IllegalArgumentException("Missing processor for " + name);
+                throw new IllegalArgumentException(STR."Missing processor for \{name}");
             }).process(element);
         }
     }
