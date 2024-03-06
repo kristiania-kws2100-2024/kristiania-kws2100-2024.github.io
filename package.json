@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "dev": "vite",
     "dev:docker": "docker compose create && docker compose start",
     "database": "npm run database:create && npm run database:load && npm run database:import",
     "database:create": "npm run database:create:database && npm run database:create:extension",
@@ -9,7 +10,6 @@
     "database:load": "npm run database:load:kommuner",
     "database:load:kommuner": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql",
     "database:import": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < database/import-norway-data.sql",
-    "dev": "vite",
     "build": "npm test && vite build",
     "test": "prettier --check . && tsc --noEmit",
     "prepare": "husky"
@@ -23,6 +23,7 @@
     "vite": "^5.1.5"
   },
   "dependencies": {
+    "ol": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
