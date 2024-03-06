@@ -30,7 +30,7 @@ public class ImportElveg implements AutoCloseable {
         elementProcessors.put(Elveg.NS.name("Beredskapsveg"), element -> {});
         elementProcessors.put(Elveg.NS.name("Fartsgrense"), new ElvegProcessors.FartsgrenseProcessor(connection, kommunenummer));
         elementProcessors.put(Elveg.NS.name("FartsgrenseVariabel"), element -> {});
-        elementProcessors.put(Elveg.NS.name("FunksjonellVegklasse"), element -> {});
+        elementProcessors.put(Elveg.NS.name("FunksjonellVegklasse"), new ElvegProcessors.FunksjonellVegklasseProcessor(connection, kommunenummer));
         elementProcessors.put(Elveg.NS.name("Gågatereguleringer"), element -> {});
         elementProcessors.put(Elveg.NS.name("Høydebegrensning"), element -> {});
         elementProcessors.put(Elveg.NS.name("InnkjøringForbudt"), element -> {});
