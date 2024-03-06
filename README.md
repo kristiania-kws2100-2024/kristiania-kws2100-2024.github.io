@@ -360,6 +360,23 @@ following process works okay:
       what's going on here"
 4. When you receive issues from a reviewer, you should close the issues with a comment
 
+### Starting PostGIS with Docker Compose
+
+```yaml
+version: "3"
+services:
+  postgis:
+    container_name: postgis
+    image: postgis/postgis
+    ports:
+      - "5432:5432"
+```
+
+### Importing a dataset into a PostGIS server in docker
+
+`docker exec -i /postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql`
+
+
 ### Creating a PostGIS API in Express
 
 ```typescript
