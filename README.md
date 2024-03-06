@@ -15,3 +15,9 @@
 ## Create a React application with OpenLayers
 
 See [course notes](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/main#reference-material)
+
+## Create a geojson API with express
+
+1. Create a server directory with express as dependency
+2. Serve kommuner from file
+3. Setup `vite.config.js` to proxy `/api`
