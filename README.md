@@ -6,11 +6,11 @@
 2. Download kommuner from [geonorge](https://kartkatalog.geonorge.no/metadata/administrative-enheter-kommuner/041f1e6e-bdbc-4091-b48f-8a5990f3cc5b)
 3. Import kommuner into the database
 4. Explore the data:
-    ```sql
-    select st_asgeojson(st_transform(omrade, 4326))
-    from kommuner
-    where kommunenummer = '0301'
-    ```
+   ```sql
+   select st_asgeojson(st_transform(omrade, 4326))
+   from kommuner
+   where kommunenummer = '0301'
+   ```
 
 ## Create a React application with OpenLayers
 

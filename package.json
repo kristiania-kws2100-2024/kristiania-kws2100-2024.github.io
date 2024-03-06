@@ -9,9 +9,15 @@
     "database:load": "npm run database:load:kommuner",
     "database:load:kommuner": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql",
     "database:import": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < database/import-norway-data.sql",
-    "dev": "vite"
+    "dev": "vite",
+    "build": "npm test && vite build",
+    "test": "prettier --check . && tsc --noEmit",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@types/react": "^18.2.63",
+    "@types/react-dom": "^18.2.20",
+    "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3",
     "vite": "^5.1.5"
