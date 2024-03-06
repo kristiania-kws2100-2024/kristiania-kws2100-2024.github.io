@@ -42,3 +42,20 @@ where a.adressenavn = 'Kongens gate'
   and b.adressenavn = 'Urtegata'
   and b.nummer = 9;
 ```
+
+```sql
+select b.adressetekst,
+       g.grunnkretsnavn,
+       a.representasjonspunkt,
+       g.omrade,
+       st_asgeojson(a.representasjonspunkt),
+       st_asgeojson(g.omrade)
+from adresser a,
+     adresser b,
+     grunnkretser g
+where a.adressenavn = 'Kongens gate'
+  and a.nummer = 22
+  and st_dwithin(a.representasjonspunkt, b.representasjonspunkt, 100.0, true)
+  and st_contains(g.omrade, a.representasjonspunkt)
+;
+```
