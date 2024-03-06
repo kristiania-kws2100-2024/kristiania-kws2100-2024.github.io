@@ -27,6 +27,8 @@ const map = new Map({
     }),
     new VectorLayer({
       source: new VectorSource({
+        strategy: (extent, resolution) =>
+          resolution < 0.00005 ? [extent] : [],
         url: "/api/eiendommer",
         format: new GeoJSON(),
       }),
