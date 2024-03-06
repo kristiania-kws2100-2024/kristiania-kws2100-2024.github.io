@@ -26,10 +26,12 @@ const map = new Map({
       }),
     }),
     new VectorLayer({
+      maxResolution: 1,
       source: new VectorSource({
         strategy: (extent, resolution) =>
           resolution < 0.00005 ? [extent] : [],
-        url: "/api/eiendommer",
+        url: (extent, resolution, projection) =>
+          `/api/eiendommer?bbox=${JSON.stringify(extent)}`,
         format: new GeoJSON(),
       }),
     }),

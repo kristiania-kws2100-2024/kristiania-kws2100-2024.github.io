@@ -30,12 +30,18 @@ app.get("/api/kommuner", async (req, res) => {
 });
 
 app.get("/api/eiendommer", async (req, res) => {
+  const { bbox } = req.query;
+  if (!bbox) {
+    return res.sendStatus(400);
+  }
+  const bounds = JSON.parse(bbox.toString());
   const result = await postgresql.query(
     `select adressenavn, adresseid, representasjonspunkt::json as geometry
      from adresser
-     where adressenavn = 'Kongens gate'
+     where st_contains(st_makeenvelope($1, $2, $3, $4, 4326), representasjonspunkt)
      limit 3000
      `,
+    bounds,
   );
   res.json({
     type: "FeatureCollection",
