@@ -1,7 +1,5 @@
 package no.kristiania.kws2100.elveg;
 
-import org.eaxy.Element;
-import org.eaxy.ElementSet;
 import org.eaxy.Namespace;
 import org.eaxy.QualifiedName;
 import org.eaxy.Xml;
@@ -25,12 +23,12 @@ public class ImportElveg {
     private static final Namespace ELVEG_NS = new Namespace("http://skjema.geonorge.no/SOSI/produktspesifikasjon/Elveg/2.0");
 
 
-    private Map<QualifiedName, ElementProcessor> elementProcessors = new HashMap<>();
+    private final Map<QualifiedName, ElementProcessor> elementProcessors = new HashMap<>();
 
     public ImportElveg(DataSource dataSource) {
         elementProcessors.put(ELVEG_NS.name("Fartsgrense"), element -> {});
         elementProcessors.put(ELVEG_NS.name("Beredskapsveg"), element -> {});
-        elementProcessors.put(ELVEG_NS.name("Fartsgrense"), this::processFartsgrense);
+        elementProcessors.put(ELVEG_NS.name("Fartsgrense"), new ElvegProcessors.FartsgrenseProcessor());
         elementProcessors.put(ELVEG_NS.name("FartsgrenseVariabel"), element -> {});
         elementProcessors.put(ELVEG_NS.name("FunksjonellVegklasse"), element -> {});
         elementProcessors.put(ELVEG_NS.name("Gågatereguleringer"), element -> {});
@@ -42,7 +40,7 @@ public class ImportElveg {
         elementProcessors.put(ELVEG_NS.name("Serviceveg"), element -> {});
         elementProcessors.put(ELVEG_NS.name("Svingerestriksjon"), element -> {});
         elementProcessors.put(ELVEG_NS.name("Trafikkreguleringer"), element -> {});
-        elementProcessors.put(ELVEG_NS.name("Veglenke"), this::processVeglenke);
+        elementProcessors.put(ELVEG_NS.name("Veglenke"), new ElvegProcessors.VeglenkeProcessor());
         elementProcessors.put(ELVEG_NS.name("Vegsperring"), element -> {});
         elementProcessors.put(ELVEG_NS.name("VærutsattVeg"), element -> {});
     }
@@ -81,28 +79,5 @@ public class ImportElveg {
             }).process(element);
         }
     }
-
-    private void processVeglenke(Element element) {
-
-        var veglenke = new Elveg.Veglenke()
-                .setDetaljnivå(textOrNull(element.find("detaljnivå")))
-                .setTypeVeg(element.find("typeVeg").first().text())
-                .setFeltoversikt(textOrNull(element.find("feltoversikt")))
-                .setKonnekteringslenke("true".equals(element.find("konnekteringslenke").first().text()))
-                .setSenterlinje(Gml.GmlLineString.fromXml(element.find("senterlinje", "*").single()));
-        veglenke.getTypeVeg();
-    }
-
-    private static String textOrNull(ElementSet elementSet) {
-        return elementSet.isPresent() ? elementSet.first().text() : null;
-    }
-
-    private void processFartsgrense(Element element) {
-        var fartsgrense = new Elveg.Fartsgrense()
-                .setId(element.attr(Gml.GML.name("id")))
-                .setFartsgrenseVerdi(textOrNull(element.find("fartgrenseVerdi")))
-                .setSenterlinje(Gml.GmlLineString.fromXml(element.find("senterlinje", "*").single()));
-    }
-
 
 }
