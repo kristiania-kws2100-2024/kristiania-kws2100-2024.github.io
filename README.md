@@ -216,6 +216,17 @@ npx tsc --init --jsx react
 npx prettier --write .
 ```
 
+#### Install husky
+
+[Husky](https://typicode.github.io/husky/) helps prevent you from checking in bad code:
+
+1. `npm install --save-dev husky`
+2. `npx husky init`
+
+Note: By default, Husky creates a file `.husky/pre-commit` which runs `npm test`. If you want to run another script,
+just change the contents of the file. If you want it to run before push instead of before commits, rename the file
+to `pre-push`
+
 ### Set up GitHub Actions to deploy to GitHub pages
 
 You can either start with a template by clicking on GitHub Actions on your repository on GitHub.com or write you
@@ -266,17 +277,6 @@ export default {
   base: "/<your repo name>",
 };
 ```
-
-#### Install husky
-
-[Husky](https://typicode.github.io/husky/) helps prevent you from checking in bad code:
-
-1. `npm install --save-dev husky`
-2. `npx husky init`
-
-Note: By default, Husky creates a file `.husky/pre-commit` which runs `npm test`. If you want to run another script,
-just change the contents of the file. If you want it to run before push instead of before commits, rename the file
-to `pre-push`
 
 ### Creating a OpenLayers map in React
 
@@ -348,3 +348,34 @@ following process works okay:
 4. When you receive issues from a reviewer, you should close the issues with a comment
 
 ### Creating a PostGIS API in Express
+
+```typescript
+import express from "express";
+import pg from "pg";
+
+const postgresql = new pg.Pool({
+  user: "postgres",
+  database: "norway_data",
+});
+
+const app = express();
+
+app.get("/api/kommuner", async (req, res) => {
+  const result = await postgresql.query(
+    "select kommunenummer, kommunenavn, omrade from kommuner",
+  );
+  res.json({
+    type: "FeatureCollection",
+    features: result.rows.map((row) => ({
+      type: "Feature",
+      geometry: row.omrade,
+      properties: {
+        kommunenummer: row.kommunenummer,
+        navn: row.kommunenavn,
+      },
+    })),
+  });
+});
+
+app.listen(3000);
+```
