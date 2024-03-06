@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Gml {
     public static final String ELVEG_DISTRIBUTION_URL = "https://kartkatalog.geonorge.no/metadata/elveg-20/77944f7e-3d75-4f6d-ae04-c528cc72e8f6";
-    static final Namespace GML = new Namespace("http://www.opengis.net/gml/3.2", "gml");
+    static final Namespace NS = new Namespace("http://www.opengis.net/gml/3.2", "gml");
 
     @Data
     public static class GmlLineString {
