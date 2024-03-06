@@ -21,3 +21,24 @@ See [course notes](https://github.com/kristiania-kws2100-2024/kristiania-kws2100
 1. Create a server directory with express as dependency
 2. Serve kommuner from file
 3. Setup `vite.config.js` to proxy `/api`
+
+## Import more data
+
+Vegadresse. Example query:
+
+```sql
+select * from adresser
+where adressenavn = 'Kongens gate' and nummer = 22
+```
+
+```sql
+select a.adressetekst,
+       b.adressetekst,
+       st_distance(a.representasjonspunkt, b.representasjonspunkt)
+from adresser a,
+     adresser b
+where a.adressenavn = 'Kongens gate'
+  and a.nummer = 22
+  and b.adressenavn = 'Urtegata'
+  and b.nummer = 9;
+```
