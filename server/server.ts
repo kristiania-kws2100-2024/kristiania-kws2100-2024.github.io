@@ -22,4 +22,21 @@ app.get("/api/kommuner", async (req, res) => {
   });
 });
 
+app.get("/api/adresser", async (req, res) => {
+  const result = await postgresql.query(
+    `select adresseid, adressetekst, st_transform(representasjonspunkt, 4326)::json as geometry
+    from adresser
+    where adressenavn = 'Prinsens gate'
+    limit 3000`,
+  );
+  res.json({
+    type: "FeatureCollection",
+    features: result.rows.map(({ adresseid, adressetekst, geometry }) => ({
+      type: "Feature",
+      geometry,
+      properties: { adresseid, adressetekst },
+    })),
+  });
+});
+
 app.listen(3000);

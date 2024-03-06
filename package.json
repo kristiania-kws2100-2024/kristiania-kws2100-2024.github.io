@@ -1,6 +1,7 @@
 {
   "scripts": {
     "database:load:kommuner": "docker exec -i /postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql",
+    "database:load:eiendommer": "docker exec -i /postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_03_Oslo_25832_MatrikkelenAdresse_PostGIS.sql",
     "dev": "vite",
     "build": "npm test && vite build",
     "test": "prettier --check . && tsc --noEmit",
