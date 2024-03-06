@@ -121,29 +121,42 @@ Norges grunnkart"), introducing some projection strangeness
 
 - [We follow the React getting started guide](https://react.dev/learn)
 - We go through essential React concepts: Components
-  - Component definitions
-  - Component usage
-  - Props
-  - Event handlers
+    - Component definitions
+    - Component usage
+    - Props
+    - Event handlers
 - We go through essential React [hooks](https://react.dev/reference/react/hooks)
-  - useState
-  - useEffect
-  - useContext
-  - useMemo
-  - useRef
+    - useState
+    - useEffect
+    - useContext
+    - useMemo
+    - useRef
 - TypeScript demonstration
-  - string union types
-  - interface types
-  - return types
-  - higher order types
+    - string union types
+    - interface types
+    - return types
+    - higher order types
 
 ### Lecture 8: Query property data
 
-Using
-the [Norwegian Land Register](https://kartkatalog.geonorge.no/metadata/matrikkelen-eiendomskart-teig/74340c24-1c8a-4454-b813-bfe498e80f16),
-we will develop functionality to show properties close to the users location on a map
+[![Lecture 8 code](https://img.shields.io/badge/Lecture_8-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/08)
+[![Lecture 8 reference](https://img.shields.io/badge/Lecture_8-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/08)
+[![Lecture 8 exercise](https://img.shields.io/badge/Lecture_8-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/08)
 
-In this manner, we will start exploring the PostGIS geographical database extension for Postgresql.
+Using the following public datasets, we will explore PostGIS and integrate a database into the OpenLayers front-end.
+
+- [Administrative enheter - kommuner](https://kartkatalog.geonorge.no/metadata/administrative-enheter-kommuner/041f1e6e-bdbc-4091-b48f-8a5990f3cc5b)
+- [Statistiske enheter - grunnkretser](https://kartkatalog.geonorge.no/metadata/statistiske-enheter-grunnkretser/51d279f8-e2be-4f5e-9f72-1a53f7535ec1)
+- [Matrikkelen - adresse](https://kartkatalog.geonorge.no/metadata/matrikkelen-adresse/f7df7a18-b30f-4745-bd64-d0863812350c)
+
+We will cover:
+
+1. Starting PostGIS with Docker Compose
+2. Downloading, importing and processing datasets
+3. Exploring geographic functions in the
+   database, `ST_Distance`, `ST_Dwithin`, `ST_Contains`, `ST_Transform`, `ST_Simplify` and `ST_AsGeoJSON`
+4. Creating geographic APIs with Express
+5. Limiting the data displayed in a vector layer based on resolution and view extent
 
 ### Lecture 9: Importing road data
 
@@ -166,9 +179,9 @@ Highlight: dark mode styling of the background map.
 This is an alternative to running `npm create vite@latest` and then removing all the code you don't need.
 
 1. `echo {} > package.json` (creates a package.json-file with only the text `{}`)
-   - ⚠️ If you are on Windows and using Powershell, this will create a totally empty file, which will not work. Use cmd
-     OR create a `package.json` file manually OR just skip this step if you know there is no `package.json` file in a
-     directory above your project directory
+    - ⚠️ If you are on Windows and using Powershell, this will create a totally empty file, which will not work. Use cmd
+      OR create a `package.json` file manually OR just skip this step if you know there is no `package.json` file in a
+      directory above your project directory
 2. `npm install --save-dev vite typescript prettier`
 3. `npm install react react-dom`
 4. `npm pkg set scripts.dev=vite`
@@ -328,8 +341,8 @@ reviewed. For the assignment, this has already been done for you by creating a `
 has a Pull Request **_into_** the `feedback` branch. **_You should not merge this pull request_**
 
 1. Give your reviewers access to your repository under Settings > Collaborators and teams
-   - Reviewers need minimum "Reader" access
-   - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
+    - Reviewers need minimum "Reader" access
+    - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
 2. The reviewer should go to the repository and select Pull requests and select the Feedback Pull request
 3. The easiest way to give a review is to go to Files changes and add comments by clicking on lines for files
 4. When you're giving a review make sure that you Finish the review or nobody else will see your comments
@@ -339,12 +352,12 @@ If you made the mistake of merging the Feedback branch, it will be a bit more di
 following process works okay:
 
 1. (As above) Give your reviewers access to your repository under Settings > Collaborators and teams
-   - Reviewers need minimum "Reader" access
-   - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
+    - Reviewers need minimum "Reader" access
+    - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
 2. The reviewer should explore the code in the repository at GitHub.com
 3. The reviewer should click on the line number for a line they have a comment for and select "Reference in new issue"
-   - Good issues includes "I liked this because", "Won't this do the wrong thing because", and "I don't understand
-     what's going on here"
+    - Good issues includes "I liked this because", "Won't this do the wrong thing because", and "I don't understand
+      what's going on here"
 4. When you receive issues from a reviewer, you should close the issues with a comment
 
 ### Creating a PostGIS API in Express
@@ -362,17 +375,14 @@ const app = express();
 
 app.get("/api/kommuner", async (req, res) => {
   const result = await postgresql.query(
-    "select kommunenummer, kommunenavn, omrade from kommuner",
+    "select kommunenummer, kommunenavn, st_simplify(omrade, 0.0001)::json as geometry from kommuner",
   );
   res.json({
     type: "FeatureCollection",
-    features: result.rows.map((row) => ({
+    features: result.rows.map(({ kommunenavn, kommunenummer, geometry }) => ({
       type: "Feature",
-      geometry: row.omrade,
-      properties: {
-        kommunenummer: row.kommunenummer,
-        navn: row.kommunenavn,
-      },
+      geometry,
+      properties: { kommunenummer, kommunenavn },
     })),
   });
 });
