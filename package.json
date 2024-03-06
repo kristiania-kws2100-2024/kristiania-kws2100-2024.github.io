@@ -8,6 +8,16 @@
     "database:create:extension": "echo create extension postgis | docker exec -i postgis /usr/bin/psql --user postgres norway_data",
     "database:load": "npm run database:load:kommuner",
     "database:load:kommuner": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql",
-    "database:import": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < database/import-norway-data.sql"
+    "database:import": "docker exec -i postgis /usr/bin/psql --user postgres norway_data < database/import-norway-data.sql",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.5"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
