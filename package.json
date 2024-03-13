@@ -5,5 +5,17 @@
     "database:load:grunnkretser": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_0000_Norge_25833_Grunnkretser_PostGIS.sql",
     "database:load:adresser:troms": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_55_Troms_25833_MatrikkelenAdresse_PostGIS.sql",
     "database:load:adresser:oslo": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_03_Oslo_25833_MatrikkelenAdresse_PostGIS.sql"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "^18.2.22",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.6"
+  },
+  "dependencies": {
+    "ol": "^9.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
