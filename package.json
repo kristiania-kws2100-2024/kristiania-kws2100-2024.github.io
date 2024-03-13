@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "dev": "vite",
     "database": "docker compose create && docker compose start",
     "database:load:kommuner": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql",
     "database:load:grunnkretser": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_0000_Norge_25833_Grunnkretser_PostGIS.sql",
