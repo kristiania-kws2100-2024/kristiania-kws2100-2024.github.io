@@ -30,7 +30,7 @@ Instead of serving geographical data from a static file, we want to serve it fro
 4. Download [addresses](https://kartkatalog.geonorge.no/metadata/matrikkelen-adresse/f7df7a18-b30f-4745-bd64-d0863812350c)
    from Geonorge and import into PostGIS - Hint: "docker exec -i postgis /usr/bin/psql --user postgres norway_data < **path
    to .sql-file**"
-5. Download [grunnkrets](https://kartkatalog.geonorge.no/metadata/matrikkelen-adresse/f7df7a18-b30f-4745-bd64-d0863812350c)
+5. Download [grunnkrets](https://kartkatalog.geonorge.no/metadata/statistiske-enheter-grunnkretser/51d279f8-e2be-4f5e-9f72-1a53f7535ec1)
    from Geonorge and import into PostGIS - Hint: "docker exec -i postgis /usr/bin/psql --user postgres norway_data < **path
    to .sql-file**"
 6. Connect to the database using IntelliJ and copy data from imports
