@@ -160,9 +160,16 @@ We will cover:
 
 ### Lecture 9: Importing road data
 
-Using
-Elveg, [the Norwegian Road Network](https://kartkatalog.geonorge.no/metadata/elveg-20/77944f7e-3d75-4f6d-ae04-c528cc72e8f6),
-we will import a dataset into PostGIS to query it.
+[![Lecture 9 code](https://img.shields.io/badge/Lecture_9-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/09)
+[![Lecture 8/9 exercise](https://img.shields.io/badge/Lecture_8-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/08)
+
+We will review the PostGIS database from scratch. We will focus on Grunnkretser in the Norwegian geographical data set
+and import, query and visualize these with a GIS API that we construct on Express.
+
+During the exercise, we will slow-code the same.
+
+- [Administrative enheter - kommuner](https://kartkatalog.geonorge.no/metadata/administrative-enheter-kommuner/041f1e6e-bdbc-4091-b48f-8a5990f3cc5b)
+- [Statistiske enheter - grunnkretser](https://kartkatalog.geonorge.no/metadata/statistiske-enheter-grunnkretser/51d279f8-e2be-4f5e-9f72-1a53f7535ec1)
 
 ## Lecture 10: Vector tile layers
 
@@ -375,7 +382,6 @@ services:
 ### Importing a dataset into a PostGIS server in docker
 
 `docker exec -i /postgis /usr/bin/psql --user postgres norway_data < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql`
-
 
 ### Creating a PostGIS API in Express
 
