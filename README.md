@@ -158,7 +158,7 @@ We will cover:
 4. Creating geographic APIs with Express
 5. Limiting the data displayed in a vector layer based on resolution and view extent
 
-### Lecture 9: Importing road data
+### Lecture 9: Geographical databases
 
 [![Lecture 9 code](https://img.shields.io/badge/Lecture_9-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/09)
 [![Lecture 8/9 exercise](https://img.shields.io/badge/Lecture_8-exercise-pink)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/exercise/08)
