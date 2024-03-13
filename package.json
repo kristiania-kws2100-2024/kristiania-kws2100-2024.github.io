@@ -2,6 +2,8 @@
   "scripts": {
     "database": "docker compose create && docker compose start",
     "database:load:kommuner": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql",
-    "database:load:grunnkretser": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_0000_Norge_25833_Grunnkretser_PostGIS.sql"
+    "database:load:grunnkretser": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_0000_Norge_25833_Grunnkretser_PostGIS.sql",
+    "database:load:adresser:troms": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_55_Troms_25833_MatrikkelenAdresse_PostGIS.sql",
+    "database:load:adresser:oslo": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_03_Oslo_25833_MatrikkelenAdresse_PostGIS.sql"
   }
 }
