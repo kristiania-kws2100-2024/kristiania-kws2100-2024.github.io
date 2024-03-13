@@ -10,8 +10,22 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/kommuner", async (req, res) => {
-  const dbResult = await postgresql.query("select * from kommuner_e1b95ab2fb054ee7998946cce6039771.kommune");
-  res.json({ dbResult })
+  const dbResult = await postgresql.query(
+    `select kommunenavn, kommunenummer,
+       st_simplify(st_transform(omrade, 4326), 0.0001)::json geometry
+    from kommuner_e1b95ab2fb054ee7998946cce6039771.kommune
+    `);
+  res.json({
+    type: "FeatureCollection",
+    features: dbResult.rows.map(row => ({
+      type: "Feature",
+      geometry: row.geometry,
+      properties: {
+        id: row.kommunenummer,
+        name: row.kommunenavn
+      }
+    }))
+  })
 })
 
 app.listen(3000);
