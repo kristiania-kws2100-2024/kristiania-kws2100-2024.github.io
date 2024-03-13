@@ -166,7 +166,8 @@ We will cover:
 We will review the PostGIS database from scratch. We will focus on Grunnkretser in the Norwegian geographical data set
 and import, query and visualize these with a GIS API that we construct on Express.
 
-During the exercise, we will slow-code the same. We will start with a slow-paced introduction to Docker and PostGIS so
+During the exercise, we will slow-code the same. We will start with a slow-paced introduction to
+[Docker](https://docs.docker.com/get-started/overview/) and [PostGIS](https://hub.docker.com/r/postgis/postgis) so
 everybody can keep up.
 
 - [Administrative enheter - kommuner](https://kartkatalog.geonorge.no/metadata/administrative-enheter-kommuner/041f1e6e-bdbc-4091-b48f-8a5990f3cc5b)
