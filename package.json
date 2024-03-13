@@ -1,5 +1,6 @@
 {
   "scripts": {
-    "database": "docker compose create && docker compose start"
+    "database": "docker compose create && docker compose start",
+    "datbase:load:kommuner": "docker exec -i kws2100-db psql --user postgres < tmp/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql"
   }
 }

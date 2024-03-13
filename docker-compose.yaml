@@ -1,6 +1,7 @@
 version: "3"
 services:
   kws2100-db:
+    container_name: kws2100-db
     image: postgis/postgis:latest
     ports:
       - "5432:5432"
