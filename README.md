@@ -281,7 +281,7 @@ jobs:
           node-version: 20.x
           cache: "npm"
       - run: npm ci
-      - run: npm run build
+      - run: npm test
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
