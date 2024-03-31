@@ -4,13 +4,14 @@ import { useGeographic } from "ol/proj";
 import "ol/ol.css";
 import React, { MutableRefObject, useEffect, useMemo, useRef } from "react";
 import { MapboxVectorLayer } from "ol-mapbox-style";
+import { useVehicleLayer } from "./useVehicleLayer";
 
 useGeographic();
 
 const map = new Map({
   view: new View({
-    center: [10, 64],
-    zoom: 7,
+    center: [8, 58.2],
+    zoom: 9,
   }),
 });
 
@@ -21,8 +22,13 @@ const backgroundLayer = new MapboxVectorLayer({
 });
 
 export function VehicleMap() {
+  const vehicleLayer = useVehicleLayer();
+
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const layers = useMemo(() => [backgroundLayer], [backgroundLayer]);
+  const layers = useMemo(
+    () => [backgroundLayer, vehicleLayer],
+    [backgroundLayer, vehicleLayer],
+  );
   useEffect(() => map.setTarget(mapRef.current), [mapRef]);
   useEffect(() => map.setLayers(layers), [layers]);
   return <div ref={mapRef} />;
