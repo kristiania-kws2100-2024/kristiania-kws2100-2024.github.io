@@ -5,6 +5,7 @@ import "ol/ol.css";
 import React, { MutableRefObject, useEffect, useMemo, useRef } from "react";
 import { MapboxVectorLayer } from "ol-mapbox-style";
 import { useVehicleLayer } from "./useVehicleLayer";
+import { useVehicleTrailLayer } from "./useVehicleTrailLayer";
 
 useGeographic();
 
@@ -22,12 +23,13 @@ const backgroundLayer = new MapboxVectorLayer({
 });
 
 export function VehicleMap() {
+  const vehicleTrailLayer = useVehicleTrailLayer();
   const vehicleLayer = useVehicleLayer();
 
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   const layers = useMemo(
-    () => [backgroundLayer, vehicleLayer],
-    [backgroundLayer, vehicleLayer],
+    () => [backgroundLayer, vehicleTrailLayer, vehicleLayer],
+    [backgroundLayer, vehicleTrailLayer, vehicleLayer],
   );
   useEffect(() => map.setTarget(mapRef.current), [mapRef]);
   useEffect(() => map.setLayers(layers), [layers]);
