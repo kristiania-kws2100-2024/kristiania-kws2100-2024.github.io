@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto gtfs-realtime.proto --ts_proto_out=generated/ gtfs-realtime.proto",
-    "generate:win": "protoc --plugin=\".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd\" gtfs-realtime.proto --ts_proto_out=generated/ gtfs-realtime.proto",
+    "generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto gtfs-realtime.proto --ts_proto_out=generated/ --ts_proto_opt=esModuleInterop=true gtfs-realtime.proto",
+    "generate:win": "protoc --plugin=\".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd\" gtfs-realtime.proto --ts_proto_out=generated/ --ts_proto_opt=esModuleInterop=true gtfs-realtime.proto",
     "dev": "vite",
     "prepare": "husky",
     "test": "tsc --noEmit && npm run test:formatting",
