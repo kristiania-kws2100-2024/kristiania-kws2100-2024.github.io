@@ -7,19 +7,24 @@ import React, {
 } from "react";
 import { FeedMessage, VehiclePosition } from "../../generated/gtfs-realtime";
 import VectorSource from "ol/source/Vector";
-import { Point } from "ol/geom";
+import { LineString, Point } from "ol/geom";
 import { Feature } from "ol";
+import { sortBy } from "../lib/sortBy";
 
 export function useVehicles(): {
-  vehicles: VehicleProperties[];
+  lastUpdate: Date;
+  vehicles: VehiclePropertiesWithHistory[];
   vehicleSource: VectorSource<VehicleFeature>;
+  vehicleTrackSource: VectorSource<VehicleTrackFeature>;
 } {
   return useContext(VehicleStateContext);
 }
 
 const VehicleStateContext = React.createContext({
-  vehicles: [] as VehicleProperties[],
+  lastUpdate: new Date(0),
+  vehicles: [] as VehiclePropertiesWithHistory[],
   vehicleSource: new VectorSource<VehicleFeature>(),
+  vehicleTrackSource: new VectorSource<VehicleTrackFeature>(),
 });
 
 export function VehicleStateProvider(props: { children: ReactNode }) {
@@ -35,23 +40,101 @@ type VehicleFeature = Feature<Point> & {
   getProperties(): VehicleProperties;
 };
 
+type VehicleTrackFeature = Feature<LineString> & {
+  getProperties(): VehicleProperties;
+};
+
+export interface VehiclePropertiesWithHistory extends VehicleProperties {
+  lastUpdate: Date;
+  history: { timestamp: Date; coordinates: number[] }[];
+}
+
+type VehicleFeatureWithHistory = VehicleFeature & {
+  getProperties(): VehiclePropertiesWithHistory;
+};
+
+function toVehicleFeature(vehicle: VehicleProperties) {
+  const newFeature = new Feature({
+    ...vehicle,
+    geometry: new Point(vehicle.geometry.coordinates),
+  }) as VehicleFeature;
+  newFeature.setId(vehicle.id);
+  return newFeature;
+}
+
+function toVehicleTrackFeature(vehicle: VehiclePropertiesWithHistory) {
+  const newFeature = new Feature({
+    ...vehicle,
+    geometry: new LineString(
+      vehicle.history
+        .toSorted(sortBy((c) => new Date(c.timestamp).getTime()))
+        .map((c) => c.coordinates),
+    ),
+  }) as VehicleTrackFeature;
+  newFeature.setId(vehicle.id);
+  return newFeature;
+}
+
 function useVehicleData(): {
-  vehicles: VehicleProperties[];
+  lastUpdate: Date;
+  vehicles: VehiclePropertiesWithHistory[];
   vehicleSource: VectorSource<VehicleFeature>;
+  vehicleTrackSource: VectorSource<VehicleTrackFeature>;
 } {
-  const [vehicles, setVehicles] = useState<Record<string, VehicleProperties>>(
-    {},
-  );
+  const [lastUpdate, setLastUpdate] = useState(new Date(0));
+  const [vehicles, setVehicles] = useState<
+    Record<string, VehiclePropertiesWithHistory>
+  >(() => JSON.parse(localStorage.getItem("vehicles") || "{}"));
   const vehicleSource = useMemo(() => new VectorSource<VehicleFeature>(), []);
+  const vehicleTrackSource = useMemo(
+    () => new VectorSource<VehicleTrackFeature>(),
+    [],
+  );
 
   async function updateVehicles() {
     const features = await fetchVehicleFeatures();
+    setLastUpdate(new Date());
     setVehicles((old) => {
-      const updates: Record<string, VehicleProperties> = {};
+      const updates: Record<string, VehiclePropertiesWithHistory> = {};
       for (const feature of features) {
-        const { id, timestamp } = feature;
-        if (!old[id] || old[id].timestamp < timestamp) {
-          updates[id] = feature;
+        console.log("feature");
+        const {
+          id,
+          timestamp,
+          geometry: { coordinates },
+        } = feature;
+        const point = { timestamp, coordinates };
+        const oldFeature = old[id];
+        if (!oldFeature) {
+          updates[id] = { ...feature, history: [point], lastUpdate: timestamp };
+          vehicleSource.addFeature(toVehicleFeature(updates[id]));
+          vehicleTrackSource.addFeature(toVehicleTrackFeature(updates[id]));
+        } else if (oldFeature.timestamp < timestamp) {
+          const latestUpdate = oldFeature.history.find(
+            (f) => f.timestamp === lastUpdate,
+          )!;
+          if (
+            latestUpdate?.coordinates[0].toFixed(2) ===
+              coordinates[0].toFixed(2) &&
+            latestUpdate?.coordinates[1].toFixed(2) ===
+              coordinates[1].toFixed(2)
+          ) {
+            updates[id] = {
+              ...feature,
+              lastUpdate: oldFeature.lastUpdate,
+              history: [...oldFeature.history, point],
+            };
+            vehicleSource.addFeature(toVehicleFeature(updates[id]));
+          } else {
+            updates[id] = {
+              ...feature,
+              history: [...oldFeature.history, point],
+              lastUpdate: timestamp,
+            };
+            vehicleSource.addFeature(toVehicleFeature(updates[id]));
+          }
+        } else if (!vehicleSource.get(id)) {
+          vehicleSource.addFeature(toVehicleFeature(oldFeature));
         }
       }
       return {
@@ -59,23 +142,11 @@ function useVehicleData(): {
         ...updates,
       };
     });
-    for (const vehicle of features) {
-      const { id, timestamp } = vehicle;
-      const existingFeature = vehicleSource.get(id);
-      if (
-        !existingFeature ||
-        existingFeature.getProperties().timestamp < timestamp
-      ) {
-        const geometry = new Point(vehicle.geometry.coordinates);
-        const newFeature = new Feature({
-          ...vehicle,
-          geometry,
-        }) as VehicleFeature;
-        newFeature.setId(id);
-        vehicleSource.addFeature(newFeature);
-      }
-    }
   }
+
+  useEffect(() => {
+    localStorage.setItem("vehicles", JSON.stringify(vehicles));
+  }, [vehicles]);
 
   useEffect(() => {
     updateVehicles().then();
@@ -83,7 +154,12 @@ function useVehicleData(): {
     return () => clearInterval(interval);
   }, []);
 
-  return { vehicleSource, vehicles: Object.values(vehicles) };
+  return {
+    lastUpdate,
+    vehicleSource,
+    vehicleTrackSource,
+    vehicles: Object.values(vehicles),
+  };
 }
 
 export interface VehicleProperties {

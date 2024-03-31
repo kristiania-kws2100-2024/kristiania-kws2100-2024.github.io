@@ -1,4 +1,4 @@
-import { Map, View } from "ol";
+import { Map, MapBrowserEvent, View } from "ol";
 import { MVT } from "ol/format";
 import VectorTileLayer from "ol/layer/VectorTile";
 import VectorTileSource from "ol/source/VectorTile";
@@ -10,7 +10,11 @@ import { MapboxVectorLayer } from "ol-mapbox-style";
 import VectorLayer from "ol/layer/Vector";
 import { Circle, Fill, Stroke, Style, Text } from "ol/style";
 import { FeatureLike } from "ol/Feature";
-import { useVehicles, VehicleProperties } from "./vehicleStateProvider";
+import {
+  useVehicles,
+  VehicleProperties,
+  VehiclePropertiesWithHistory,
+} from "./vehicleStateProvider";
 
 useGeographic();
 const ahocevarLayer = new VectorTileLayer({
@@ -35,7 +39,7 @@ const map = new Map({
 });
 
 function vehicleStyle(feature: FeatureLike) {
-  const props = feature.getProperties() as VehicleProperties;
+  const props = feature.getProperties() as VehiclePropertiesWithHistory;
   return [
     new Style({
       image: new Circle({
@@ -54,7 +58,7 @@ function vehicleStyle(feature: FeatureLike) {
     }),
     new Style({
       text: new Text({
-        text: props.timestamp.toLocaleTimeString(),
+        text: `${props.history.length} updates`,
         font: "bold 14px sans-serif",
         stroke: new Stroke({ color: "white" }),
         fill: new Fill({ color: "black" }),
@@ -64,11 +68,12 @@ function vehicleStyle(feature: FeatureLike) {
   ];
 }
 
-export function VehicleMap() {
-  const { vehicleSource } = useVehicles();
+export function VehicleMap({ vehicle }: { vehicle?: VehicleProperties }) {
+  const { vehicleSource, vehicleTrackSource } = useVehicles();
   const layers = useMemo(
     () => [
       layer,
+      new VectorLayer({ source: vehicleTrackSource }),
       new VectorLayer({ source: vehicleSource, style: vehicleStyle }),
     ],
     [layer, vehicleSource],
@@ -83,5 +88,15 @@ export function VehicleMap() {
       map.getView().animate({ center, zoom: 12 });
     });
   }, []);
+  useEffect(() => {
+    if (vehicle) {
+      map.getView().animate({ center: vehicle.geometry.coordinates, zoom: 14 });
+    }
+  }, [vehicle]);
+  function onClick(e: MapBrowserEvent<MouseEvent>) {}
+  useEffect(() => {
+    map.on("click", onClick);
+    return () => map.un("click", onClick);
+  }, [map, layers]);
   return <div ref={mapRef} />;
 }
