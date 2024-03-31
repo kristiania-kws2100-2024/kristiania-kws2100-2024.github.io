@@ -1,9 +1,22 @@
 {
   "scripts": {
     "generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto gtfs-realtime.proto --ts_proto_out=generated/ gtfs-realtime.proto",
-    "generate:win": "protoc --plugin=\".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd\" gtfs-realtime.proto --ts_proto_out=generated/ gtfs-realtime.proto"
+    "generate:win": "protoc --plugin=\".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd\" gtfs-realtime.proto --ts_proto_out=generated/ gtfs-realtime.proto",
+    "dev": "vite",
+    "prepare": "husky",
+    "test": "tsc --noEmit && prettier --check ."
   },
   "devDependencies": {
-    "ts-proto": "^1.171.0"
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.23",
+    "husky": "^9.0.11",
+    "prettier": "^3.2.5",
+    "ts-proto": "^1.171.0",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.7"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
