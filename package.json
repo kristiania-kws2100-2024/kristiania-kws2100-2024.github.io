@@ -4,9 +4,11 @@
     "generate:win": "protoc --plugin=\".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd\" gtfs-realtime.proto --ts_proto_out=generated/ gtfs-realtime.proto",
     "dev": "vite",
     "prepare": "husky",
-    "test": "tsc --noEmit && prettier --check ."
+    "test": "tsc --noEmit && npm run test:formatting",
+    "test:formatting": "prettier --check . && biome format ."
   },
   "devDependencies": {
+    "@biomejs/biome": "1.6.3",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
     "husky": "^9.0.11",
