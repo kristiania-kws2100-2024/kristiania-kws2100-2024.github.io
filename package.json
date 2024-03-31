@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "generate": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto gtfs-realtime.proto --ts_proto_out=generated/ gtfs-realtime.proto",
+    "generate:win": "protoc --plugin=\".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd\" gtfs-realtime.proto --ts_proto_out=generated/ gtfs-realtime.proto"
+  },
+  "devDependencies": {
+    "ts-proto": "^1.171.0"
+  }
+}
