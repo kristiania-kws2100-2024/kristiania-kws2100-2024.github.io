@@ -3,10 +3,12 @@ import { MVT } from "ol/format";
 import VectorTileLayer from "ol/layer/VectorTile";
 import VectorTileSource from "ol/source/VectorTile";
 import { useGeographic } from "ol/proj";
-import React, { MutableRefObject, useEffect, useRef } from "react";
+import React, { MutableRefObject, useEffect, useMemo, useRef } from "react";
 
 import "ol/ol.css";
 import { MapboxVectorLayer } from "ol-mapbox-style";
+import { useVehicleVectorSource } from "./useVehicleVectorSource";
+import VectorLayer from "ol/layer/Vector";
 
 useGeographic();
 const ahocevarLayer = new VectorTileLayer({
@@ -24,7 +26,6 @@ const layer = new MapboxVectorLayer({
     "pk.eyJ1Ijoiamhhbm5lcyIsImEiOiJjbHVmaHJxcnAwczVyMmpvYzB2aXh6bDI5In0.lrAcWw8waJKbUNyBF8Vzqw",
 });
 const map = new Map({
-  layers: [layer],
   view: new View({
     center: [10, 65],
     zoom: 5,
@@ -32,7 +33,20 @@ const map = new Map({
 });
 
 export function VehicleMap() {
+  const vehicleSource = useVehicleVectorSource();
+  const layers = useMemo(
+    () => [layer, new VectorLayer({ source: vehicleSource })],
+    [layer, vehicleSource],
+  );
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
   useEffect(() => map.setTarget(mapRef.current), []);
+  useEffect(() => map.setLayers(layers), [layers]);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((res) => {
+      const { latitude, longitude } = res.coords;
+      const center = [longitude, latitude];
+      map.getView().animate({ center, zoom: 12 });
+    });
+  }, []);
   return <div ref={mapRef} />;
 }
