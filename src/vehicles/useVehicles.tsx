@@ -1,63 +1,22 @@
-import { FeedMessage, VehiclePosition } from "../../generated/gtfs-realtime";
 import { useEffect, useState } from "react";
+import {
+  fetchVehicleFeatures,
+  VehicleProperties,
+} from "./vehicleStateProvider";
 
-const VEHICLE_POSITIONS_URL =
-  "https://api.entur.io/realtime/v1/gtfs-rt/vehicle-positions";
-const TRIP_UPDATES_URL =
-  "https://api.entur.io/realtime/v1/gtfs-rt/trip-updates";
+export function useVehicles(): VehicleProperties[] {
+  const [vehicles, setVehicles] = useState<Record<string, VehicleProperties>>(
+    {},
+  );
 
-export interface Point {
-  type: "Point";
-  coordinates: number[];
-}
-
-export interface VehicleFeature {
-  properties: VehicleProperties;
-  geometry: Point;
-}
-
-export interface VehicleProperties {
-  id: string;
-  timestamp: Date;
-  routeId: string;
-  bearing?: number;
-  rawData: VehiclePosition;
-}
-
-export function useVehicles(): VehicleFeature[] {
-  const [vehicles, setVehicles] = useState<Record<string, VehicleFeature>>({});
-
-  async function fetchVehiclePositions() {
-    const res = await fetch(VEHICLE_POSITIONS_URL);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch ${VEHICLE_POSITIONS_URL}: ${res}`);
-    }
-    const feedMessage = FeedMessage.decode(
-      new Uint8Array(await res.arrayBuffer()),
-    );
+  async function updateVehicles() {
+    const features = await fetchVehicleFeatures();
     setVehicles((old) => {
-      const updates: Record<string, VehicleFeature> = {};
-      for (const e of feedMessage.entity) {
-        const vehicle = e.vehicle;
-        if (!vehicle?.position) continue;
-        if (
-          !old[e.id] ||
-          old[e.id].properties.rawData.timestamp! < vehicle.timestamp!
-        ) {
-          const { longitude, latitude, bearing } = vehicle.position;
-          updates[e.id] = {
-            geometry: {
-              type: "Point",
-              coordinates: [longitude, latitude],
-            },
-            properties: {
-              id: e.id,
-              routeId: vehicle.trip?.routeId!,
-              timestamp: new Date(vehicle.timestamp!),
-              bearing,
-              rawData: vehicle,
-            },
-          };
+      const updates: Record<string, VehicleProperties> = {};
+      for (const feature of features) {
+        const { id, timestamp } = feature;
+        if (!old[id] || old[id].timestamp < timestamp) {
+          updates[id] = feature;
         }
       }
       return {
@@ -68,8 +27,8 @@ export function useVehicles(): VehicleFeature[] {
   }
 
   useEffect(() => {
-    fetchVehiclePositions().then();
-    const interval = setInterval(() => fetchVehiclePositions(), 15000);
+    updateVehicles().then();
+    const interval = setInterval(() => updateVehicles(), 15000);
     return () => clearInterval(interval);
   }, []);
 

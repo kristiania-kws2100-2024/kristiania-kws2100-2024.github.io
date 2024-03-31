@@ -11,6 +11,7 @@ import { useVehicleVectorSource } from "./useVehicleVectorSource";
 import VectorLayer from "ol/layer/Vector";
 import { Circle, Fill, Stroke, Style, Text } from "ol/style";
 import { FeatureLike } from "ol/Feature";
+import { VehicleProperties } from "./vehicleStateProvider";
 
 useGeographic();
 const ahocevarLayer = new VectorTileLayer({
@@ -35,7 +36,7 @@ const map = new Map({
 });
 
 function vehicleStyle(feature: FeatureLike) {
-  const props = feature.getProperties();
+  const props = feature.getProperties() as VehicleProperties;
   return [
     new Style({
       image: new Circle({
