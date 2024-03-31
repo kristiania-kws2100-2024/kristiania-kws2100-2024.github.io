@@ -1,6 +1,6 @@
 import * as React from "react";
 import { VehiclePositionsContext } from "../vehicles/vehiclePositionsContext";
-import { VehicleMap } from "../vehicle/vehicleMap";
+import { VehicleMap } from "../vehicles/vehicleMap";
 
 export function Application() {
   return (
