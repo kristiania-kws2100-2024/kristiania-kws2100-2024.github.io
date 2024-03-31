@@ -1,8 +1,89 @@
-import { ReactNode } from "react";
+import React, {
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { FeedMessage, VehiclePosition } from "../../generated/gtfs-realtime";
+import VectorSource from "ol/source/Vector";
+import { Point } from "ol/geom";
+import { Feature } from "ol";
+
+export function useVehicles(): {
+  vehicles: VehicleProperties[];
+  vehicleSource: VectorSource<VehicleFeature>;
+} {
+  return useContext(VehicleStateContext);
+}
+
+const VehicleStateContext = React.createContext({
+  vehicles: [] as VehicleProperties[],
+  vehicleSource: new VectorSource<VehicleFeature>(),
+});
 
 export function VehicleStateProvider(props: { children: ReactNode }) {
-  return props.children;
+  const value = useVehicleData();
+  return (
+    <VehicleStateContext.Provider value={value}>
+      {props.children}
+    </VehicleStateContext.Provider>
+  );
+}
+
+type VehicleFeature = Feature<Point> & {
+  getProperties(): VehicleProperties;
+};
+
+function useVehicleData(): {
+  vehicles: VehicleProperties[];
+  vehicleSource: VectorSource<VehicleFeature>;
+} {
+  const [vehicles, setVehicles] = useState<Record<string, VehicleProperties>>(
+    {},
+  );
+  const vehicleSource = useMemo(() => new VectorSource<VehicleFeature>(), []);
+
+  async function updateVehicles() {
+    const features = await fetchVehicleFeatures();
+    setVehicles((old) => {
+      const updates: Record<string, VehicleProperties> = {};
+      for (const feature of features) {
+        const { id, timestamp } = feature;
+        if (!old[id] || old[id].timestamp < timestamp) {
+          updates[id] = feature;
+        }
+      }
+      return {
+        ...old,
+        ...updates,
+      };
+    });
+    for (const vehicle of features) {
+      const { id, timestamp } = vehicle;
+      const existingFeature = vehicleSource.get(id);
+      if (
+        !existingFeature ||
+        existingFeature.getProperties().timestamp < timestamp
+      ) {
+        const geometry = new Point(vehicle.geometry.coordinates);
+        const newFeature = new Feature({
+          ...vehicle,
+          geometry,
+        }) as VehicleFeature;
+        newFeature.setId(id);
+        vehicleSource.addFeature(newFeature);
+      }
+    }
+  }
+
+  useEffect(() => {
+    updateVehicles().then();
+    const interval = setInterval(() => updateVehicles(), 15000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return { vehicleSource, vehicles: Object.values(vehicles) };
 }
 
 export interface VehicleProperties {

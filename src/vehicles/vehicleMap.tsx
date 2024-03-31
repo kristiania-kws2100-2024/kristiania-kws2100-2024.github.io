@@ -7,11 +7,10 @@ import React, { MutableRefObject, useEffect, useMemo, useRef } from "react";
 
 import "ol/ol.css";
 import { MapboxVectorLayer } from "ol-mapbox-style";
-import { useVehicleVectorSource } from "./useVehicleVectorSource";
 import VectorLayer from "ol/layer/Vector";
 import { Circle, Fill, Stroke, Style, Text } from "ol/style";
 import { FeatureLike } from "ol/Feature";
-import { VehicleProperties } from "./vehicleStateProvider";
+import { useVehicles, VehicleProperties } from "./vehicleStateProvider";
 
 useGeographic();
 const ahocevarLayer = new VectorTileLayer({
@@ -66,7 +65,7 @@ function vehicleStyle(feature: FeatureLike) {
 }
 
 export function VehicleMap() {
-  const vehicleSource = useVehicleVectorSource();
+  const { vehicleSource } = useVehicles();
   const layers = useMemo(
     () => [
       layer,

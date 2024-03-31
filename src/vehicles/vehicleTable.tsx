@@ -1,9 +1,9 @@
-import { useVehicles } from "./useVehicles";
 import { sortBy } from "../lib/sortBy";
 import * as React from "react";
+import { useVehicles } from "./vehicleStateProvider";
 
 export function VehicleTable() {
-  const vehicles = useVehicles();
+  const { vehicles } = useVehicles();
   return (
     <>
       <h1>{vehicles.length} positions</h1>
