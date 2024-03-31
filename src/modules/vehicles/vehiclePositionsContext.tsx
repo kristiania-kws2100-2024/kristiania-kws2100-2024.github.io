@@ -2,7 +2,7 @@ import { FeedEntity, FeedMessage } from "../../../generated/gtfs-realtime";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 
 const context = React.createContext({
-  vehicles: [] as FeedEntity[],
+  lastSnapshot: [] as FeedEntity[],
 });
 
 export function useVehiclePositions() {
@@ -28,7 +28,7 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
     fetchVehiclePositions().then(setVehiclePositions);
   }, []);
   const value = {
-    vehicles: vehiclePositions?.entity || [],
+    lastSnapshot: vehiclePositions?.entity || [],
   };
   return <context.Provider value={value}>{props.children}</context.Provider>;
 }
