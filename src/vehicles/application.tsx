@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import "./vehicles.css";
-import { VehicleTable } from "./vehicleTable";
+import { VehicleMap } from "./vehicleMap";
 
 export function Application() {
-  return <VehicleTable />;
+  return <VehicleMap />;
 }

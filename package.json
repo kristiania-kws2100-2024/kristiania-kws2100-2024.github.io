@@ -18,6 +18,8 @@
     "vite": "^5.2.7"
   },
   "dependencies": {
+    "ol": "^9.1.0",
+    "ol-mapbox-style": "^12.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
