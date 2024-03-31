@@ -9,6 +9,8 @@ import "ol/ol.css";
 import { MapboxVectorLayer } from "ol-mapbox-style";
 import { useVehicleVectorSource } from "./useVehicleVectorSource";
 import VectorLayer from "ol/layer/Vector";
+import { Circle, Fill, Stroke, Style, Text } from "ol/style";
+import { FeatureLike } from "ol/Feature";
 
 useGeographic();
 const ahocevarLayer = new VectorTileLayer({
@@ -32,10 +34,43 @@ const map = new Map({
   }),
 });
 
+function vehicleStyle(feature: FeatureLike) {
+  const props = feature.getProperties();
+  return [
+    new Style({
+      image: new Circle({
+        radius: 4,
+        fill: new Fill({ color: "red" }),
+      }),
+    }),
+    new Style({
+      text: new Text({
+        text: props.routeId,
+        font: "bold 14px sans-serif",
+        stroke: new Stroke({ color: "white" }),
+        fill: new Fill({ color: "black" }),
+        offsetY: -10,
+      }),
+    }),
+    new Style({
+      text: new Text({
+        text: props.timestamp.toLocaleTimeString(),
+        font: "bold 14px sans-serif",
+        stroke: new Stroke({ color: "white" }),
+        fill: new Fill({ color: "black" }),
+        offsetY: 10,
+      }),
+    }),
+  ];
+}
+
 export function VehicleMap() {
   const vehicleSource = useVehicleVectorSource();
   const layers = useMemo(
-    () => [layer, new VectorLayer({ source: vehicleSource })],
+    () => [
+      layer,
+      new VectorLayer({ source: vehicleSource, style: vehicleStyle }),
+    ],
     [layer, vehicleSource],
   );
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
