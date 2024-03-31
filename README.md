@@ -13,3 +13,14 @@
    - it's pretty big)
 2. `npm install ts-proto` for TypeScript bindings
 3. Download the [gtfs-realtime.proto spec](https://github.com/google/transit/blob/master/gtfs-realtime/proto/gtfs-realtime.proto)
+
+## Resources
+
+- [ENTUR devloper portal](https://developer.entur.org/pages-real-time-api)
+- [Protobuf specification](https://protobuf.dev/)
+- [protoc tool installation](https://grpc.io/docs/protoc-installation/)
+  - [protoc releases](https://github.com/protocolbuffers/protobuf/releases)
+- [ts-proto project](https://github.com/stephenh/ts-proto)
+  - [Using protobuf with TypeScript](https://dev.to/icarossio/using-protobuf-with-typescript-2gdj)
+- [gtfs-realtime specification](https://github.com/google/transit/blob/master/gtfs-realtime/proto/gtfs-realtime.proto)
+- [General Transit Feed Specification](https://gtfs.org/)
