@@ -1,9 +1,31 @@
 import { FeedEntity, FeedMessage } from "../../../generated/gtfs-realtime";
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import React, {
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { metersBetween } from "../../components/coordinates";
+
+interface VehiclePositionAtTime {
+  timestamp: number;
+  coordinates: number[];
+  move: number;
+}
+
+export interface VehiclePosition {
+  id: string;
+  routeId: string;
+  lastUpdate: number;
+  lastMove: number;
+  history: VehiclePositionAtTime[];
+}
 
 const context = React.createContext({
   lastSnapshot: [] as FeedEntity[],
   vehicleHistory: {} as Record<string, FeedEntity[]>,
+  vehicles: [] as VehiclePosition[],
   lastUpdate: new Date(0),
 });
 
@@ -36,6 +58,41 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
       JSON.stringify(vehicleHistory),
     );
   }, [vehicleHistory]);
+  const vehicles = useMemo<VehiclePosition[]>(
+    () =>
+      Object.values(vehicleHistory).map((h) => {
+        let lastMove = 0;
+        let previous: VehiclePositionAtTime | undefined;
+        const history = [] as VehiclePositionAtTime[];
+        for (const feedEntity of h.toReversed()) {
+          const position = feedEntity.vehicle?.position;
+          const timestamp = feedEntity.vehicle?.timestamp;
+          if (!position || !timestamp) continue;
+          const { latitude, longitude } = position;
+          const coordinates = [longitude, latitude];
+          if (previous) {
+            if (timestamp === previous.timestamp) continue;
+            const move = metersBetween(previous.coordinates, coordinates);
+            if (move > 10) {
+              lastMove = timestamp;
+            }
+            previous = { move, coordinates, timestamp };
+            history.push(previous);
+          } else {
+            previous = { move: 0, coordinates, timestamp };
+            history.push(previous);
+          }
+        }
+        return {
+          id: h[0].id,
+          routeId: h[0].vehicle?.trip?.routeId!,
+          lastUpdate: h[0].vehicle?.timestamp!,
+          lastMove,
+          history,
+        };
+      }),
+    [vehicleHistory],
+  );
 
   async function updateVehiclePositions() {
     const feedMessage = await fetchVehiclePositions();
@@ -43,7 +100,9 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
     setVehiclePositions(feedMessage);
     setVehicleHistory((old) => {
       return Object.fromEntries(
-        feedMessage.entity.map((e) => [e.id, [e, ...(old[e.id] || [])]]),
+        feedMessage.entity
+          .filter((e) => e.vehicle?.trip?.routeId?.startsWith("AKT:"))
+          .map((e) => [e.id, [e, ...(old[e.id] || [])]]),
       );
     });
   }
@@ -58,6 +117,7 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
     lastSnapshot: vehiclePositions?.entity || [],
     vehicleHistory,
     lastUpdate,
+    vehicles,
   };
   return <context.Provider value={value}>{props.children}</context.Provider>;
 }
