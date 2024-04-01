@@ -1,7 +1,4 @@
-import {
-  useVehiclePositions,
-  VehiclePosition,
-} from "./vehiclePositionsContext";
+import { useVehiclePositions } from "./vehiclePositionsContext";
 import { useMemo } from "react";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
@@ -9,6 +6,7 @@ import { Feature } from "ol";
 import { Point } from "ol/geom";
 import { FeatureLike } from "ol/Feature";
 import { Circle, Fill, Stroke, Style, Text } from "ol/style";
+import { VehiclePosition } from "./useVehicles";
 
 function style(feature: FeatureLike, resolution: number) {
   const vehicle = feature.getProperties() as VehiclePosition;

@@ -1,7 +1,8 @@
 import { Time } from "../../components/time";
 import { Coordinates } from "../../components/coordinates";
 import React from "react";
-import { VehiclePosition } from "./vehiclePositionsContext";
+
+import { VehiclePosition } from "./useVehicles";
 
 export function VehicleTableRow({ vehicle }: { vehicle: VehiclePosition }) {
   return (
