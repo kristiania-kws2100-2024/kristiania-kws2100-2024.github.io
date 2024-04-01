@@ -1,11 +1,5 @@
 import { FeedEntity, FeedMessage } from "../../../generated/gtfs-realtime";
-import React, {
-  ReactNode,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { metersBetween } from "../../components/coordinates";
 
 interface VehiclePositionAtTime {
@@ -23,8 +17,6 @@ export interface VehiclePosition {
 }
 
 const context = React.createContext({
-  lastSnapshot: [] as FeedEntity[],
-  vehicleHistory: {} as Record<string, FeedEntity[]>,
   vehicles: [] as VehiclePosition[],
   lastUpdate: new Date(0),
 });
@@ -66,21 +58,15 @@ function valueFromEntity(e: FeedEntity) {
 
 export function VehiclePositionsContext(props: { children: ReactNode }) {
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date(0));
-  const [vehiclePositions, setVehiclePositions] = useState<
-    FeedMessage | undefined
-  >();
-  const [vehicleHistory, setVehicleHistory] = useState<
-    Record<string, FeedEntity[]>
-  >(JSON.parse(localStorage.getItem("vehiclePositionHistory") || "{}"));
 
-  const [vehicles2, setVehicles2] = useState<Record<string, VehiclePosition>>(
+  const [vehicles, setVehicles] = useState<Record<string, VehiclePosition>>(
     JSON.parse(localStorage.getItem("vehicles") || "{}"),
   );
   useEffect(() => {
-    localStorage.setItem("vehicles", JSON.stringify(vehicles2));
-  }, [vehicles2]);
+    localStorage.setItem("vehicles", JSON.stringify(vehicles));
+  }, [vehicles]);
   function updateVehicles(entity: FeedEntity[]) {
-    setVehicles2((old) => {
+    setVehicles((old) => {
       const updated = { ...old };
       for (const e of entity) {
         const value = valueFromEntity(e);
@@ -109,59 +95,10 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
     });
   }
 
-  useEffect(() => {
-    localStorage.setItem(
-      "vehiclePositionHistory",
-      JSON.stringify(vehicleHistory),
-    );
-  }, [vehicleHistory]);
-  const vehicles = useMemo<VehiclePosition[]>(
-    () =>
-      Object.values(vehicleHistory).map((h) => {
-        let lastMove = 0;
-        let previous: VehiclePositionAtTime | undefined;
-        const history = [] as VehiclePositionAtTime[];
-        for (const feedEntity of h.toReversed()) {
-          const position = feedEntity.vehicle?.position;
-          const timestamp = feedEntity.vehicle?.timestamp;
-          if (!position || !timestamp) continue;
-          const { latitude, longitude } = position;
-          const coordinates = [longitude, latitude];
-          if (previous) {
-            if (timestamp === previous.timestamp) continue;
-            const move = metersBetween(previous.coordinates, coordinates);
-            if (move > 10) {
-              lastMove = timestamp;
-            }
-            previous = { move, coordinates, timestamp };
-            history.push(previous);
-          } else {
-            previous = { move: 0, coordinates, timestamp };
-            history.push(previous);
-          }
-        }
-        return {
-          id: h[0].id,
-          routeId: h[0].vehicle?.trip?.routeId!,
-          lastUpdate: h[0].vehicle?.timestamp!,
-          lastMove,
-          history,
-        };
-      }),
-    [vehicleHistory],
-  );
   async function updateVehiclePositions() {
     const feedMessage = await fetchVehiclePositions();
     setLastUpdate(new Date());
     updateVehicles(feedMessage.entity);
-    setVehiclePositions(feedMessage);
-    setVehicleHistory((old) => {
-      return Object.fromEntries(
-        feedMessage.entity
-          .filter((e) => e.vehicle?.trip?.routeId?.startsWith("AKT:"))
-          .map((e) => [e.id, [e, ...(old[e.id] || [])]]),
-      );
-    });
   }
 
   useEffect(() => {
@@ -170,11 +107,14 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
     return () => clearInterval(intervalId);
   }, []);
 
-  const value = {
-    lastSnapshot: vehiclePositions?.entity || [],
-    vehicleHistory,
-    lastUpdate,
-    vehicles: Object.values(vehicles2),
-  };
-  return <context.Provider value={value}>{props.children}</context.Provider>;
+  return (
+    <context.Provider
+      value={{
+        lastUpdate,
+        vehicles: Object.values(vehicles),
+      }}
+    >
+      {props.children}
+    </context.Provider>
+  );
 }
