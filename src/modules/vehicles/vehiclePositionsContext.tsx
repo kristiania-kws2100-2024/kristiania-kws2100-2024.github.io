@@ -44,6 +44,26 @@ export async function fetchVehiclePositions() {
   return FeedMessage.decode(new Uint8Array(await res.arrayBuffer()));
 }
 
+function valueFromEntity(e: FeedEntity) {
+  const { id, vehicle } = e;
+  if (!vehicle) return undefined;
+
+  const { timestamp, trip, position } = vehicle;
+  if (!timestamp || !trip || !position) return undefined;
+
+  const { routeId } = trip;
+  const { latitude, longitude } = position;
+  if (!routeId || !latitude || !longitude) return undefined;
+
+  return {
+    id,
+    lastUpdate: timestamp,
+    lastMove: timestamp,
+    routeId,
+    history: [{ timestamp, coordinates: [longitude, latitude], move: 0 }],
+  };
+}
+
 export function VehiclePositionsContext(props: { children: ReactNode }) {
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date(0));
   const [vehiclePositions, setVehiclePositions] = useState<
@@ -52,6 +72,43 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
   const [vehicleHistory, setVehicleHistory] = useState<
     Record<string, FeedEntity[]>
   >(JSON.parse(localStorage.getItem("vehiclePositionHistory") || "{}"));
+
+  const [vehicles2, setVehicles2] = useState<Record<string, VehiclePosition>>(
+    JSON.parse(localStorage.getItem("vehicles") || "{}"),
+  );
+  useEffect(() => {
+    localStorage.setItem("vehicles", JSON.stringify(vehicles2));
+  }, [vehicles2]);
+  function updateVehicles(entity: FeedEntity[]) {
+    setVehicles2((old) => {
+      const updated = { ...old };
+      for (const e of entity) {
+        const value = valueFromEntity(e);
+        if (!value) continue;
+        const prev = updated[value.id];
+        if (prev) {
+          const history = [...prev.history];
+          const previous = history[history.length - 1];
+          const {
+            history: [position],
+          } = value;
+          const move = metersBetween(
+            previous.coordinates,
+            position.coordinates,
+          );
+          const lastMove = move > 10 ? position.timestamp : prev.lastMove;
+          history.push(position);
+          if (previous.timestamp !== position.timestamp) {
+            updated[value.id] = { ...prev, lastMove, history };
+          }
+        } else {
+          updated[value.id] = value;
+        }
+      }
+      return updated;
+    });
+  }
+
   useEffect(() => {
     localStorage.setItem(
       "vehiclePositionHistory",
@@ -93,13 +150,10 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
       }),
     [vehicleHistory],
   );
-  useEffect(() => {
-    localStorage.setItem("vehicles", JSON.stringify(vehicles));
-  }, [vehicles]);
-
   async function updateVehiclePositions() {
     const feedMessage = await fetchVehiclePositions();
     setLastUpdate(new Date());
+    updateVehicles(feedMessage.entity);
     setVehiclePositions(feedMessage);
     setVehicleHistory((old) => {
       return Object.fromEntries(
@@ -120,7 +174,7 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
     lastSnapshot: vehiclePositions?.entity || [],
     vehicleHistory,
     lastUpdate,
-    vehicles,
+    vehicles: Object.values(vehicles2),
   };
   return <context.Provider value={value}>{props.children}</context.Provider>;
 }
