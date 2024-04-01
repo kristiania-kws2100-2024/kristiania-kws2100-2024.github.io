@@ -9,18 +9,16 @@ export function useVehicleTrailLayer() {
   const { vehicles } = useVehiclePositions();
   const features = useMemo(() => {
     const fifteenMinutesAgo = new Date().getTime() / 1000 - 15 * 60;
-    return (
-      vehicles
-        .filter((v) => v.history.length > 10)
-        //.filter((v) => v.lastMove > fifteenMinutesAgo)
-        .map(
-          (v) =>
-            new Feature({
-              geometry: new LineString(v.history.map((pos) => pos.coordinates)),
-              ...v,
-            }),
-        )
-    );
+    return vehicles
+      .filter((v) => v.history.length > 4)
+      .filter((v) => v.lastMove > fifteenMinutesAgo)
+      .map(
+        (v) =>
+          new Feature({
+            geometry: new LineString(v.history.map((pos) => pos.coordinates)),
+            ...v,
+          }),
+      );
   }, [vehicles]);
 
   return useMemo(

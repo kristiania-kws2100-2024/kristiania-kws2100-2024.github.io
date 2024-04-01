@@ -47,17 +47,15 @@ export function useVehicleLayer() {
   const { vehicles } = useVehiclePositions();
   const features = useMemo(() => {
     const fifteenMinutesAgo = new Date().getTime() / 1000 - 15 * 60;
-    return (
-      vehicles
-        //.filter((v) => v.lastMove > fifteenMinutesAgo)
-        .map(
-          (v) =>
-            new Feature({
-              geometry: new Point(v.history[v.history.length - 1].coordinates),
-              ...v,
-            }),
-        )
-    );
+    return vehicles
+      .filter((v) => v.lastMove > fifteenMinutesAgo)
+      .map(
+        (v) =>
+          new Feature({
+            geometry: new Point(v.history[v.history.length - 1].coordinates),
+            ...v,
+          }),
+      );
   }, [vehicles]);
 
   return useMemo(

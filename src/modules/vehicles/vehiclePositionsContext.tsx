@@ -36,21 +36,21 @@ export async function fetchVehiclePositions() {
   return FeedMessage.decode(new Uint8Array(await res.arrayBuffer()));
 }
 
-function valueFromEntity(e: FeedEntity) {
-  const { id, vehicle } = e;
-  if (!vehicle) return undefined;
+function valueFromEntity({ vehicle: entity }: FeedEntity) {
+  if (!entity) return undefined;
 
-  const { timestamp, trip, position } = vehicle;
-  if (!timestamp || !trip || !position) return undefined;
+  const { timestamp, trip, position, vehicle } = entity;
+  if (!timestamp || !trip || !position || !vehicle) return undefined;
 
+  const { id } = vehicle;
   const { routeId } = trip;
   const { latitude, longitude } = position;
-  if (!routeId || !latitude || !longitude) return undefined;
+  if (!routeId || !latitude || !longitude || !id) return undefined;
 
   return {
     id,
     lastUpdate: timestamp,
-    lastMove: timestamp,
+    lastMove: 0,
     routeId,
     history: [{ timestamp, coordinates: [longitude, latitude], move: 0 }],
   };
@@ -67,25 +67,32 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
   }, [vehicles]);
   function updateVehicles(entity: FeedEntity[]) {
     setVehicles((old) => {
+      const twoHoursAgo = new Date().getTime() / 1000 - 2 * 60 * 60;
       const updated = { ...old };
       for (const e of entity) {
         const value = valueFromEntity(e);
         if (!value) continue;
         const prev = updated[value.id];
         if (prev) {
-          const history = [...prev.history];
-          const previous = history[history.length - 1];
-          const {
-            history: [position],
-          } = value;
-          const move = metersBetween(
-            previous.coordinates,
-            position.coordinates,
-          );
-          const lastMove = move > 10 ? position.timestamp : prev.lastMove;
-          history.push(position);
-          if (previous.timestamp !== position.timestamp) {
-            updated[value.id] = { ...prev, lastMove, history };
+          const history = [
+            ...prev.history.filter(({ timestamp }) => timestamp > twoHoursAgo),
+          ];
+          if (history.length > 0) {
+            const previous = history[history.length - 1];
+            const {
+              history: [position],
+            } = value;
+            const move = metersBetween(
+              previous.coordinates,
+              position.coordinates,
+            );
+            const lastMove = move > 10 ? position.timestamp : prev.lastMove;
+            history.push(position);
+            if (previous.timestamp !== position.timestamp) {
+              updated[value.id] = { ...prev, lastMove, history };
+            }
+          } else {
+            updated[value.id] = value;
           }
         } else {
           updated[value.id] = value;
