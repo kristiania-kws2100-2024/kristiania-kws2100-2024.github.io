@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - practice/*
+      - practice/*/*
 
 jobs:
   publish:
