@@ -93,6 +93,9 @@ export function VehiclePositionsContext(props: { children: ReactNode }) {
       }),
     [vehicleHistory],
   );
+  useEffect(() => {
+    localStorage.setItem("vehicles", JSON.stringify(vehicles));
+  }, [vehicles]);
 
   async function updateVehiclePositions() {
     const feedMessage = await fetchVehiclePositions();
