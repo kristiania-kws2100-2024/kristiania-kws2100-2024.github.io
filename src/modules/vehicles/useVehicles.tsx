@@ -46,11 +46,13 @@ function valueFromEntity({ vehicle: entity }: FeedEntity) {
   const { timestamp, trip, position, vehicle } = entity;
   if (!timestamp || !trip || !position || !vehicle) return undefined;
 
-  const { id } = vehicle;
-  const { routeId } = trip;
+  const { id: vehicleId } = vehicle;
+  const { tripId, routeId } = trip;
   const { latitude, longitude } = position;
-  if (!routeId || !latitude || !longitude || !id) return undefined;
+  if (!tripId || !routeId || !latitude || !longitude || !vehicleId)
+    return undefined;
 
+  const id = tripId + "/" + vehicleId;
   const history = [{ timestamp, coordinates: [longitude, latitude], move: 0 }];
   return { id, lastUpdate: timestamp, lastMove: 0, routeId, history };
 }
