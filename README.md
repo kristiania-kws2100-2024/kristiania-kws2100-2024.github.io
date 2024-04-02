@@ -121,21 +121,21 @@ Norges grunnkart"), introducing some projection strangeness
 
 - [We follow the React getting started guide](https://react.dev/learn)
 - We go through essential React concepts: Components
-    - Component definitions
-    - Component usage
-    - Props
-    - Event handlers
+  - Component definitions
+  - Component usage
+  - Props
+  - Event handlers
 - We go through essential React [hooks](https://react.dev/reference/react/hooks)
-    - useState
-    - useEffect
-    - useContext
-    - useMemo
-    - useRef
+  - useState
+  - useEffect
+  - useContext
+  - useMemo
+  - useRef
 - TypeScript demonstration
-    - string union types
-    - interface types
-    - return types
-    - higher order types
+  - string union types
+  - interface types
+  - return types
+  - higher order types
 
 ### Lecture 8: Query property data
 
@@ -173,11 +173,37 @@ everybody can keep up.
 - [Administrative enheter - kommuner](https://kartkatalog.geonorge.no/metadata/administrative-enheter-kommuner/041f1e6e-bdbc-4091-b48f-8a5990f3cc5b)
 - [Statistiske enheter - grunnkretser](https://kartkatalog.geonorge.no/metadata/statistiske-enheter-grunnkretser/51d279f8-e2be-4f5e-9f72-1a53f7535ec1)
 
-## Lecture 10: Vector tile layers
+### No lecture week 12 or Easter
 
-Highlight: dark mode styling of the background map.
+### Lecture 10: Points that move
+
+[![Lecture 10 code](https://img.shields.io/badge/Lecture_10-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/10)
+[![Lecture 10 reference](https://img.shields.io/badge/Lecture_10-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/10)
+
+In this lecture, we will create a map that shows public transit in Norway. As a bonus content, we will touch
+on [Vector Tile Layers](https://openlayers.org/en/latest/examples/mapbox-vector-layer.html)
+with [Mapbox styles](https://mapbox.com).
+
+ENTUR is a public sector agency that provides [APIs for Norwegian public transport](https://developer.entur.org/). Among
+these, there is [an API to fetch vehicle positions](https://developer.entur.org/pages-real-time-intro), using the open
+standard [gtfs-realtime (General Transit Feed Specification)](https://gtfs.org/), which is based on the transport
+protocol [protobuf](https://protobuf.dev/). We will use
+the [protoc - protobuf compiler](https://github.com/protocolbuffers/protobuf/releases) tool with the
+[ts-proto TypeScript library](https://github.com/stephenh/ts-proto) to transform the
+[gtfs-realtime.proto API specification](https://github.com/google/transit/blob/master/gtfs-realtime/proto/gtfs-realtime.proto)
+into TypeScript.
+
+gtfs-realtime provides a fairly low level interface to the vehicle data and we will need to work to make this into
+something that OpenLayers will be happy to consume.
+
+#### Exercise:
+
+This week's exercise will be to recreate the map from the lecture. Due to time constraints, a detailed description will
+not be given.
 
 ### Lecture 11: Drawing on the map
+
+In this lecture, we will create a map where we can add out own points and polygons by [drawing with the mouse]().
 
 ### Lecture 12: Getting ready for the exam
 
@@ -187,55 +213,48 @@ Highlight: dark mode styling of the background map.
 
 This is an alternative to running `npm create vite@latest` and then removing all the code you don't need.
 
-1. `echo {} > package.json` (creates a package.json-file with only the text `{}`)
-    - ⚠️ If you are on Windows and using Powershell, this will create a totally empty file, which will not work. Use cmd
-      OR create a `package.json` file manually OR just skip this step if you know there is no `package.json` file in a
-      directory above your project directory
-2. `npm install --save-dev vite typescript prettier`
-3. `npm install react react-dom`
-4. `npm pkg set scripts.dev=vite`
-   <details>
+<details>
 
-   ```shell
-   echo {} > package.json
-   npm install --save-dev vite typescript prettier
-   npm install react react-dom
-   npm pkg set scripts.dev=vite
-   ```
+```shell
+npm install --save-dev vite
+npm install react react-dom
+npm pkg set scripts.dev=vite
+```
 
-   </details>
+</details>
 
-5. Create `index.html`:
+1. `npm install --save-dev vite typescript prettier`
+   - ⚠️ if this doesn't create a `package.json` file in the current working directory, you have a JavaScript project in
+     a parent directory. You can create a new `package.json` file using `npm init` or creating a file manually with
+     only `{}` as the file content (the last option avoids clutter)
+2. `npm install react react-dom`
+3. `npm pkg set scripts.dev=vite`
+4. Create `index.html`:
    ```html
    <body>
      <div id="root"></div>
    </body>
    <script src="src/main.tsx" type="module"></script>
    ```
-6. Create `src/main.tsx`:
+5. Create `src/main.tsx`:
    ```tsx
    import React from "react";
    import ReactDOM from "react-dom/client";
    const root = ReactDOM.createRoot(document.getElementById("root")!);
    root.render(<h1>Hello React</h1>);
    ```
-7. Run `npm run dev` to start developing
+6. Run `npm run dev` to start developing
 
 ### Building with check of Typescript and formatting
 
 Set up:
 
 ```shell
-npm pkg set scripts.build="npm test && vite build"
-npm pkg set scripts.test="prettier --check . && tsc --noEmit"
-```
-
-Clean up:
-
-```shell
+npm install --save-dev typescript prettier
 npm install --save-dev @types/react @types/react-dom
 npx tsc --init --jsx react
 npx prettier --write .
+npm pkg set scripts.test="prettier --check . && tsc --noEmit"
 ```
 
 #### Install husky
@@ -250,6 +269,10 @@ just change the contents of the file. If you want it to run before push instead 
 to `pre-push`
 
 ### Set up GitHub Actions to deploy to GitHub pages
+
+```shell
+npm pkg set scripts.build="npm test && vite build"
+```
 
 You can either start with a template by clicking on GitHub Actions on your repository on GitHub.com or write you
 workflow from scratch
@@ -350,8 +373,8 @@ reviewed. For the assignment, this has already been done for you by creating a `
 has a Pull Request **_into_** the `feedback` branch. **_You should not merge this pull request_**
 
 1. Give your reviewers access to your repository under Settings > Collaborators and teams
-    - Reviewers need minimum "Reader" access
-    - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
+   - Reviewers need minimum "Reader" access
+   - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
 2. The reviewer should go to the repository and select Pull requests and select the Feedback Pull request
 3. The easiest way to give a review is to go to Files changes and add comments by clicking on lines for files
 4. When you're giving a review make sure that you Finish the review or nobody else will see your comments
@@ -361,12 +384,12 @@ If you made the mistake of merging the Feedback branch, it will be a bit more di
 following process works okay:
 
 1. (As above) Give your reviewers access to your repository under Settings > Collaborators and teams
-    - Reviewers need minimum "Reader" access
-    - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
+   - Reviewers need minimum "Reader" access
+   - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
 2. The reviewer should explore the code in the repository at GitHub.com
 3. The reviewer should click on the line number for a line they have a comment for and select "Reference in new issue"
-    - Good issues includes "I liked this because", "Won't this do the wrong thing because", and "I don't understand
-      what's going on here"
+   - Good issues includes "I liked this because", "Won't this do the wrong thing because", and "I don't understand
+     what's going on here"
 4. When you receive issues from a reviewer, you should close the issues with a comment
 
 ### Starting PostGIS with Docker Compose
@@ -414,3 +437,13 @@ app.get("/api/kommuner", async (req, res) => {
 
 app.listen(3000);
 ```
+
+### Generating TypeScript definitions from a `.proto` (protobuf) specification
+
+1. Download [`protoc`](https://github.com/protocolbuffers/protobuf/releases) and store it locally (but `.gitignored`
+   - it's pretty big)
+2. `npm install ts-proto` for TypeScript bindings
+3. Download the [gtfs-realtime.proto spec](https://github.com/google/transit/blob/master/gtfs-realtime/proto/gtfs-realtime.proto) (or whatever spec you want to use)
+4. Run `protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=generated/ --ts_proto_opt=esModuleInterop=true ./gtfs-realtime.proto`
+   ️ ️- ⚠ On Windows, you have to replace `protoc-gen-ts_proto` with `protoc-gen-ts_proto.cmd`, so the command is `node_modules/.bin/protoc-gen-ts_proto.cmd --ts_proto_out=generated/ --ts_proto_opt=esModuleInterop=true ./gtfs-realtime.proto`
+   - You may want to add a `script` in `package.json` for this
