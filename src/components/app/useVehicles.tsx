@@ -43,7 +43,6 @@ export function useVehicles() {
   useEffect(() => {
     localStorage.setItem("vehicleTable", JSON.stringify(vehicleTable));
   }, [vehicleTable]);
-  const [vehicles, setVehicles] = useState<KwsVehicle[]>([]);
 
   async function fetchVehiclePosition() {
     const res = await fetch(
@@ -76,7 +75,6 @@ export function useVehicles() {
       }
       return updated;
     });
-    setVehicles(vehicles);
   }
 
   useEffect(() => {
