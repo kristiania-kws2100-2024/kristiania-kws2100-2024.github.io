@@ -7,6 +7,7 @@ interface KwsVehiclePosition {
 }
 
 interface KwsVehicle {
+  id: string;
   routeId: string;
   position: KwsVehiclePosition;
   history: KwsVehiclePosition[];
@@ -16,23 +17,29 @@ function convertFromProtobuf(
   vehicle: VehiclePosition | undefined,
 ): KwsVehicle | undefined {
   if (!vehicle) return;
-  const { position, trip } = vehicle;
-  if (!position || !trip) return;
+  const { position, trip, vehicle: protoVehicle } = vehicle;
+  if (!position || !trip || !protoVehicle) return;
+  const { id } = protoVehicle;
   const { latitude, longitude } = position;
   const { routeId } = trip;
-  if (!routeId) return;
+  if (!routeId || !id) return;
 
+  const p = {
+    coordinate: [longitude, latitude],
+    timestamp: 0,
+  };
   return {
+    id,
     routeId,
-    position: {
-      coordinate: [longitude, latitude],
-      timestamp: 0,
-    },
-    history: [],
+    position: p,
+    history: [p],
   };
 }
 
 export function useVehicles() {
+  const [vehicleTable, setVehicleTable] = useState<Record<string, KwsVehicle>>(
+    {},
+  );
   const [vehicles, setVehicles] = useState<KwsVehicle[]>([]);
 
   async function fetchVehiclePosition() {
@@ -50,6 +57,22 @@ export function useVehicles() {
       const v = convertFromProtobuf(vehicle);
       if (v) vehicles.push(v);
     }
+    setVehicleTable((old) => {
+      const updated = { ...old };
+      for (const v of vehicles) {
+        const oldVehicle = updated[v.id];
+        if (oldVehicle) {
+          updated[v.id] = {
+            ...oldVehicle,
+            position: v.position,
+            history: [...oldVehicle.history, v.position],
+          };
+        } else {
+          updated[v.id] = v;
+        }
+      }
+      return updated;
+    });
     setVehicles(vehicles);
   }
 
@@ -58,5 +81,5 @@ export function useVehicles() {
     const intervalId = setInterval(() => fetchVehiclePosition(), 15000);
     return () => clearInterval(intervalId);
   }, []);
-  return vehicles;
+  return Object.values(vehicleTable);
 }
