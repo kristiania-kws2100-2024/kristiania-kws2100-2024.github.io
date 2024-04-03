@@ -15,8 +15,11 @@ const map = new Map({
 });
 
 export function TransitMapApplication() {
-  const vehicleLayer = useVehicleLayer();
-  const layers = useMemo(() => [backgroundLayer, vehicleLayer], [vehicleLayer]);
+  const { vehicleLayer, vehicleTrailLayer } = useVehicleLayer();
+  const layers = useMemo(
+    () => [backgroundLayer, vehicleTrailLayer, vehicleLayer],
+    [vehicleLayer, vehicleLayer],
+  );
   useEffect(() => map.setLayers(layers), [layers]);
 
   const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
