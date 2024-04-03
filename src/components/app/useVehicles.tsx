@@ -45,6 +45,8 @@ export function useVehicles() {
 
   useEffect(() => {
     fetchVehiclePosition();
+    const intervalId = setInterval(() => fetchVehiclePosition(), 15000);
+    return () => clearInterval(intervalId);
   }, []);
   return vehicles;
 }
