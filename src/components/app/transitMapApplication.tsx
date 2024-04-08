@@ -1,6 +1,4 @@
 import { Map, View } from "ol";
-import TileLayer from "ol/layer/Tile";
-import { OSM } from "ol/source";
 import React, { MutableRefObject, useEffect, useMemo, useRef } from "react";
 import { useGeographic } from "ol/proj";
 
@@ -13,13 +11,18 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { DrawFerryButton } from "./drawFerryButton";
 import { DrawCircleButton } from "./drawCircleButton";
+import { MapboxVectorLayer } from "ol-mapbox-style";
 
 useGeographic();
 
 const drawingSource = new VectorSource();
 const drawingLayer = new VectorLayer({ source: drawingSource });
 
-const backgroundLayer = new TileLayer({ source: new OSM() });
+const backgroundLayer = new MapboxVectorLayer({
+  styleUrl: "mapbox://styles/mapbox/dark-v9",
+  accessToken:
+    "pk.eyJ1Ijoiamhhbm5lcyIsImEiOiJjbHVmaHJxcnAwczVyMmpvYzB2aXh6bDI5In0.lrAcWw8waJKbUNyBF8Vzqw",
+});
 const map = new Map({
   view: new View({ center: [10, 63], zoom: 9 }),
 });
