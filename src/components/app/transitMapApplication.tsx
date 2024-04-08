@@ -12,6 +12,7 @@ import { DrawTrainStationButton } from "./drawTrainStationButton";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { DrawFerryButton } from "./drawFerryButton";
+import { DrawCircleButton } from "./drawCircleButton";
 
 useGeographic();
 
@@ -20,7 +21,7 @@ const drawingLayer = new VectorLayer({ source: drawingSource });
 
 const backgroundLayer = new TileLayer({ source: new OSM() });
 const map = new Map({
-  view: new View({ center: [10, 63], zoom: 8 }),
+  view: new View({ center: [10, 63], zoom: 9 }),
 });
 
 export function TransitMapApplication() {
@@ -40,7 +41,7 @@ export function TransitMapApplication() {
       <nav>
         <DrawTrainStationButton map={map} source={drawingSource} />
         <DrawFerryButton map={map} source={drawingSource} />
-        <button>Draw circle</button>
+        <DrawCircleButton map={map} source={drawingSource} />
       </nav>
       <div ref={mapRef}></div>
     </>

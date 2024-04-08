@@ -15,7 +15,7 @@ function trainStationStyle(f: FeatureLike, resolution: number) {
         stroke: new Stroke({ color: "black", width: 3 }),
       }),
     }),
-    ...(resolution < 640
+    ...(resolution < 500
       ? [
           new Style({
             image: new Icon({
@@ -33,17 +33,13 @@ export function DrawTrainStationButton({ source, map }: DrawingProps) {
 
   function handleClick() {
     map.addInteraction(draw);
+    source.once("addfeature", handleAddFeature);
   }
 
   function handleAddFeature(e: VectorSourceEvent) {
     e.feature?.setStyle(trainStationStyle);
     map.removeInteraction(draw);
   }
-
-  useEffect(() => {
-    source.on("addfeature", handleAddFeature);
-    return () => source.un("addfeature", handleAddFeature);
-  }, []);
 
   return <button onClick={handleClick}>Draw train station</button>;
 }

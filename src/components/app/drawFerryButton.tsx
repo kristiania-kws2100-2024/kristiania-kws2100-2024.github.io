@@ -5,7 +5,7 @@ import { Circle, Fill, Icon, Stroke, Style } from "ol/style";
 import { FeatureLike } from "ol/Feature";
 import { DrawingProps } from "./drawingProps";
 
-function trainStationStyle(f: FeatureLike, resolution: number) {
+function ferryStyle(f: FeatureLike, resolution: number) {
   const radius = Math.min(6000 / resolution, 20);
   return [
     new Style({
@@ -15,7 +15,7 @@ function trainStationStyle(f: FeatureLike, resolution: number) {
         stroke: new Stroke({ color: "dark blue", width: 3 }),
       }),
     }),
-    ...(resolution < 640
+    ...(resolution < 500
       ? [
           new Style({
             image: new Icon({
@@ -33,17 +33,13 @@ export function DrawFerryButton({ source, map }: DrawingProps) {
 
   function handleClick() {
     map.addInteraction(draw);
+    source.once("addfeature", handleAddFeature);
   }
 
   function handleAddFeature(e: VectorSourceEvent) {
-    e.feature?.setStyle(trainStationStyle);
+    e.feature?.setStyle(ferryStyle);
     map.removeInteraction(draw);
   }
-
-  useEffect(() => {
-    source.on("addfeature", handleAddFeature);
-    return () => source.un("addfeature", handleAddFeature);
-  }, []);
 
   return <button onClick={handleClick}>Draw ferry</button>;
 }
