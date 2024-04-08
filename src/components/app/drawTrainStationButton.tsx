@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import VectorSource from "ol/source/Vector";
+import React, { useEffect, useMemo } from "react";
+import VectorSource, { VectorSourceEvent } from "ol/source/Vector";
 import { Map } from "ol";
 import { Draw } from "ol/interaction";
 import { Circle, Fill, Stroke, Style } from "ol/style";
@@ -24,14 +24,20 @@ export function DrawTrainStationButton({
   source: VectorSource;
   map: Map;
 }) {
+  const draw = useMemo(() => new Draw({ source, type: "Point" }), [source]);
+
   function handleClick() {
-    map.addInteraction(new Draw({ source, type: "Point" }));
+    map.addInteraction(draw);
+  }
+
+  function handleAddFeature(e: VectorSourceEvent) {
+    e.feature?.setStyle(trainStationStyle);
+    map.removeInteraction(draw);
   }
 
   useEffect(() => {
-    source.on("addfeature", (e) => {
-      e.feature?.setStyle(trainStationStyle);
-    });
+    source.on("addfeature", handleAddFeature);
+    return () => source.un("addfeature", handleAddFeature);
   }, []);
 
   return <button onClick={handleClick}>Draw train station</button>;
