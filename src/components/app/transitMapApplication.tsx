@@ -19,7 +19,7 @@ const drawingSource = new VectorSource();
 const drawingLayer = new VectorLayer({ source: drawingSource });
 
 const backgroundLayer = new MapboxVectorLayer({
-  styleUrl: "mapbox://styles/mapbox/dark-v9",
+  styleUrl: "mapbox://styles/mapbox/bright-v9",
   accessToken:
     "pk.eyJ1Ijoiamhhbm5lcyIsImEiOiJjbHVmaHJxcnAwczVyMmpvYzB2aXh6bDI5In0.lrAcWw8waJKbUNyBF8Vzqw",
 });

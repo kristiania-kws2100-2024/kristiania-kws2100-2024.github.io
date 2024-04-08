@@ -19,10 +19,11 @@ function convertFromProtobuf(
   if (!vehicle) return;
   const { position, trip, vehicle: protoVehicle, timestamp } = vehicle;
   if (!position || !trip || !protoVehicle || !timestamp) return;
-  const { id } = protoVehicle;
   const { latitude, longitude } = position;
   const { routeId } = trip;
-  if (!routeId || !id) return;
+  if (!routeId || !protoVehicle.id) return;
+
+  const id = routeId + "/" + protoVehicle.id;
 
   const p = { coordinate: [longitude, latitude], timestamp };
   return { id, routeId, position: p, history: [p] };
