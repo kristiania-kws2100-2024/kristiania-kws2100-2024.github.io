@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import { Draw } from "ol/interaction";
 import VectorSource, { VectorSourceEvent } from "ol/source/Vector";
 import { Circle } from "ol/geom";
+import { Style, Circle as CircleStyle, Fill, Stroke } from "ol/style";
 
 export function DrawCircleButton({
   source,
@@ -23,10 +24,23 @@ export function DrawCircleButton({
     const center = circle.getCenter();
     const radius = circle.getRadius();
 
-    const features = vehicleSource
-      .getFeaturesInExtent(circle.getExtent())
-      .map((f) => f.getProperties().routeId);
-    console.log({ center, radius, features });
+    const features = vehicleSource.getFeaturesInExtent(circle.getExtent());
+    console.log({
+      center,
+      radius,
+      features: features.map((f) => f.getProperties().routeId),
+    });
+
+    for (const feature of features) {
+      feature.setStyle(
+        new Style({
+          image: new CircleStyle({
+            stroke: new Stroke({ color: "red" }),
+            radius: 5,
+          }),
+        }),
+      );
+    }
   }
 
   return <button onClick={handleClick}>Draw circle</button>;
