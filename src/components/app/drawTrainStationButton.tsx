@@ -2,19 +2,30 @@ import React, { useEffect, useMemo } from "react";
 import VectorSource, { VectorSourceEvent } from "ol/source/Vector";
 import { Map } from "ol";
 import { Draw } from "ol/interaction";
-import { Circle, Fill, Stroke, Style } from "ol/style";
+import { Circle, Fill, Icon, Stroke, Style } from "ol/style";
 import { FeatureLike } from "ol/Feature";
 
 function trainStationStyle(f: FeatureLike, resolution: number) {
-  console.log({ resolution });
-  const radius = Math.min(6000 / resolution, 25);
-  return new Style({
-    image: new Circle({
-      radius,
-      fill: new Fill({ color: "white" }),
-      stroke: new Stroke({ color: "black", width: 3 }),
+  const radius = Math.min(6000 / resolution, 20);
+  return [
+    new Style({
+      image: new Circle({
+        radius,
+        fill: new Fill({ color: "white" }),
+        stroke: new Stroke({ color: "black", width: 3 }),
+      }),
     }),
-  });
+    ...(resolution < 640
+      ? [
+          new Style({
+            image: new Icon({
+              src: "/icons/train.png",
+              width: radius * 1.5,
+            }),
+          }),
+        ]
+      : []),
+  ];
 }
 
 export function DrawTrainStationButton({
