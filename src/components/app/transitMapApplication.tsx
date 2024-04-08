@@ -11,6 +11,7 @@ import { useVehicleLayer } from "./useVehicleLayer";
 import { DrawTrainStationButton } from "./drawTrainStationButton";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
+import { DrawFerryButton } from "./drawFerryButton";
 
 useGeographic();
 
@@ -38,6 +39,7 @@ export function TransitMapApplication() {
     <>
       <nav>
         <DrawTrainStationButton map={map} source={drawingSource} />
+        <DrawFerryButton map={map} source={drawingSource} />
         <button>Draw circle</button>
       </nav>
       <div ref={mapRef}></div>

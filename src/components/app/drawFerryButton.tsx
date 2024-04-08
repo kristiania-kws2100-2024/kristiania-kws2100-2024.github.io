@@ -11,15 +11,15 @@ function trainStationStyle(f: FeatureLike, resolution: number) {
     new Style({
       image: new Circle({
         radius,
-        fill: new Fill({ color: "white" }),
-        stroke: new Stroke({ color: "black", width: 3 }),
+        fill: new Fill({ color: "blue" }),
+        stroke: new Stroke({ color: "dark blue", width: 3 }),
       }),
     }),
     ...(resolution < 640
       ? [
           new Style({
             image: new Icon({
-              src: "/icons/train.png",
+              src: "/icons/directions_boat.png",
               width: radius * 1.5,
             }),
           }),
@@ -28,7 +28,7 @@ function trainStationStyle(f: FeatureLike, resolution: number) {
   ];
 }
 
-export function DrawTrainStationButton({ source, map }: DrawingProps) {
+export function DrawFerryButton({ source, map }: DrawingProps) {
   const draw = useMemo(() => new Draw({ source, type: "Point" }), [source]);
 
   function handleClick() {
@@ -45,5 +45,5 @@ export function DrawTrainStationButton({ source, map }: DrawingProps) {
     return () => source.un("addfeature", handleAddFeature);
   }, []);
 
-  return <button onClick={handleClick}>Draw train station</button>;
+  return <button onClick={handleClick}>Draw ferry</button>;
 }
