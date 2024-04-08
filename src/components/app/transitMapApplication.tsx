@@ -8,8 +8,14 @@ import "./app.css";
 
 import "ol/ol.css";
 import { useVehicleLayer } from "./useVehicleLayer";
+import { DrawTrainStationButton } from "./drawTrainStationButton";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
 
 useGeographic();
+
+const drawingSource = new VectorSource();
+const drawingLayer = new VectorLayer({ source: drawingSource });
 
 const backgroundLayer = new TileLayer({ source: new OSM() });
 const map = new Map({
@@ -19,7 +25,7 @@ const map = new Map({
 export function TransitMapApplication() {
   const { vehicleLayer, vehicleTrailLayer } = useVehicleLayer();
   const layers = useMemo(
-    () => [backgroundLayer, vehicleTrailLayer, vehicleLayer],
+    () => [backgroundLayer, vehicleTrailLayer, vehicleLayer, drawingLayer],
     [vehicleLayer, vehicleLayer],
   );
   useEffect(() => map.setLayers(layers), [layers]);
@@ -31,7 +37,7 @@ export function TransitMapApplication() {
   return (
     <>
       <nav>
-        <button>Draw train station</button>
+        <DrawTrainStationButton map={map} source={drawingSource} />
         <button>Draw circle</button>
       </nav>
       <div ref={mapRef}></div>
