@@ -4,6 +4,8 @@ import { OSM } from "ol/source";
 import React, { MutableRefObject, useEffect, useMemo, useRef } from "react";
 import { useGeographic } from "ol/proj";
 
+import "./app.css";
+
 import "ol/ol.css";
 import { useVehicleLayer } from "./useVehicleLayer";
 
@@ -26,5 +28,13 @@ export function TransitMapApplication() {
   useEffect(() => {
     map.setTarget(mapRef.current);
   }, []);
-  return <div ref={mapRef}></div>;
+  return (
+    <>
+      <nav>
+        <button>Draw train station</button>
+        <button>Draw circle</button>
+      </nav>
+      <div ref={mapRef}></div>
+    </>
+  );
 }
