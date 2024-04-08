@@ -41,7 +41,11 @@ export function TransitMapApplication() {
       <nav>
         <DrawTrainStationButton map={map} source={drawingSource} />
         <DrawFerryButton map={map} source={drawingSource} />
-        <DrawCircleButton map={map} source={drawingSource} />
+        <DrawCircleButton
+          map={map}
+          source={drawingSource}
+          vehicleSource={vehicleLayer.getSource()!}
+        />
       </nav>
       <div ref={mapRef}></div>
     </>
