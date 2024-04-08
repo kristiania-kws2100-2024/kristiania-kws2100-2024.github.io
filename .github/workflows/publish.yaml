@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - lecture/*
+      - reference/*
 
 jobs:
   publish:
