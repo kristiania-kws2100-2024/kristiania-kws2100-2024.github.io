@@ -11,7 +11,7 @@ import "./app.css";
 import { Draw } from "ol/interaction";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { Circle, Fill, Stroke, Style } from "ol/style";
+import { Circle, Fill, Icon, Stroke, Style } from "ol/style";
 
 useGeographic();
 
@@ -51,9 +51,8 @@ export function TransitMapApplication() {
           }),
         }),
         new Style({
-          image: new Circle({
-            fill: new Fill({ color: "red" }),
-            radius: 5,
+          image: new Icon({
+            src: "/icons/subway.svg",
           }),
         }),
       ]);
