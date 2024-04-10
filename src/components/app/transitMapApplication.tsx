@@ -11,6 +11,7 @@ import "./app.css";
 import { Draw } from "ol/interaction";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
+import { Circle, Fill, Style } from "ol/style";
 
 useGeographic();
 
@@ -38,7 +39,18 @@ export function TransitMapApplication() {
   }, []);
 
   function handleClickAddStation() {
-    map.addInteraction(new Draw({ type: "Polygon", source: drawingSource }));
+    map.addInteraction(new Draw({ type: "Point", source: drawingSource }));
+    drawingSource.on("addfeature", (event) => {
+      console.log(event);
+      event.feature?.setStyle(
+        new Style({
+          image: new Circle({
+            fill: new Fill({ color: "red" }),
+            radius: 20,
+          }),
+        }),
+      );
+    });
   }
 
   return (
