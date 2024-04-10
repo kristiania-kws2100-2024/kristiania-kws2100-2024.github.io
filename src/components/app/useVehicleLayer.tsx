@@ -10,7 +10,8 @@ export function useVehicleLayer() {
   const vehicleSource = useMemo(() => {
     return new VectorSource({
       features: vehicles.map(
-        (v) => new Feature(new Point(v.position.coordinate)),
+        ({ position: { coordinate }, routeId }) =>
+          new Feature({ geometry: new Point(coordinate), routeId }),
       ),
     });
   }, [vehicles]);
