@@ -8,6 +8,7 @@ import "ol/ol.css";
 import { useVehicleLayer } from "./useVehicleLayer";
 
 import "./app.css";
+import { Draw } from "ol/interaction";
 
 useGeographic();
 
@@ -28,10 +29,15 @@ export function TransitMapApplication() {
   useEffect(() => {
     map.setTarget(mapRef.current);
   }, []);
+
+  function handleClickAddStation() {
+    map.addInteraction(new Draw({ type: "Polygon" }));
+  }
+
   return (
     <>
       <header>
-        <button>Add train station</button>
+        <button onClick={handleClickAddStation}>Add train station</button>
         <button>Add ferry</button>
         <button>Add circle</button>
       </header>
