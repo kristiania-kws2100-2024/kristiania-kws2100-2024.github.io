@@ -59,6 +59,13 @@ const ferryStyle = [
   }),
 ];
 
+const highlightedVehicleStyle = new Style({
+  image: new CircleStyle({
+    radius: 5,
+    stroke: new Stroke({ color: "red" }),
+  }),
+});
+
 export function TransitMapApplication() {
   const { vehicleLayer, vehicleTrailLayer } = useVehicleLayer();
   const layers = useMemo(
@@ -103,16 +110,21 @@ export function TransitMapApplication() {
 
       const extent = circle.getExtent();
 
-      const features = vehicleLayer
-        .getSource()
-        ?.getFeaturesInExtent(extent)
-        .filter((f) =>
-          circle.intersectsCoordinate(
-            (f.getGeometry() as Point).getCoordinates(),
-          ),
-        )
-        .map((feature) => feature.getProperties().routeId);
+      const features =
+        vehicleLayer
+          .getSource()
+          ?.getFeaturesInExtent(extent)
+          .filter((f) =>
+            circle.intersectsCoordinate(
+              (f.getGeometry() as Point).getCoordinates(),
+            ),
+          )
+          .map((feature) => feature.getProperties().routeId) || [];
       console.log({ center, radius, coordinates, extent, features });
+
+      for (const feature of features) {
+        //feature.setStyle(highlightedVehicleStyle);
+      }
     });
   }
 
