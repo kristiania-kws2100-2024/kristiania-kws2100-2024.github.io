@@ -3,6 +3,7 @@ import TileLayer from "ol/layer/Tile";
 import { OSM } from "ol/source";
 import React, { MutableRefObject, useEffect, useMemo, useRef } from "react";
 import { useGeographic } from "ol/proj";
+import { MapboxVectorLayer } from "ol-mapbox-style";
 
 import "ol/ol.css";
 import { useVehicleLayer } from "./useVehicleLayer";
@@ -15,7 +16,13 @@ import { Circle, Fill, Icon, Stroke, Style } from "ol/style";
 
 useGeographic();
 
-const backgroundLayer = new TileLayer({ source: new OSM() });
+const openStreetMapLayer = new TileLayer({ source: new OSM() });
+const vectorTileLayer = new MapboxVectorLayer({
+  styleUrl: "mapbox://styles/mapbox/dark-v9",
+  accessToken:
+    "pk.eyJ1Ijoiamhhbm5lcyIsImEiOiJjbHV0dThuaDkwMzN3MmpsaW16dHltZGtnIn0.qUyFwcqanRPBh1O4SF9kQA",
+});
+
 const map = new Map({
   view: new View({ center: [10, 63], zoom: 8 }),
 });
@@ -54,7 +61,7 @@ const ferryStyle = [
 export function TransitMapApplication() {
   const { vehicleLayer, vehicleTrailLayer } = useVehicleLayer();
   const layers = useMemo(
-    () => [backgroundLayer, vehicleTrailLayer, vehicleLayer, drawingLayer],
+    () => [vectorTileLayer, vehicleTrailLayer, vehicleLayer, drawingLayer],
     [vehicleLayer, vehicleLayer],
   );
   useEffect(() => map.setLayers(layers), [layers]);
@@ -67,7 +74,7 @@ export function TransitMapApplication() {
   function handleClickAddStation() {
     const draw = new Draw({ type: "Point", source: drawingSource });
     map.addInteraction(draw);
-    drawingSource.on("addfeature", (event) => {
+    drawingSource.once("addfeature", (event) => {
       map.removeInteraction(draw);
       event.feature?.setStyle(trainStationStyle);
     });
@@ -76,7 +83,7 @@ export function TransitMapApplication() {
   function handleClickAddFerry() {
     const draw = new Draw({ type: "Point", source: drawingSource });
     map.addInteraction(draw);
-    drawingSource.on("addfeature", (event) => {
+    drawingSource.once("addfeature", (event) => {
       map.removeInteraction(draw);
       event.feature?.setStyle(ferryStyle);
     });
@@ -86,7 +93,10 @@ export function TransitMapApplication() {
     <>
       <header>
         <button onClick={handleClickAddStation}>Add train station</button>
-        <button onClick={handleClickAddFerry}>Add ferry</button>
+        <button onClick={handleClickAddFerry}>
+          <span className="material-symbols-outlined">directions_boat</span>
+          Add ferry
+        </button>
         <button>Add circle</button>
       </header>
       <div ref={mapRef}></div>
