@@ -121,21 +121,21 @@ Norges grunnkart"), introducing some projection strangeness
 
 - [We follow the React getting started guide](https://react.dev/learn)
 - We go through essential React concepts: Components
-  - Component definitions
-  - Component usage
-  - Props
-  - Event handlers
+    - Component definitions
+    - Component usage
+    - Props
+    - Event handlers
 - We go through essential React [hooks](https://react.dev/reference/react/hooks)
-  - useState
-  - useEffect
-  - useContext
-  - useMemo
-  - useRef
+    - useState
+    - useEffect
+    - useContext
+    - useMemo
+    - useRef
 - TypeScript demonstration
-  - string union types
-  - interface types
-  - return types
-  - higher order types
+    - string union types
+    - interface types
+    - return types
+    - higher order types
 
 ### Lecture 8: Query property data
 
@@ -203,7 +203,15 @@ not be given.
 
 ### Lecture 11: Drawing on the map
 
+[![Lecture 11 code](https://img.shields.io/badge/Lecture_11-lecture_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/lecture/11)
+[![Lecture 11 reference](https://img.shields.io/badge/Lecture_11-reference_code-blue)](https://github.com/kristiania-kws2100-2024/kristiania-kws2100-2024.github.io/tree/reference/11)
+
 In this lecture, we will create a map where we can add out own points and polygons by [drawing with the mouse]().
+
+### Exercise:
+
+This week's exercise is to draw objects on a map using OpenLayers `map.addInteraction(new Draw(...))` function.
+Experiment with different type of objects as well. Try and save the objects to `localStorage` and load them at startup.
 
 ### Lecture 12: Getting ready for the exam
 
@@ -224,9 +232,9 @@ npm pkg set scripts.dev=vite
 </details>
 
 1. `npm install --save-dev vite typescript prettier`
-   - ⚠️ if this doesn't create a `package.json` file in the current working directory, you have a JavaScript project in
-     a parent directory. You can create a new `package.json` file using `npm init` or creating a file manually with
-     only `{}` as the file content (the last option avoids clutter)
+    - ⚠️ if this doesn't create a `package.json` file in the current working directory, you have a JavaScript project in
+      a parent directory. You can create a new `package.json` file using `npm init` or creating a file manually with
+      only `{}` as the file content (the last option avoids clutter)
 2. `npm install react react-dom`
 3. `npm pkg set scripts.dev=vite`
 4. Create `index.html`:
@@ -373,8 +381,8 @@ reviewed. For the assignment, this has already been done for you by creating a `
 has a Pull Request **_into_** the `feedback` branch. **_You should not merge this pull request_**
 
 1. Give your reviewers access to your repository under Settings > Collaborators and teams
-   - Reviewers need minimum "Reader" access
-   - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
+    - Reviewers need minimum "Reader" access
+    - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
 2. The reviewer should go to the repository and select Pull requests and select the Feedback Pull request
 3. The easiest way to give a review is to go to Files changes and add comments by clicking on lines for files
 4. When you're giving a review make sure that you Finish the review or nobody else will see your comments
@@ -384,12 +392,12 @@ If you made the mistake of merging the Feedback branch, it will be a bit more di
 following process works okay:
 
 1. (As above) Give your reviewers access to your repository under Settings > Collaborators and teams
-   - Reviewers need minimum "Reader" access
-   - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
+    - Reviewers need minimum "Reader" access
+    - NOTE: You don't need to give the teacher and the TAs access - this happens automatically
 2. The reviewer should explore the code in the repository at GitHub.com
 3. The reviewer should click on the line number for a line they have a comment for and select "Reference in new issue"
-   - Good issues includes "I liked this because", "Won't this do the wrong thing because", and "I don't understand
-     what's going on here"
+    - Good issues includes "I liked this because", "Won't this do the wrong thing because", and "I don't understand
+      what's going on here"
 4. When you receive issues from a reviewer, you should close the issues with a comment
 
 ### Starting PostGIS with Docker Compose
@@ -440,11 +448,16 @@ app.listen(3000);
 
 ### Generating TypeScript definitions from a `.proto` (protobuf) specification
 
-1. Download [`protoc`](https://github.com/protocolbuffers/protobuf/releases) and store it locally (but `.gitignored` - it's pretty big)
+1. Download [`protoc`](https://github.com/protocolbuffers/protobuf/releases) and store it locally (but `.gitignored` -
+   it's pretty big)
 2. `npm install ts-proto` for TypeScript bindings
-3. Download the [gtfs-realtime.proto spec](https://github.com/google/transit/blob/master/gtfs-realtime/proto/gtfs-realtime.proto) (or whatever spec you want to use)
-4. Run `protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=generated/ --ts_proto_opt=esModuleInterop=true ./gtfs-realtime.proto`
-   - Note: ⚠ On Windows, you have to replace `protoc-gen-ts_proto` with `protoc-gen-ts_proto.cmd`, so the \
-     full command is `protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto.cmd --ts_proto_out=generated/ --ts_proto_opt=esModuleInterop=true ./gtfs-realtime.proto`
-   - Note: You may want to add a `script` in `package.json` for this
+3. Download
+   the [gtfs-realtime.proto spec](https://github.com/google/transit/blob/master/gtfs-realtime/proto/gtfs-realtime.proto) (
+   or whatever spec you want to use)
+4.
+Run `protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=generated/ --ts_proto_opt=esModuleInterop=true ./gtfs-realtime.proto`
+    - Note: ⚠ On Windows, you have to replace `protoc-gen-ts_proto` with `protoc-gen-ts_proto.cmd`, so the \
+      full command
+      is `protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto.cmd --ts_proto_out=generated/ --ts_proto_opt=esModuleInterop=true ./gtfs-realtime.proto`
+    - Note: You may want to add a `script` in `package.json` for this
 
