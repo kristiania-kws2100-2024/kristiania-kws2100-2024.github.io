@@ -17,17 +17,14 @@ function convertFromProtobuf(
   vehicle: VehiclePosition | undefined,
 ): KwsVehicle | undefined {
   if (!vehicle) return;
-  const { position, trip, vehicle: protoVehicle } = vehicle;
-  if (!position || !trip || !protoVehicle) return;
+  const { position, trip, vehicle: protoVehicle, timestamp } = vehicle;
+  if (!position || !trip || !protoVehicle || !timestamp) return;
   const { id } = protoVehicle;
   const { latitude, longitude } = position;
   const { routeId } = trip;
   if (!routeId || !id) return;
 
-  const p = {
-    coordinate: [longitude, latitude],
-    timestamp: 0,
-  };
+  const p = { coordinate: [longitude, latitude], timestamp };
   return {
     id,
     routeId,
@@ -61,13 +58,17 @@ export function useVehicles() {
     }
     setVehicleTable((old) => {
       const updated = { ...old };
+      const recently = new Date().getTime() / 1000 - 60 * 5;
       for (const v of vehicles) {
         const oldVehicle = updated[v.id];
         if (oldVehicle) {
           updated[v.id] = {
             ...oldVehicle,
             position: v.position,
-            history: [...oldVehicle.history, v.position],
+            history: [
+              ...oldVehicle.history.filter((p) => p.timestamp > recently),
+              v.position,
+            ],
           };
         } else {
           updated[v.id] = v;
