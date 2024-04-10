@@ -7,6 +7,8 @@ import { useGeographic } from "ol/proj";
 import "ol/ol.css";
 import { useVehicleLayer } from "./useVehicleLayer";
 
+import "./app.css";
+
 useGeographic();
 
 const backgroundLayer = new TileLayer({ source: new OSM() });
@@ -26,5 +28,14 @@ export function TransitMapApplication() {
   useEffect(() => {
     map.setTarget(mapRef.current);
   }, []);
-  return <div ref={mapRef}></div>;
+  return (
+    <>
+      <header>
+        <button>Add train station</button>
+        <button>Add ferry</button>
+        <button>Add circle</button>
+      </header>
+      <div ref={mapRef}></div>
+    </>
+  );
 }
