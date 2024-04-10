@@ -9,6 +9,8 @@ import { useVehicleLayer } from "./useVehicleLayer";
 
 import "./app.css";
 import { Draw } from "ol/interaction";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
 
 useGeographic();
 
@@ -17,10 +19,15 @@ const map = new Map({
   view: new View({ center: [10, 63], zoom: 8 }),
 });
 
+const drawingSource = new VectorSource();
+const drawingLayer = new VectorLayer({
+  source: drawingSource,
+});
+
 export function TransitMapApplication() {
   const { vehicleLayer, vehicleTrailLayer } = useVehicleLayer();
   const layers = useMemo(
-    () => [backgroundLayer, vehicleTrailLayer, vehicleLayer],
+    () => [backgroundLayer, vehicleTrailLayer, vehicleLayer, drawingLayer],
     [vehicleLayer, vehicleLayer],
   );
   useEffect(() => map.setLayers(layers), [layers]);
@@ -31,7 +38,7 @@ export function TransitMapApplication() {
   }, []);
 
   function handleClickAddStation() {
-    map.addInteraction(new Draw({ type: "Polygon" }));
+    map.addInteraction(new Draw({ type: "Polygon", source: drawingSource }));
   }
 
   return (
