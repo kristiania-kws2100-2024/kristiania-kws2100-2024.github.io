@@ -89,6 +89,15 @@ export function TransitMapApplication() {
     });
   }
 
+  function handleClickAddCircle() {
+    const draw = new Draw({ type: "Point", source: drawingSource });
+    map.addInteraction(draw);
+    drawingSource.once("addfeature", (event) => {
+      map.removeInteraction(draw);
+      event.feature?.setStyle(ferryStyle);
+    });
+  }
+
   return (
     <>
       <header>
@@ -97,7 +106,7 @@ export function TransitMapApplication() {
           <span className="material-symbols-outlined">directions_boat</span>
           Add ferry
         </button>
-        <button>Add circle</button>
+        <button onClick={handleClickAddCircle}>Add circle</button>
       </header>
       <div ref={mapRef}></div>
     </>
