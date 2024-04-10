@@ -25,6 +25,19 @@ const drawingLayer = new VectorLayer({
   source: drawingSource,
 });
 
+const trainStationStyle = [
+  new Style({
+    image: new Circle({
+      fill: new Fill({ color: "white" }),
+      stroke: new Stroke({ color: "black", width: 2 }),
+      radius: 20,
+    }),
+  }),
+  new Style({
+    image: new Icon({ src: "/icons/subway.svg" }),
+  }),
+];
+
 export function TransitMapApplication() {
   const { vehicleLayer, vehicleTrailLayer } = useVehicleLayer();
   const layers = useMemo(
@@ -39,23 +52,11 @@ export function TransitMapApplication() {
   }, []);
 
   function handleClickAddStation() {
-    map.addInteraction(new Draw({ type: "Point", source: drawingSource }));
+    const draw = new Draw({ type: "Point", source: drawingSource });
+    map.addInteraction(draw);
     drawingSource.on("addfeature", (event) => {
-      console.log(event);
-      event.feature?.setStyle([
-        new Style({
-          image: new Circle({
-            fill: new Fill({ color: "white" }),
-            stroke: new Stroke({ color: "black", width: 2 }),
-            radius: 20,
-          }),
-        }),
-        new Style({
-          image: new Icon({
-            src: "/icons/subway.svg",
-          }),
-        }),
-      ]);
+      map.removeInteraction(draw);
+      event.feature?.setStyle(trainStationStyle);
     });
   }
 
