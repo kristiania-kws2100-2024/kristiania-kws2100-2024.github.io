@@ -5,6 +5,9 @@
     "dev:client": "vite",
     "dev:server": "cd server && npm run dev",
     "dev:database": "docker compose create && docker compose start",
+    "db:import": "npm run db:import:kommuner && npm run db:import:transform",
+    "db:import:kommuner": "docker exec -i postgis /usr/bin/psql --user postgres < data/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql",
+    "db:import:transform": "docker exec -i postgis /usr/bin/psql --user postgres < database/import.sql",
     "test": "tsc --noEmit && prettier --check .",
     "prepare": "husky"
   },
