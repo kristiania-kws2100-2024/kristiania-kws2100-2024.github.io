@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect, useMemo, useRef, useState } from "react";
 
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
-import { OSM } from "ol/source";
+import { OSM, WMTS } from "ol/source";
 import { useGeographic } from "ol/proj";
 
 import "ol/ol.css";
@@ -12,14 +12,39 @@ import "./application.css";
 import { Layer } from "ol/layer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { GeoJSON } from "ol/format";
+import { GeoJSON, WMTSCapabilities } from "ol/format";
 import { unByKey } from "ol/Observable";
 import { Fill, Style } from "ol/style";
 import CircleStyle from "ol/style/Circle";
+import { optionsFromCapabilities } from "ol/source/WMTS";
 
 useGeographic();
 
 const osmLayer = new TileLayer({ source: new OSM() });
+
+const photoLayer = new TileLayer();
+
+const parser = new WMTSCapabilities();
+async function loadWtmsSource(
+  url: string,
+  config: { matrixSet: string; layer: string },
+) {
+  const res = await fetch(url);
+  const text = await res.text();
+  const result = parser.read(text);
+  return new WMTS(optionsFromCapabilities(result, config)!);
+}
+async function loadPhotoLayer() {
+  return await loadWtmsSource(
+    "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",
+    {
+      layer: "Nibcache_web_mercator_v2",
+      matrixSet: "default028mm",
+    },
+  );
+}
+loadPhotoLayer().then((source) => photoLayer.setSource(source));
+
 const shelterLayer = new VectorLayer({
   source: new VectorSource({
     url: "/geojson/shelters.json",
@@ -49,7 +74,16 @@ export function Application() {
 
   const [featureLayers, setFeatureLayers] = useState<Layer[]>([]);
 
-  const layers = useMemo(() => [osmLayer, ...featureLayers], [featureLayers]);
+  const [backgroundLayerName, setBackgroundLayerName] = useState("osm");
+  const backgroundLayer = useMemo(
+    () => (backgroundLayerName === "osm" ? osmLayer : photoLayer),
+    [backgroundLayerName],
+  );
+
+  const layers = useMemo(
+    () => [backgroundLayer, ...featureLayers],
+    [backgroundLayer, featureLayers],
+  );
   useEffect(() => map.setLayers(layers), [layers]);
 
   const [activeFeatures, setActiveFeatures] = useState<object[]>([]);
@@ -103,10 +137,13 @@ export function Application() {
           Show kommuner
         </label>
         <label>
-          Background map:
-          <select>
-            <option>Open Street Map</option>
-            <option>Norge i bilder</option>
+          Background map ({backgroundLayerName}):
+          <select
+            value={backgroundLayerName}
+            onChange={(e) => setBackgroundLayerName(e.target.value)}
+          >
+            <option value={"osm"}>Open Street Map</option>
+            <option value={"photo"}>Norge i bilder</option>
           </select>
         </label>
       </nav>

@@ -18,9 +18,29 @@ This demonstrates the following:
 
 ## Hints
 
+### GeoJSON service in Express
+
+```typescript
+app.get("/api/kommuner", async (req, res) => {
+  const result = await postgresql.query(
+    "select kommunenummer, kommunenavn, st_transform(omrade, 4326)::json geometry from kommuner",
+  );
+  res.json({
+    type: "FeatureCollection",
+    features: result.rows.map(({ kommunenummer, kommunenavn, geometry }) => ({
+      type: "Feature",
+      geometry,
+      properties: { kommunenummer, kommunenavn },
+    })),
+  });
+});
+```
+
 ### WMTS parser:
 
 ```typescript
+const parser = new WMTSCapabilities();
+
 async function loadWtmsSource(
   url: string,
   config: { matrixSet: string; layer: string },
@@ -31,7 +51,7 @@ async function loadWtmsSource(
   return new WMTS(optionsFromCapabilities(result, config)!);
 }
 
-async function loadFlyfotoLayer() {
+async function loadPhotoLayer() {
   return await loadWtmsSource(
     "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",
     {
@@ -40,8 +60,5 @@ async function loadFlyfotoLayer() {
     },
   );
 }
-
-useEffect(() => {
-  loadFlyfotoLayer().then((source) => ortoPhotoLayer.setSource(source));
-}, []);
+loadPhotoLayer().then((source) => photoLayer.setSource(source));
 ```
