@@ -35,6 +35,9 @@ const shelterLayer = new VectorLayer({
     });
   },
 });
+const kommuneLayer = new VectorLayer({
+  source: new VectorSource({ url: "/api/kommuner", format: new GeoJSON() }),
+});
 
 const map = new Map({
   view: new View({ center: [10, 60], zoom: 9 }),
@@ -68,6 +71,15 @@ export function Application() {
     return () => unByKey(key);
   }, [showShelters]);
 
+  const [showKommuneLayer, setShowKommuneLayer] = useState(false);
+  useEffect(() => {
+    if (showKommuneLayer) {
+      setFeatureLayers((old) => [...old, kommuneLayer]);
+    } else {
+      setFeatureLayers((old) => old.filter((l) => l !== kommuneLayer));
+    }
+  }, [showKommuneLayer]);
+
   return (
     <>
       <header>
@@ -83,7 +95,11 @@ export function Application() {
           Show shelters
         </label>
         <label>
-          <input type={"checkbox"} />
+          <input
+            type={"checkbox"}
+            checked={showKommuneLayer}
+            onChange={(e) => setShowKommuneLayer(e.target.checked)}
+          />
           Show kommuner
         </label>
         <label>
