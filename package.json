@@ -1,9 +1,10 @@
 {
   "name": "openlayers-demo",
   "scripts": {
-    "dev": "concurrently npm:dev:client npm:dev:server",
+    "dev": "npm run dev:database && concurrently npm:dev:client npm:dev:server",
     "dev:client": "vite",
     "dev:server": "cd server && npm run dev",
+    "dev:database": "docker compose create && docker compose start",
     "test": "tsc --noEmit && prettier --check .",
     "prepare": "husky"
   },
