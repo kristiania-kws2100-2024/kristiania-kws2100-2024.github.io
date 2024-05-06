@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect, useMemo, useRef, useState } from "react";
 
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
-import { OSM, WMTS } from "ol/source";
+import { OSM } from "ol/source";
 import { useGeographic } from "ol/proj";
 
 import "ol/ol.css";
@@ -12,54 +12,15 @@ import "./application.css";
 import { Layer } from "ol/layer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { GeoJSON, WMTSCapabilities } from "ol/format";
-import { unByKey } from "ol/Observable";
-import { Fill, Style } from "ol/style";
-import CircleStyle from "ol/style/Circle";
-import { optionsFromCapabilities } from "ol/source/WMTS";
+import { GeoJSON } from "ol/format";
+import { useShelterLayer } from "../map/shelterLayer";
+import { photoLayer } from "../map/photoLayer";
+import { useFeatureLayer } from "../map/useFeatureLayer";
 
 useGeographic();
 
 const osmLayer = new TileLayer({ source: new OSM() });
 
-const photoLayer = new TileLayer();
-
-const parser = new WMTSCapabilities();
-async function loadWtmsSource(
-  url: string,
-  config: { matrixSet: string; layer: string },
-) {
-  const res = await fetch(url);
-  const text = await res.text();
-  const result = parser.read(text);
-  return new WMTS(optionsFromCapabilities(result, config)!);
-}
-async function loadPhotoLayer() {
-  return await loadWtmsSource(
-    "https://opencache.statkart.no/gatekeeper/gk/gk.open_nib_web_mercator_wmts_v2?SERVICE=WMTS&REQUEST=GetCapabilities",
-    {
-      layer: "Nibcache_web_mercator_v2",
-      matrixSet: "default028mm",
-    },
-  );
-}
-loadPhotoLayer().then((source) => photoLayer.setSource(source));
-
-const shelterLayer = new VectorLayer({
-  source: new VectorSource({
-    url: "/geojson/shelters.json",
-    format: new GeoJSON(),
-  }),
-  style: (feature) => {
-    const radius = 10 + feature.getProperties().plasser / 400;
-    return new Style({
-      image: new CircleStyle({
-        radius,
-        fill: new Fill({ color: "green" }),
-      }),
-    });
-  },
-});
 const kommuneLayer = new VectorLayer({
   source: new VectorSource({ url: "/api/kommuner", format: new GeoJSON() }),
 });
@@ -86,33 +47,15 @@ export function Application() {
   );
   useEffect(() => map.setLayers(layers), [layers]);
 
-  const [activeFeatures, setActiveFeatures] = useState<object[]>([]);
-
   const [showShelters, setShowShelters] = useState(false);
-  useEffect(() => {
-    if (showShelters) {
-      setFeatureLayers((old) => [...old, shelterLayer]);
-    } else {
-      setFeatureLayers((old) => old.filter((l) => l !== shelterLayer));
-    }
-
-    const key = map.on("pointermove", (e) => {
-      const features = map.getFeaturesAtPixel(e.pixel, {
-        layerFilter: (l) => l === shelterLayer,
-      });
-      setActiveFeatures(features.map((f) => f.getProperties().adresse));
-    });
-    return () => unByKey(key);
-  }, [showShelters]);
+  const { activeShelterFeatures } = useShelterLayer(
+    map,
+    setFeatureLayers,
+    showShelters,
+  );
 
   const [showKommuneLayer, setShowKommuneLayer] = useState(false);
-  useEffect(() => {
-    if (showKommuneLayer) {
-      setFeatureLayers((old) => [...old, kommuneLayer]);
-    } else {
-      setFeatureLayers((old) => old.filter((l) => l !== kommuneLayer));
-    }
-  }, [showKommuneLayer]);
+  useFeatureLayer(setFeatureLayers, kommuneLayer, showKommuneLayer);
 
   return (
     <>
@@ -149,7 +92,11 @@ export function Application() {
       </nav>
       <div className={"map"} ref={mapRef}></div>
       <footer>
-        {activeFeatures.length ? JSON.stringify(activeFeatures) : null}
+        {activeShelterFeatures.length
+          ? JSON.stringify(
+              activeShelterFeatures.map((f) => f.getProperties().adresse),
+            )
+          : null}
       </footer>
     </>
   );
