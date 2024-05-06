@@ -13,6 +13,9 @@ import { Layer } from "ol/layer";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { GeoJSON } from "ol/format";
+import { unByKey } from "ol/Observable";
+import { Fill, Style } from "ol/style";
+import CircleStyle from "ol/style/Circle";
 
 useGeographic();
 
@@ -22,6 +25,15 @@ const shelterLayer = new VectorLayer({
     url: "/geojson/shelters.json",
     format: new GeoJSON(),
   }),
+  style: (feature) => {
+    const radius = 10 + feature.getProperties().plasser / 400;
+    return new Style({
+      image: new CircleStyle({
+        radius,
+        fill: new Fill({ color: "green" }),
+      }),
+    });
+  },
 });
 
 const map = new Map({
@@ -37,6 +49,8 @@ export function Application() {
   const layers = useMemo(() => [osmLayer, ...featureLayers], [featureLayers]);
   useEffect(() => map.setLayers(layers), [layers]);
 
+  const [activeFeatures, setActiveFeatures] = useState<object[]>([]);
+
   const [showShelters, setShowShelters] = useState(false);
   useEffect(() => {
     if (showShelters) {
@@ -44,6 +58,14 @@ export function Application() {
     } else {
       setFeatureLayers((old) => old.filter((l) => l !== shelterLayer));
     }
+
+    const key = map.on("pointermove", (e) => {
+      const features = map.getFeaturesAtPixel(e.pixel, {
+        layerFilter: (l) => l === shelterLayer,
+      });
+      setActiveFeatures(features.map((f) => f.getProperties().adresse));
+    });
+    return () => unByKey(key);
   }, [showShelters]);
 
   return (
@@ -73,7 +95,9 @@ export function Application() {
         </label>
       </nav>
       <div className={"map"} ref={mapRef}></div>
-      <footer>Current focus:</footer>
+      <footer>
+        {activeFeatures.length ? JSON.stringify(activeFeatures) : null}
+      </footer>
     </>
   );
 }
