@@ -9,7 +9,8 @@
     "db:import:kommuner": "docker exec -i postgis /usr/bin/psql --user postgres < data/Basisdata_0000_Norge_25833_Kommuner_PostGIS.sql",
     "db:import:transform": "docker exec -i postgis /usr/bin/psql --user postgres < database/import.sql",
     "test": "tsc --noEmit && prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "cd server && npm install"
   },
   "devDependencies": {
     "@types/react": "^18.3.1",
