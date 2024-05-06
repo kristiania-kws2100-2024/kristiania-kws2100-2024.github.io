@@ -16,7 +16,7 @@ app.get("/api/srids", async (req, res) => {
 
 app.get("/api/kommuner", async (req, res) => {
   const result = await postgresql.query(
-    "select kommunenummer, kommunenavn, st_transform(omrade, 4326)::json geometry from kommuner",
+    "select kommunenummer, kommunenavn, st_simplify(st_transform(omrade, 4326), 0.001)::json geometry from kommuner",
   );
   res.json({
     type: "FeatureCollection",
