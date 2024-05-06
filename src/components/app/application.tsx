@@ -1,11 +1,16 @@
 import * as React from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 
 import { Map, View } from "ol";
-
-import "./application.css";
 import TileLayer from "ol/layer/Tile";
 import { OSM } from "ol/source";
-import { MutableRefObject, useEffect, useRef } from "react";
+import { useGeographic } from "ol/proj";
+
+import "ol/ol.css";
+
+import "./application.css";
+
+useGeographic();
 
 const map = new Map({
   layers: [new TileLayer({ source: new OSM() })],
