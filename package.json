@@ -10,6 +10,7 @@
     "db:import:transform": "docker exec -i postgis /usr/bin/psql --user postgres < database/import.sql",
     "test": "tsc --noEmit && prettier --check .",
     "prepare": "husky",
+    "build": "npm run test && vite build",
     "postinstall": "cd server && npm install"
   },
   "devDependencies": {
