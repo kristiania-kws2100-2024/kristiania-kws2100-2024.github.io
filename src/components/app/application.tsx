@@ -1,8 +1,21 @@
 import * as React from "react";
 
+import { Map, View } from "ol";
+
 import "./application.css";
+import TileLayer from "ol/layer/Tile";
+import { OSM } from "ol/source";
+import { MutableRefObject, useEffect, useRef } from "react";
+
+const map = new Map({
+  layers: [new TileLayer({ source: new OSM() })],
+  view: new View({ center: [10, 60], zoom: 9 }),
+});
 
 export function Application() {
+  const mapRef = useRef() as MutableRefObject<HTMLDivElement>;
+  useEffect(() => map.setTarget(mapRef.current), []);
+
   return (
     <>
       <header>
@@ -25,7 +38,7 @@ export function Application() {
           </select>
         </label>
       </nav>
-      <div className={"map"}>(I'm a map)</div>
+      <div className={"map"} ref={mapRef}></div>
       <footer>Current focus:</footer>
     </>
   );
