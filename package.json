@@ -1,4 +1,5 @@
 {
+  "name": "openlayers-demo",
   "scripts": {
     "dev": "vite",
     "test": "tsc --noEmit && prettier --check .",

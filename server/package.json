@@ -1,0 +1,14 @@
+{
+  "name": "gis-demo-server",
+  "scripts": {
+    "dev": "ts-node-dev server.ts"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
