@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "test": "tsc --noEmit && prettier --check .",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/react": "^18.3.1",
