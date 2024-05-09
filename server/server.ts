@@ -14,4 +14,18 @@ app.get("/api/srids", async (req, res) => {
   res.json(result.rows.map(({ srid, auth_name }) => ({ srid, auth_name })));
 });
 
+app.get("/api/kommuner", async (req, res) => {
+  const result = await postgresql.query(
+    "select kommunenummer, kommunenavn, st_simplify(st_transform(omrade, 4326), 0.001)::json as geometry from kommuner",
+  );
+  res.json({
+    type: "FeatureCollection",
+    features: result.rows.map(({ kommunenummer, kommunenavn, geometry }) => ({
+      type: "Feature",
+      geometry,
+      properties: { kommunenummer, kommunenavn },
+    })),
+  });
+});
+
 app.listen(3000);
